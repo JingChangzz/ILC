@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="javaparser-core-3.5.3" level="project" />
+    <orderEntry type="library" name="ICCSniffer" level="project" />
   </component>
 </module>
