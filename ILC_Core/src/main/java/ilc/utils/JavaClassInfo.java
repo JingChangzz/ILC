@@ -1,5 +1,6 @@
 package ilc.utils;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -9,6 +10,12 @@ public class JavaClassInfo {
     private String path;
     private String className;
     private List<String> allMethods;
+
+    public JavaClassInfo(File in){
+        setPath(in.getAbsolutePath());
+        setClassName(in.getName().split(".java")[0]);
+        setAllMethods(JavaAnalysis.getAllMethodsOfJava(getPath()));
+    }
 
     public String getPath() {
         return path;
