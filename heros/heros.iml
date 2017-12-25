@@ -16,6 +16,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="heros1" level="project" />
+    <orderEntry type="library" name="heros" level="project" />
   </component>
 </module>

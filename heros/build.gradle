@@ -1,4 +1,1 @@
-group 'ILC'
-version '1.0-SNAPSHOT'
-
 ant.importBuild 'build.xml'
