@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="heros1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/heros/mockito-all-1.9.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/heros/slf4j-api-1.7.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/heros/org.hamcrest.core_1.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/heros/junit.jar!/" />
+      <root url="jar://$PROJECT_DIR$/heros/slf4j-simple-1.7.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/heros/guava-14.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
