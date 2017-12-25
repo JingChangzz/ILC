@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="/heros/src"/>
+	<classpathentry kind="src" path="/heros/test"/>
+	<classpathentry kind="output" path="/out/production/heros"/>
+</classpath>
