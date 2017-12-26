@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="infoflow">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/infoflow.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
