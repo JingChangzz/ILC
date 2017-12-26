@@ -19,12 +19,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="heros_main" target="1.5" />
-      <module name="heros_test" target="1.5" />
       <module name="ILC_Core_main" target="1.8" />
       <module name="ILC_Core_test" target="1.8" />
-      <module name="ILC_main" target="1.8" />
-      <module name="ILC_test" target="1.8" />
+      <module name="ILC_main" target="1.7" />
+      <module name="ILC_test" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

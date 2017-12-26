@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="coal-0.1.7">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/coal-0.1.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/coal-strings-0.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/commons-cli-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/herosclasses-trunk.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/ic3-classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/infoflow.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/infoflow-android-dialdroid.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jsch-0.1.51.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/log4j-1.2.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mysql-connector-java-5.1.31.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/protobuf-java-2.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/slf4j-api-1.7.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/slf4j-log4j12-1.7.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/soot.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
