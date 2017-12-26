@@ -18,8 +18,10 @@ import java.util.List;
 /**
  * Created by Administrator on 11/7/2017.
  *
- * 1.批量反编译
+ * 1.批量反编译??
  * jar固定路径 -> source固定路径
+ * 根据这个是不是说明可以直接分析jar文件？？！！
+ *
  *
  * 2.计算数据流
  * source->sink

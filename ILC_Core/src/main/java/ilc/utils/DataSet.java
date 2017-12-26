@@ -6,7 +6,7 @@ package ilc.utils;
 public class DataSet {
 
     //jar配置文件路径
-    public static String  JarDePropertiesPath = "D:\\Desktop\\0921\\IAC\\src\\main\\resources\\path.properties";
+    public static String  JarDePropertiesPath = "./resources/path.properties";
 
 
 }

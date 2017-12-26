@@ -2,23 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29150fd9-7fcd-47c2-95c9-6186308d02e6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/infoflow.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/infoflow_android.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_api_1_7_7.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_log4j12_1_7_13.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/soot.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/AndroidMethod.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/IPermissionMethodParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/PermissionMethodParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/SootMethodAndClass.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/SetupForAnalysis.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/libs/infoflow-android-dialdroid.jar" afterPath="$PROJECT_DIR$/libs/infoflow-android.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/ILC.iml" afterPath="$PROJECT_DIR$/.idea/modules/ILC.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/ILC_Core/ILC_Core_main.iml" afterPath="$PROJECT_DIR$/.idea/modules/ILC_Core/ILC_Core_main.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/ILC_Core/ILC_Core_test.iml" afterPath="$PROJECT_DIR$/.idea/modules/ILC_Core/ILC_Core_test.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/ILC_main.iml" afterPath="$PROJECT_DIR$/.idea/modules/ILC_main.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/ILC_test.iml" afterPath="$PROJECT_DIR$/.idea/modules/ILC_test.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/path.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/Properties/JarDeProperties.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/Properties/JarDeProperties.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/DataSet.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/DataSet.java" />
     </list>
     <ignored path="$PROJECT_DIR$/ILC_Core/.gradle/" />
     <ignored path="$PROJECT_DIR$/ILC_Core/out/" />
@@ -95,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Core.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Core.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="65" column="25" lean-forward="false" selection-start-line="65" selection-start-column="25" selection-end-line="65" selection-end-column="25" />
+            <state relative-caret-position="200">
+              <caret line="22" column="27" lean-forward="false" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -107,11 +95,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SetupForAnalysis.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JarDeProperties.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/Properties/JarDeProperties.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="470">
+              <caret line="37" column="75" lean-forward="false" selection-start-line="37" selection-start-column="75" selection-end-line="37" selection-end-column="75" />
+              <folding>
+                <element signature="e#686#687#0" expanded="true" />
+                <element signature="e#774#775#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SetupForAnalysis.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/SetupForAnalysis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="340">
+              <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -703,7 +704,6 @@
         <option value="$PROJECT_DIR$/jasmin/src/jasmin/ReservedWords.java" />
         <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/soot/tutorial/tagclass/Main.java" />
-        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/.idea/modules.xml" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/PermissionParser.java" />
@@ -711,6 +711,9 @@
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/SootMethodAndClass.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/AndroidMethod.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/SetupForAnalysis.java" />
+        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java" />
+        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/DataSet.java" />
+        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/Properties/JarDeProperties.java" />
       </list>
     </option>
   </component>
@@ -804,62 +807,7 @@
             <path>
               <item name="ILC" type="b2602c69:ProjectViewProjectNode" />
               <item name="ILC" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="ILC_Core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="ILC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ILC" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="ILC_Core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ILC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ILC" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="ILC_Core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="ILC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ILC" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="ILC_Core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ILC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ILC" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="ILC_Core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ilc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ILC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ILC" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="ILC_Core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ilc" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ILC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ILC" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="ILC_Core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ilc" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ILC" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ILC" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="libs" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -887,9 +835,9 @@
       <recent name="ilc.data" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="D:\Desktop\0921\ILC\libs" />
       <recent name="$PROJECT_DIR$/libs" />
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/soot-infoflow-FlowDroid_2.0/lib" />
       <recent name="$PROJECT_DIR$/soot-infoflow-FlowDroid_2.0" />
     </key>
@@ -906,7 +854,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Core">
+  <component name="RunManager" selected="Application.JarDeProperties">
     <configuration name="Core" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -977,22 +925,24 @@
         <option name="vmOptions" />
       </ExternalSystemSettings>
     </configuration>
-    <configuration name="ILC:heros [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/heros" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="dependencies" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
+    <configuration name="JarDeProperties" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="ilc.Properties.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="ilc.Properties.JarDeProperties" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="ILC_Core_main" />
+      <envs />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
@@ -1241,19 +1191,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Gradle.ILC:heros [dependencies]" />
-      <item index="1" class="java.lang.String" itemvalue="Gradle.ILC [buildNeeded]" />
-      <item index="2" class="java.lang.String" itemvalue="Gradle.ILC [clean]" />
-      <item index="3" class="java.lang.String" itemvalue="Gradle.ILC [build]" />
-      <item index="4" class="java.lang.String" itemvalue="Application.Core" />
+      <item index="0" class="java.lang.String" itemvalue="Gradle.ILC [buildNeeded]" />
+      <item index="1" class="java.lang.String" itemvalue="Gradle.ILC [clean]" />
+      <item index="2" class="java.lang.String" itemvalue="Gradle.ILC [build]" />
+      <item index="3" class="java.lang.String" itemvalue="Application.Core" />
+      <item index="4" class="java.lang.String" itemvalue="Application.JarDeProperties" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Core" />
-        <item index="1" class="java.lang.String" itemvalue="Gradle.ILC [clean]" />
-        <item index="2" class="java.lang.String" itemvalue="Gradle.ILC [build]" />
-        <item index="3" class="java.lang.String" itemvalue="Gradle.ILC [buildNeeded]" />
-        <item index="4" class="java.lang.String" itemvalue="Gradle.ILC:heros [dependencies]" />
+        <item index="0" class="java.lang.String" itemvalue="Application.JarDeProperties" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Core" />
+        <item index="2" class="java.lang.String" itemvalue="Gradle.ILC [clean]" />
+        <item index="3" class="java.lang.String" itemvalue="Gradle.ILC [build]" />
+        <item index="4" class="java.lang.String" itemvalue="Gradle.ILC [buildNeeded]" />
       </list>
     </recent_temporary>
   </component>
@@ -1277,7 +1227,7 @@
       <workItem from="1514197261037" duration="1098000" />
       <workItem from="1514198371265" duration="5004000" />
       <workItem from="1514207756843" duration="1140000" />
-      <workItem from="1514278283009" duration="1297000" />
+      <workItem from="1514278283009" duration="2714000" />
     </task>
     <task id="LOCAL-00001" summary="模块化调整">
       <created>1514193561975</created>
@@ -1342,23 +1292,31 @@
       <option name="project" value="LOCAL" />
       <updated>1514270862936</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="数据流分析">
+      <created>1514288203089</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1514288203089</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14103000" />
+    <option name="totallyTimeSpent" value="15520000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="43" width="1456" height="876" extended-state="0" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32635984" sideWeight="0.47209984" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39943343" sideWeight="0.5028203" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32702702" sideWeight="0.4897388" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.4897388" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29673204" sideWeight="0.4869403" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1377,7 +1335,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="VersionChecker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32635984" sideWeight="0.47209984" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="SBT" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="sbt-shell-toolwindow" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1421,32 +1378,33 @@
     <MESSAGE value="模块化调整" />
     <MESSAGE value="heros模块化调整" />
     <MESSAGE value="直接使用相关的jar" />
-    <option name="LAST_COMMIT_MESSAGE" value="直接使用相关的jar" />
+    <MESSAGE value="数据流分析" />
+    <option name="LAST_COMMIT_MESSAGE" value="数据流分析" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
-          <line>59</line>
+          <line>61</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
-          <line>61</line>
+          <line>63</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
-          <line>62</line>
+          <line>64</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
-          <line>63</line>
+          <line>65</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
@@ -1466,11 +1424,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/soot-infoflow-FlowDroid_2.0/gradlew.bat" />
-    <entry file="file://$PROJECT_DIR$/soot-infoflow-FlowDroid_2.0/META-INF/MANIFEST.MF" />
-    <entry file="file://$PROJECT_DIR$/soot-infoflow-FlowDroid_2.0/soot-infoflow-FlowDroid_2.0.iml" />
-    <entry file="file://$PROJECT_DIR$/soot-infoflow-FlowDroid_2.0/src/soot/jimple/infoflow/AbstractInfoflow.java" />
-    <entry file="file://$PROJECT_DIR$/soot-infoflow-FlowDroid_2.0/src/soot/jimple/infoflow/aliasing/AbstractAliasStrategy.java" />
     <entry file="file://$PROJECT_DIR$/soot-infoflow-FlowDroid_2.0/src/soot/jimple/infoflow/InfoflowManager.java" />
     <entry file="file://$PROJECT_DIR$/soot-infoflow-FlowDroid_2.0/securiBench/securibench/micro/BasicTestCase.java" />
     <entry file="file://$PROJECT_DIR$/soot-infoflow-FlowDroid_2.0/build.xml" />
@@ -1610,20 +1563,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java">
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/SetupForAnalysis.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="65" column="25" lean-forward="false" selection-start-line="65" selection-start-column="25" selection-end-line="65" selection-end-column="25" />
+        <state relative-caret-position="340">
+          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/SetupForAnalysis.java">
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/Properties/WorkingDirectoryLocationStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="140">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/Properties/Properties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="29" column="22" lean-forward="true" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/path.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/DataSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/Properties/JarDeProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="37" column="75" lean-forward="false" selection-start-line="37" selection-start-column="75" selection-end-line="37" selection-end-column="75" />
+          <folding>
+            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#774#775#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="22" column="27" lean-forward="false" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

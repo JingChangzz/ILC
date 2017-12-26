@@ -35,7 +35,7 @@ public class JarDeProperties extends Properties {
 
     public static void main(String[] args) {
         JarDeProperties jarDeProperties = new JarDeProperties();
-
+        //System.out.println(new File("123.txt").getAbsolutePath());//  **/FromWinServer/ILC/123.txt
         System.out.println(jarDeProperties.jarPath());
         System.out.println(jarDeProperties.sourcePath());
     }
