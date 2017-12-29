@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="wala_core">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/wala_core.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

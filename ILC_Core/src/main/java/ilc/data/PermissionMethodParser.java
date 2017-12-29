@@ -3,10 +3,7 @@ package ilc.data;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +13,6 @@ public class PermissionMethodParser implements IPermissionMethodParser {
 
     private List<String> data;
     private final String regex = "^<(.+):\\s*(.+)\\s+(.+)\\s*\\((.*)\\)>\\s*(.*?)(\\s+->\\s+(.*))?$";
-    //	private final String regexNoRet = "^<(.+):\\s(.+)\\s?(.+)\\s*\\((.*)\\)>\\s+(.*?)(\\s+->\\s+(.*))?+$";
     private final String regexNoRet = "^<(.+):\\s*(.+)\\s*\\((.*)\\)>\\s*(.*?)?(\\s+->\\s+(.*))?$";
 
     public static PermissionMethodParser fromFile(String fileName) throws IOException {
@@ -30,7 +26,7 @@ public class PermissionMethodParser implements IPermissionMethodParser {
         return pmp;
     }
 
-    private PermissionMethodParser() {
+    public PermissionMethodParser() {
     }
 
     private PermissionMethodParser(List<String> data) {
@@ -82,6 +78,45 @@ public class PermissionMethodParser implements IPermissionMethodParser {
         }
 
         return methodList;
+    }
+
+    public Map<String, Set<String>> parse(List<String> contents) throws IOException{
+        Set<String> sources = new HashSet<String>(INITIAL_SET_SIZE);
+        Set<String> sinks = new HashSet<String>(INITIAL_SET_SIZE);
+        Map<String, Set<String>> result = new HashMap<>();
+        result.put("SOURCE", sources);
+        result.put("SINK", sinks);
+
+        Pattern p = Pattern.compile(regex);
+        Pattern pNoRet = Pattern.compile(regexNoRet);
+
+        for(String line : contents){
+            if (line.isEmpty() || line.startsWith("%"))
+                continue;
+            Matcher m = p.matcher(line);
+            if(m.find()) {
+                AndroidMethod singleMethod = parseMethod(m, true);
+                if (singleMethod.isSink())
+                    result.get("SINK").add(singleMethod.getSignature());
+                    //(SourceSinkDefinition)singleMethod;
+                else
+                    result.get("SOURCE").add(singleMethod.getSignature());
+            }
+            else {
+                Matcher mNoRet = pNoRet.matcher(line);
+                if(mNoRet.find()) {
+                    AndroidMethod singleMethod = parseMethod(mNoRet, false);
+                    if (singleMethod.isSink())
+                        result.get("SINK").add(singleMethod.getSignature());
+                    else
+                        result.get("SOURCE").add(singleMethod.getSignature());
+                }
+                else
+                    System.err.println("Line does not match: " + line);
+            }
+        }
+
+        return result;
     }
 
     private AndroidMethod parseMethod(Matcher m, boolean hasReturnType) {

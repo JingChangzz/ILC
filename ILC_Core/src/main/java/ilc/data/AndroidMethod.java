@@ -1,13 +1,14 @@
 package ilc.data;
 
 import soot.SootMethod;
+import soot.jimple.infoflow.data.SootMethodAndClass;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class AndroidMethod extends SootMethodAndClass{
+public class AndroidMethod extends SootMethodAndClass {
 
     public enum CATEGORY {
         // all categories

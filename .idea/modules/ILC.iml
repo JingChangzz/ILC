@@ -12,5 +12,14 @@
     <orderEntry type="library" name="infoflow" level="project" />
     <orderEntry type="library" name="slf4j-api-1.7.7" level="project" />
     <orderEntry type="library" name="slf4j-log4j12-1.7.13" level="project" />
+    <orderEntry type="library" name="com.ibm.wala.core-1.3.8" level="project" />
+    <orderEntry type="library" name="wala_core" level="project" />
+    <orderEntry type="library" name="com.ibm.wala.util-1.3.7" level="project" />
+    <orderEntry type="library" name="com.ibm.wala.util-1.4.3" level="project" />
+    <orderEntry type="library" name="wala_shrike" level="project" />
+    <orderEntry type="library" name="jsdg-stubs-jre1.5" level="project" />
+    <orderEntry type="library" name="com.ibm.wala.cast.java-1.4.0" level="project" />
+    <orderEntry type="library" name="com.ibm.wala.core-1.4.3" level="project" />
+    <orderEntry type="library" name="com.ibm.wala.shrike-1.4.3" level="project" />
   </component>
 </module>

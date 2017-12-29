@@ -2,8 +2,13 @@ package ilc.utils;
 
 import org.apache.commons.io.FileUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Administrator on 11/13/2017.
@@ -43,5 +48,25 @@ public class FileUtil {
 //            }
 //        }
         return files;
+    }
+
+    public static List<String> readFile(String fileName) throws IOException {
+        List<String> result = new ArrayList<>();
+        String line;
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            fr = new FileReader(fileName);
+            br = new BufferedReader(fr);
+            while((line = br.readLine()) != null)
+                result.add(line);
+        }
+        finally {
+            if (br != null)
+                br.close();
+            if (fr != null)
+                fr.close();
+        }
+        return result;
     }
 }

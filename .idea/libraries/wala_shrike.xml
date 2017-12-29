@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="wala_shrike">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/wala_shrike.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

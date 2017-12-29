@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jsdg-stubs-jre1.5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/jsdg-stubs-jre1.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
