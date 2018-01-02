@@ -12,15 +12,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by zhangjing on 11/13/2017.
  */
 public class JavaAnalysis {
-    public static Collection<JavaClassInfo> allClassesInfo = null;
+    public static Collection<JavaClassInfo> allClassesInfo = new HashSet<JavaClassInfo>();
     public static Collection<File> allFiles = null;
-    public static Collection<String> allEntryPoints = null;
+    public static Set<String> allEntryPoints = new HashSet<>();
 
     public JavaAnalysis(String file){
         try {
@@ -41,7 +43,7 @@ public class JavaAnalysis {
             DeleteSuper.deleteSuperForParser(f);
             JavaClassInfo javaClassInfo = new JavaClassInfo(f);
             allClassesInfo.add(javaClassInfo);
-            getEntryPoints(javaClassInfo);
+            getEntryPoints();
         }
         return allClassesInfo;
     }
@@ -49,11 +51,33 @@ public class JavaAnalysis {
     /**
      * 每个类中的所有public method 生成一个entry point
      * <org.mypackage.MyClass : void method(int)>
-     * @param contents
+     *
      */
-    private static void getEntryPoints(JavaClassInfo contents){
-
-
+    private static void getEntryPoints(){
+        Set<String> result = new HashSet<>();
+        for (JavaClassInfo info : allClassesInfo){
+            if (info.getAllMethods().size() == 0){
+                continue;
+            }
+            for (MethodDeclaration m : info.getAllMethods()) {
+                if (m.isAbstract() || m.isPrivate() || m.isProtected()){
+                    continue;
+                }
+                String s = new String();
+                s = "<" + info.getPackageName() + "." + info.getClassName() + " : "
+                        +  m.getType().toString() + " " + m.getName().toString() +"(";
+                for (int i = 0; i < m.getParameters().size(); i++) {
+                    if (i > 0){
+                        s += ",";
+                    }
+                    s += m.getParameter(i).getType().toString();
+                }
+                s += ")>";
+                System.out.println("Entrypoints: "+s);
+                allEntryPoints.add(s);
+                //System.out.println(allEntryPoints.size());
+            }
+        }
     }
 
     /**

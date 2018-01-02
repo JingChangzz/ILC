@@ -25,5 +25,7 @@
     <orderEntry type="library" name="wala_shrike" level="project" />
     <orderEntry type="library" name="com.ibm.wala.core-1.4.3" level="project" />
     <orderEntry type="library" name="com.ibm.wala.shrike-1.4.3" level="project" />
+    <orderEntry type="library" name="log4j-1.2.17" level="project" />
+    <orderEntry type="library" name="slf4j-log4j12-1.7.13" level="project" />
   </component>
 </module>

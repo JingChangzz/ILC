@@ -35,10 +35,10 @@ import java.util.Set;
  */
 public class Core {
 
-    public static void test(String jarPath) throws IOException {
+    public static void test(String dePath, String jarPath) throws IOException {
         //entry points
-        Collection<JavaClassInfo> contents = JavaAnalysis.getAllJavaClassesInfo(new File(jarPath));
-        Set<String> entryPoints = getEntryPoints(contents);
+        Collection<JavaClassInfo> contents = JavaAnalysis.getAllJavaClassesInfo(new File(dePath));
+        Set<String> entryPoints = JavaAnalysis.allEntryPoints;
 
         //source and sink
         SetupForAnalysis.main(null);
@@ -66,14 +66,15 @@ public class Core {
         ISourceSinkManager ssm = new DefaultSourceSinkManager(sources, sinks, sources, sinks);
         infoFlow.computeInfoflow(jarPath, libPath.toString(), sepc, ssm);
         InfoflowResults infoflowResults = infoFlow.getResults();
-
+        
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-//        if ()
-//            return;
+        test("D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/out3", "D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/");
+
+
         // Sources, sinks and entry points. Use soot representation (e.g. <org.mypackage.MyClass : void method(int)>)
         List<String> sources = new ArrayList<>();
         // I run soot and save the methods I want as sources, sinks or entry points and then put in here
