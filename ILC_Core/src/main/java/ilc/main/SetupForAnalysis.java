@@ -1,10 +1,10 @@
 package ilc.main;
 
-import ilc.data.AndroidMethod;
-import ilc.data.PermissionMethodParser;
 import ilc.utils.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import soot.jimple.infoflow.android.data.AndroidMethod;
+import soot.jimple.infoflow.android.data.parsers.PermissionMethodParser;
 
 import java.io.IOException;
 import java.util.HashMap;

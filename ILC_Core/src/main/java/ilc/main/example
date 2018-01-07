@@ -1,0 +1,40 @@
+        // Sources, sinks and entry points. Use soot representation (e.g. <org.mypackage.MyClass : void method(int)>)
+        List<String> sources = new ArrayList<>();
+        // I run soot and save the methods I want as sources, sinks or entry points and then put in here
+        List<String> sinks = new ArrayList<>();
+        List<String> entryPoints = new ArrayList<>();
+        // then i run soot-infoflow (which re-runs soots by itself)
+        // The application path containing Jars or class files
+        String appPath = "D:\\Desktop\\sdk\\PushServices\\GETUI_ANDROID_SDK";
+        StringBuilder libPath = new StringBuilder();
+        try(DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(appPath), "*.jar")){ // I think that if you analyze .class files you don't need this step
+            for (Path path : stream){
+                libPath.append(path.toFile().getCanonicalFile());
+                libPath.append(File.pathSeparator);
+            }
+        }catch (IOException e){
+            System.out.println("Error loading jar files.");
+            e.printStackTrace();
+            System.exit(-1);
+        }
+        appPath = libPath.toString();
+        System.out.println(appPath);
+
+        // you may want to add path to rt.jar here to libPath
+        // libPath.append(System.getProperty("java.home") + "\lib\rt.jar" + Path.pathSeparator);
+
+        // Read the soot thesis for more informations on app classes and lib classes
+
+        Infoflow infoFlow = new Infoflow();
+        SequentialEntryPointCreator sepc = new SequentialEntryPointCreator(entryPoints);
+        // Creates dummy main where calls all the entry points you specify
+        ISourceSinkManager ssm = new DefaultSourceSinkManager(sources, sinks, sources, sinks);
+        infoFlow.computeInfoflow(appPath, libPath.toString(), sepc, ssm);
+        InfoflowResults infoflowResults = infoFlow.getResults();
+
+        // more resources
+        // https://soot-build.cs.uni-paderborn.de/public/origin/develop/soot/soot-develop/options/soot_options.htm
+        // https://courses.cs.washington.edu/courses/cse501/01wi/project/sable-thesis.pdf
+        // https://github.com/Sable/soot/wiki
+
+        // hope it helps and be patient, it takes a while to run in correctly ;)

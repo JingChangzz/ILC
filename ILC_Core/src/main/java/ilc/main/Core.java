@@ -2,11 +2,17 @@ package ilc.main;
 
 import ilc.utils.JavaAnalysis;
 import ilc.utils.JavaClassInfo;
+import soot.SootMethod;
+import soot.jimple.Stmt;
 import soot.jimple.infoflow.Infoflow;
+import soot.jimple.infoflow.android.TestApps.Test;
 import soot.jimple.infoflow.entryPointCreators.SequentialEntryPointCreator;
 import soot.jimple.infoflow.results.InfoflowResults;
+import soot.jimple.infoflow.results.ResultSinkInfo;
+import soot.jimple.infoflow.results.ResultSourceInfo;
 import soot.jimple.infoflow.source.DefaultSourceSinkManager;
 import soot.jimple.infoflow.source.ISourceSinkManager;
+import soot.tagkit.LineNumberTag;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,9 +20,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -37,8 +41,9 @@ public class Core {
 
     public static void test(String dePath, String jarPath) throws IOException {
         //entry points
-        Collection<JavaClassInfo> contents = JavaAnalysis.getAllJavaClassesInfo(new File(dePath));
-        Set<String> entryPoints = JavaAnalysis.allEntryPoints;
+        JavaAnalysis javaAnalysis = new JavaAnalysis(dePath);
+        Collection<JavaClassInfo> all = javaAnalysis.getAllJavaClassesInfo();
+        Set<String> entryPoints = javaAnalysis.allEntryPoints;
 
         //source and sink
         SetupForAnalysis.main(null);
@@ -66,55 +71,82 @@ public class Core {
         ISourceSinkManager ssm = new DefaultSourceSinkManager(sources, sinks, sources, sinks);
         infoFlow.computeInfoflow(jarPath, libPath.toString(), sepc, ssm);
         InfoflowResults infoflowResults = infoFlow.getResults();
-        
+
     }
 
+    private static void testForJar() throws IOException, InterruptedException {
+        //entryPoint
+        String outJar = "D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/out3";
+        JavaAnalysis javaAnalysis = new JavaAnalysis(outJar);
+        Collection<JavaClassInfo> all = javaAnalysis.getAllJavaClassesInfo();
 
-    public static void main(String[] args) throws IOException {
-
-        test("D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/out3", "D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/");
-
-
-        // Sources, sinks and entry points. Use soot representation (e.g. <org.mypackage.MyClass : void method(int)>)
-        List<String> sources = new ArrayList<>();
-        // I run soot and save the methods I want as sources, sinks or entry points and then put in here
-        List<String> sinks = new ArrayList<>();
-        List<String> entryPoints = new ArrayList<>();
-        // then i run soot-infoflow (which re-runs soots by itself)
-        // The application path containing Jars or class files
-        String appPath = "D:\\Desktop\\sdk\\PushServices\\GETUI_ANDROID_SDK";
+        //check jar
+        String jarFile = "D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/";
         StringBuilder libPath = new StringBuilder();
-        try(DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(appPath), "*.jar")){ // I think that if you analyze .class files you don't need this step
+        try(DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(jarFile), "*.jar")){ // I think that if you analyze .class files you don't need this step
             for (Path path : stream){
                 libPath.append(path.toFile().getCanonicalFile());
-                libPath.append(File.pathSeparator);
             }
         }catch (IOException e){
             System.out.println("Error loading jar files.");
             e.printStackTrace();
             System.exit(-1);
         }
-        appPath = libPath.toString();
-        System.out.println(appPath);
+        jarFile = libPath.toString();
+        System.out.println(jarFile);
 
-        // you may want to add path to rt.jar here to libPath
-        // libPath.append(System.getProperty("java.home") + "\lib\rt.jar" + Path.pathSeparator);
+        String classPath = "D:/Android/platforms/android-19/android.jar";
+        InfoflowResults results = Test.runAnalysisForResults(
+                new String[] { jarFile, classPath,
+                        "--aplength", "2", "--timeout", "1000000", "--logsourcesandsinks", "--nocallbacks" });
 
-        // Read the soot thesis for more informations on app classes and lib classes
+        if (results != null) {
+            for (ResultSinkInfo sink : results.getResults().keySet()) { //
+                SootMethod method = results.getInfoflowCFG().getMethodOf(sink.getSink());
 
-        Infoflow infoFlow = new Infoflow();
-        SequentialEntryPointCreator sepc = new SequentialEntryPointCreator(entryPoints);
-        // Creates dummy main where calls all the entry points you specify
-        ISourceSinkManager ssm = new DefaultSourceSinkManager(sources, sinks, sources, sinks);
-        infoFlow.computeInfoflow(appPath, libPath.toString(), sepc, ssm);
-        InfoflowResults infoflowResults = infoFlow.getResults();
+                String className = results.getInfoflowCFG().getMethodOf(sink.getSink()).getDeclaringClass()
+                        .toString();
 
-        // more resources
-        // https://soot-build.cs.uni-paderborn.de/public/origin/develop/soot/soot-develop/options/soot_options.htm
-        // https://courses.cs.washington.edu/courses/cse501/01wi/project/sable-thesis.pdf
-        // https://github.com/Sable/soot/wiki
+                int instruction = 0;
 
-        // hope it helps and be patient, it takes a while to run in correctly ;)
+                if (sink.getSink().hasTag("LineNumberTag")) {
+                    instruction = ((LineNumberTag) sink.getSink().getTag("LineNumberTag")).getLineNumber();
+                }
+                System.out.println("--"+sink.getSink().toString());
+                for (ResultSourceInfo source : results.getResults().get(sink)) {
+
+                    String leakSource = source.getSource().toString();
+                    String methodCalling = null;
+                    System.out.println("/t" + leakSource );
+                    try {
+                        methodCalling = source.getSource().getInvokeExpr().getMethod().getName();
+                    } catch (Exception e) {
+
+                    }
+
+                    String leakSink = sink.getSink().toString();
+                    StringBuffer leakPath = new StringBuffer();
+
+                    if (source.getPath() != null) {
+                        for (Stmt stmt : source.getPath()) {
+                            leakPath.append(stmt.toString() + ",");
+                        }
+                    }
+
+                    System.out.println("/t" + leakPath);
+                }
+            }
+        }
+        System.out.println("exitpath over");
+
+    }
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        testForJar();
+
+        //test("D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/out3", "D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/");
+
+
         System.out.println("over");
     }
 

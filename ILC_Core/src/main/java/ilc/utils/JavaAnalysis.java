@@ -2,6 +2,7 @@ package ilc.utils;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import org.apache.commons.io.FileUtils;
@@ -20,30 +21,36 @@ import java.util.Set;
  * Created by zhangjing on 11/13/2017.
  */
 public class JavaAnalysis {
+    private static String file;
     public static Collection<JavaClassInfo> allClassesInfo = new HashSet<JavaClassInfo>();
     public static Collection<File> allFiles = null;
     public static Set<String> allEntryPoints = new HashSet<>();
+    public static Set<String> entryPointsForAndroid = new HashSet<>();
+    public static String extentFrom = "";
 
     public JavaAnalysis(String file){
-        try {
-            getAllJavaClassesInfo(new File(file));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.file = file;
     }
 
     /**
      * 获取所有类的信息
-     * @param in 文件夹路径
      * @return 所有类的信息
      */
-    public static Collection<JavaClassInfo> getAllJavaClassesInfo(File in) throws IOException {
-        allFiles = getAllJavaFile(in);
+    public Collection<JavaClassInfo> getAllJavaClassesInfo() throws IOException {
+        allFiles = getAllJavaFile();
         for (File f : allFiles){
             DeleteSuper.deleteSuperForParser(f);
-            JavaClassInfo javaClassInfo = new JavaClassInfo(f);
+            JavaClassInfo javaClassInfo = new JavaClassInfo();
+            javaClassInfo.setPath(f.getAbsolutePath());
+            javaClassInfo.setClassName(f.getName().split(".java")[0]);
+            javaClassInfo.setAllMethods(getAllMethodsOfJava(f));
+            javaClassInfo.setPackageName(getJavaPackageName(f));
+            javaClassInfo.setExtendsFrom(extentFrom);
             allClassesInfo.add(javaClassInfo);
             getEntryPoints();
+            System.out.println(f.getAbsolutePath());
+            System.out.println(allClassesInfo.size());
+            System.out.println(extentFrom);
         }
         return allClassesInfo;
     }
@@ -53,7 +60,7 @@ public class JavaAnalysis {
      * <org.mypackage.MyClass : void method(int)>
      *
      */
-    private static void getEntryPoints(){
+    private void getEntryPoints(){
         Set<String> result = new HashSet<>();
         for (JavaClassInfo info : allClassesInfo){
             if (info.getAllMethods().size() == 0){
@@ -73,30 +80,46 @@ public class JavaAnalysis {
                     s += m.getParameter(i).getType().toString();
                 }
                 s += ")>";
-                System.out.println("Entrypoints: "+s);
+                //System.out.println("Entrypoints: "+s);
                 allEntryPoints.add(s);
-                //System.out.println(allEntryPoints.size());
+                if (info.getExtendsFrom().equals("Activity")
+                        || info.getExtendsFrom().equals("BroadcastReceiver")
+                        || info.getExtendsFrom().equals("ContentProvider")
+                        || info.getExtendsFrom().equals("Service")){
+                    entryPointsForAndroid.add(info.getPackageName()+ "." + info.getClassName());
+                }
             }
         }
+        //System.out.println(allEntryPoints.size());
     }
 
     /**
      * 根据文件夹路径得到所有java文件
-     * @param in 根路径
      * @return java文件列表
      */
-    public static Collection<File> getAllJavaFile(File in){
-        Collection<File> results = FileUtils.listFiles(in, new String[]{"java"}, true);
+    public Collection<File> getAllJavaFile(){
+        Collection<File> results = FileUtils.listFiles(new File(file), new String[]{"java"}, true);
         return results;
     }
 
-    public static List<MethodDeclaration> getAllMethodsOfJava(String path){
+    public List<MethodDeclaration> getAllMethodsOfJava(File f){
         FileInputStream in = null;
         CompilationUnit cu = null;
         MethodVisitor methodVisitor = new MethodVisitor();
         try {
-            in = new FileInputStream(path);
-            cu = JavaParser.parse(in);
+            in = new FileInputStream(f);
+            cu = JavaParser.parse(f);
+            if (cu.getTypes().size()>0){
+                ClassOrInterfaceDeclaration type = (ClassOrInterfaceDeclaration) cu.getTypes().get(0);
+                if (type.isPublic() && !type.isAbstract()
+                        && !type.isInterface() && type.toString().contains("extends")) {
+                    extentFrom = type.getExtendedTypes().get(0).toString();
+                }else {
+                    extentFrom = "";
+                }
+            } else {
+                extentFrom = "";
+            }
             // visit and print the methods names
             cu.accept(new MethodVisitor(), null);
             methodVisitor.visit(cu, null);
@@ -125,13 +148,13 @@ public class JavaAnalysis {
 
     /**
      * 获取java类的package名
-     * @param file
+     * @param f
      * @return
      */
-    public static String getJavaPackageName(String file){
+    public String getJavaPackageName(File f){
         CompilationUnit cu = null;
         try {
-            cu = JavaParser.parse(new File(file));
+            cu = JavaParser.parse(f);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -151,6 +174,7 @@ public class JavaAnalysis {
 //        }
 
         //getAllJavaFile(new File("ILC_Core/src/main/java/ilc/"));
-        getAllJavaClassesInfo(new File("D:\\Desktop\\sdk\\PushServices\\GETUI_ANDROID_SDK\\out3"));
+        JavaAnalysis javaAnalysis = new JavaAnalysis("D:\\Desktop\\sdk\\PushServices\\GETUI_ANDROID_SDK\\out3");
+        javaAnalysis.getAllJavaClassesInfo();
     }
 }

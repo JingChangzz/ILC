@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="coal-0.1.7">
+  <library name="jsch-0.1.51">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/coal-0.1.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jsch-0.1.51.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

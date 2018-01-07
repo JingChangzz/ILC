@@ -2,7 +2,6 @@ package ilc.utils;
 
 import com.github.javaparser.ast.body.MethodDeclaration;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -14,11 +13,9 @@ public class JavaClassInfo {
     private List<MethodDeclaration> allMethods;
     private String packageName;//文件的package
 
-    public JavaClassInfo(File in){
-        setPath(in.getAbsolutePath());
-        setClassName(in.getName().split(".java")[0]);
-        setAllMethods(JavaAnalysis.getAllMethodsOfJava(getPath()));
-        setPackageName(JavaAnalysis.getJavaPackageName(getPath()));
+    private String extendsFrom;
+
+    public JavaClassInfo(){
     }
 
     public String getPath() {
@@ -53,4 +50,13 @@ public class JavaClassInfo {
     public void setPackageName(String packageName) {
         this.packageName = packageName;
     }
+
+    public String getExtendsFrom() {
+        return extendsFrom;
+    }
+
+    public void setExtendsFrom(String extendsFrom) {
+        this.extendsFrom = extendsFrom;
+    }
+
 }
