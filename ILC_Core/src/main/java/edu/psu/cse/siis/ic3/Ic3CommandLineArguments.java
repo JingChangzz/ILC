@@ -79,12 +79,12 @@ public class Ic3CommandLineArguments extends CommandLineArguments {
     public void processCommandLineArguments() {
         this.manifest = this.getOptionValue("in");
         if(this.getCompiledModel() == null && this.getModel() == null) {
-            this.setCompiledModel("/res/icc.cmodel");
+            this.setCompiledModel("./res/icc.cmodel");
         }
 
         this.iccStudy = this.getOptionValue("iccstudy");
         if(this.hasOption("db")) {
-            this.db = this.getOptionValue("db", "cc.properties");
+            this.db = this.getOptionValue("db", "db.properties");
         }
 
         if(this.hasOption("dbhost")) {

@@ -14,10 +14,10 @@ import edu.psu.cse.siis.coal.SymbolFilter;
 import edu.psu.cse.siis.coal.arguments.ArgumentValueManager;
 import edu.psu.cse.siis.coal.arguments.MethodReturnValueManager;
 import edu.psu.cse.siis.coal.field.transformers.FieldTransformerManager;
-import edu.psu.cse.siis.ic3.Ic3Data.Application;
 import edu.psu.cse.siis.ic3.Ic3Data.Application.Builder;
 import edu.psu.cse.siis.ic3.db.SQLConnection;
 import edu.psu.cse.siis.ic3.manifest.ManifestPullParser;
+import ilc.utils.JavaAnalysis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import soot.G;
@@ -62,7 +62,7 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
     protected Writer writer;
     protected ManifestPullParser detailedManifest;
     protected Map<String, Integer> componentToIdMap;
-    protected SetupApplication setupApplication;
+    protected Ic3SetupApplication ic3SetupApplication;
     protected String packageName;
     protected Ic3CommandLineArguments arguments;
     protected String apkPath;
@@ -87,25 +87,29 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
 
     protected void initializeAnalysis(Ic3CommandLineArguments commandLineArguments) throws FatalAnalysisException {
         long startTime = System.currentTimeMillis() / 1000L;
-        this.outputDir = commandLineArguments.getOutput();
-        this.prepareManifestFile(commandLineArguments);
-        if(commandLineArguments.getProtobufDestination() != null) {
+        this.outputDir = "./ic3output";
+        this.componentToIdMap = new HashMap<>();
+//        this.prepareManifestFile(commandLineArguments);
+/*        if(commandLineArguments.getProtobufDestination() != null) {
             this.ic3Builder = Application.newBuilder();
             this.ic3Builder.setAnalysisStart(startTime);
             if(commandLineArguments.getSample() != null) {
                 this.ic3Builder.setSample(commandLineArguments.getSample());
             }
-
             this.componentNameToBuilderMap = this.detailedManifest.populateProtobuf(this.ic3Builder);
         } else if(commandLineArguments.getDb() != null) {
             SQLConnection.init(commandLineArguments.getDbName(), commandLineArguments.getDb(), commandLineArguments.getSsh(), commandLineArguments.getDbLocalPort());
             this.componentToIdMap = this.detailedManifest.writeToDb(false);
-        }
+        }*/
 
         this.apkPath = commandLineArguments.getInput();
         Timers.v().mainGeneration.start();
-        this.setupApplication = new SetupApplication(commandLineArguments.getManifest(), this.apkPath, commandLineArguments.getAndroidJar());
-        Set entryPointClasses = null;
+        this.ic3SetupApplication = new Ic3SetupApplication(commandLineArguments.getManifest(), this.apkPath, commandLineArguments.getAndroidJar());
+        Set entryPointClasses = JavaAnalysis.entryPointsForAndroid;
+//        entryPointClasses.add((String) JavaAnalysis.entryPointsForAndroid.toArray()[1]);
+        String name = new File(commandLineArguments.getManifest()).getName();
+        this.packageName = name.substring(0, name.lastIndexOf("."));
+
 //        if(this.detailedManifest == null) {
 //            try {
 //                ProcessManifest entryPointMap = new ProcessManifest(commandLineArguments.getManifest());
@@ -119,17 +123,17 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
 //            this.packageName = this.detailedManifest.getPackageName();
 //        }
 //
-        Map callBackMethods = null;
-//        try {
-//            callBackMethods = this.setupApplication.calculateSourcesSinksEntrypoints(new HashSet(), new HashSet(), this.packageName, entryPointClasses);
-//        } catch (IOException var11) {
-//            this.logger.error("Could not calculate entry points", var11);
-//            throw new FatalAnalysisException();
-//        }
+        Map callBackMethods = new HashMap<>();
+        try {
+            callBackMethods = this.ic3SetupApplication.calculateSourcesSinksEntrypoints(new HashSet(), new HashSet(), this.packageName, entryPointClasses);
+        } catch (IOException var11) {
+            this.logger.error("Could not calculate entry points", var11);
+            throw new FatalAnalysisException();
+        }
 
         /**
          * 计算entrypoints和callbacks
-         * 依旧改成直接处理代码获得（因为没有manifest文件和layout文件）
+         * 依旧改成直接处理代码获得（因为不一定有manifest文件和layout文件）
          */
 
         Timers.v().mainGeneration.end();
@@ -189,7 +193,7 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
         Scene.v().loadNecessaryClasses();
         Timers.v().classLoading.end();
         Timers.v().entryPointMapping.start();
-        Scene.v().setEntryPoints(Collections.singletonList(this.setupApplication.getEntryPointCreator().createDummyMain()));
+        Scene.v().setEntryPoints(Collections.singletonList(this.ic3SetupApplication.getEntryPointCreator().createDummyMain()));
         Timers.v().entryPointMapping.end();
         e1 = Scene.v().getClasses().iterator();
 
@@ -235,8 +239,8 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
     }
 
     protected void processResults(Ic3CommandLineArguments commandLineArguments) throws FatalAnalysisException {
-        System.out.println("\n*****Manifest*****");
-        System.out.println(this.detailedManifest.toString());
+//        System.out.println("\n*****Manifest*****");
+//        System.out.println(this.detailedManifest.toString());
         if(commandLineArguments.getProtobufDestination() != null) {
             ProtobufResultProcessor resultProcessor = new ProtobufResultProcessor();
 

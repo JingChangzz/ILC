@@ -18,6 +18,10 @@
  */
 package edu.psu.cse.siis.ic3.db;
 
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -26,10 +30,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
-
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
 
 public abstract class Table {
   private static final String SELECT_LAST_INSERT_ID = "SELECT LAST_INSERT_ID()";

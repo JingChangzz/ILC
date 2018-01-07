@@ -269,8 +269,7 @@ public class ManifestPullParser {
 
   public Map<String, Integer> writeToDb(boolean skipEntryPoints) {
     Map<String, Integer> componentIds = new HashMap<String, Integer>();
-    
-    
+
     componentIds.putAll(SQLConnection.insert(getPackageName(), version, shaSum, activities, usesPermissions,
         permissions, skipEntryPoints));
     componentIds.putAll(SQLConnection.insert(getPackageName(), version,shaSum, activityAliases, null, null,

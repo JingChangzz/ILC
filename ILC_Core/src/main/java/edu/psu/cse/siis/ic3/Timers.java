@@ -25,13 +25,13 @@
 
 package edu.psu.cse.siis.ic3;
 
-import java.sql.SQLException;
-import java.text.DecimalFormat;
-
 import edu.psu.cse.siis.ic3.db.SQLConnection;
 import soot.G;
 import soot.Timer;
 import soot.options.Options;
+
+import java.sql.SQLException;
+import java.text.DecimalFormat;
 
 public class Timers {
   private static Timers instance = new Timers();
@@ -99,7 +99,7 @@ public class Timers {
     G.v().out.println("Time measurements");
     G.v().out.println();
 
-    G.v().out.println("    Main generation: " + toTimeString(mainGeneration, totalTime));
+    G.v().out.println("    Ic3Main generation: " + toTimeString(mainGeneration, totalTime));
 
     G.v().out.println();
 

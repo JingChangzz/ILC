@@ -1,5 +1,6 @@
 package ilc.main;
 
+import edu.psu.cse.siis.ic3.Ic3Main;
 import ilc.utils.JavaAnalysis;
 import ilc.utils.JavaClassInfo;
 import soot.SootMethod;
@@ -20,6 +21,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Set;
 
@@ -74,7 +76,7 @@ public class Core {
 
     }
 
-    private static void testForJar() throws IOException, InterruptedException {
+    private static void testForJar() throws IOException, InterruptedException, SQLException {
         //entryPoint
         String outJar = "D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/out3";
         JavaAnalysis javaAnalysis = new JavaAnalysis(outJar);
@@ -96,6 +98,13 @@ public class Core {
         System.out.println(jarFile);
 
         String classPath = "D:/Android/platforms/android-19/android.jar";
+
+        //Ic3 数据提取
+        Ic3Main.main(new String[] { "-in", jarFile, "-cp",
+                classPath, "-db", "./db.properties", "-dbname",
+                "ilc", "-dbhost", "localhost" });
+
+        //dataflow分析
         InfoflowResults results = Test.runAnalysisForResults(
                 new String[] { jarFile, classPath,
                         "--aplength", "2", "--timeout", "1000000", "--logsourcesandsinks", "--nocallbacks" });
@@ -141,7 +150,7 @@ public class Core {
 
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, SQLException {
         testForJar();
 
         //test("D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/out3", "D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/");
