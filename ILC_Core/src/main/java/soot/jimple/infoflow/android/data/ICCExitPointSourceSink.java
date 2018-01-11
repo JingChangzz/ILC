@@ -358,5 +358,18 @@ public class ICCExitPointSourceSink {
         data.add("<android.content.ContentResolver: android.database.Cursor query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String)> -> _SINK_");
         data.add("<android.content.ContentResolver: android.database.Cursor query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String,android.os.CancellationSignal)> -> _SINK_");
         data.add("<android.database.MatrixCursor: void addRow(java.lang.Object[])> -> _SINK_");
+        data.add("<java.io.OutputStream: void write(byte[])> -> _SINK_");
+        data.add("<java.io.OutputStream: void write(byte[],int,int)> -> _SINK_ ");
+        data.add("<java.io.OutputStream: void write(int)> -> _SINK_ ");
+        data.add("<java.io.FileOutputStream: void write(byte[])> -> _SINK_");
+        data.add("<java.io.FileOutputStream: void write(byte[],int,int)> -> _SINK_");
+        data.add("<java.io.FileOutputStream: void write(int)> -> _SINK_");
+        data.add("<java.io.Writer: void write(char[])> -> _SINK_");
+        data.add("<java.io.Writer: void write(char[],int,int)> -> _SINK_");
+        data.add("<java.io.Writer: void write(int)> -> _SINK_");
+        data.add("<java.io.Writer: void write(java.lang.String)> -> _SINK_");
+        data.add("<java.io.Writer: void write(java.lang.String,int,int)> -> _SINK_");
+        data.add("<java.io.Writer: java.io.Writer append(java.lang.CharSequence)> -> _SINK_");
+        data.add("<java.io.OutputStreamWriter: java.io.Writer append(java.lang.CharSequence)> -> _SINK_");
     }
 }

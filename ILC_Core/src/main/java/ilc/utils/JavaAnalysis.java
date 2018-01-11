@@ -81,12 +81,15 @@ public class JavaAnalysis {
                 }
                 s += ")>";
                 //System.out.println("Entrypoints: "+s);
-                allEntryPoints.add(s);
+               // allEntryPoints.add(s);
+
                 if (info.getExtendsFrom().equals("Activity")
                         || info.getExtendsFrom().equals("BroadcastReceiver")
                         || info.getExtendsFrom().equals("ContentProvider")
                         || info.getExtendsFrom().equals("Service")){
                     entryPointsForAndroid.add(info.getPackageName()+ "." + info.getClassName());
+                }else {
+                    allEntryPoints.add(info.getPackageName()+ "." + info.getClassName());
                 }
             }
         }

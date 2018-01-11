@@ -18,6 +18,12 @@
  */
 package edu.psu.cse.siis.ic3.db;
 
+import edu.psu.cse.siis.ic3.manifest.ManifestComponent;
+import edu.psu.cse.siis.ic3.manifest.ManifestData;
+import edu.psu.cse.siis.ic3.manifest.ManifestIntentFilter;
+import edu.psu.cse.siis.ic3.manifest.ManifestProviderComponent;
+import soot.Unit;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,12 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import edu.psu.cse.siis.ic3.manifest.ManifestComponent;
-import edu.psu.cse.siis.ic3.manifest.ManifestData;
-import edu.psu.cse.siis.ic3.manifest.ManifestIntentFilter;
-import edu.psu.cse.siis.ic3.manifest.ManifestProviderComponent;
-import soot.Unit;
 
 public class SQLConnection {
   protected static ApplicationTable applicationTable = new ApplicationTable();
@@ -158,7 +158,7 @@ public class SQLConnection {
 
       Set<ManifestIntentFilter> intentFilters = component.getIntentFilters();
 
-      // System.out.println("Inserting " + intentFilters);
+      System.out.println("Inserting " + intentFilters);
       if (intentFilters != null) {
         for (ManifestIntentFilter intentFilter : component.getIntentFilters()) {
           List<Integer> actionIds = new ArrayList<Integer>();

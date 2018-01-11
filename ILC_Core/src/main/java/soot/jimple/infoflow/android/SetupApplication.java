@@ -251,9 +251,9 @@ public class SetupApplication {
 
     public void calculateSourcesSinksEntrypoints(ISourceSinkDefinitionProvider sourcesAndSinks) throws IOException, XmlPullParserException {
         this.sourceSinkProvider = sourcesAndSinks;
-        this.entrypoints = new HashSet<>();
-        this.entrypoints.add((String)JavaAnalysis.entryPointsForAndroid.toArray()[1]);
-        this.appPackageName = new File(this.apkFileLocation).getName().substring(0, new File(this.apkFileLocation).getName().lastIndexOf("."));
+        this.entrypoints = JavaAnalysis.entryPointsForAndroid;
+        String apkName = new File(this.apkFileLocation).getName();
+        this.appPackageName = apkName.substring(0, apkName.lastIndexOf("."));
         System.out.println("Entry point calculation done.");
         G.reset();
         //no callback

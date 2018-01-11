@@ -9,10 +9,11 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class Ic3Main {
-	public static void main(String[] args) throws SQLException {
+	public static String manifest;
+	public static void main(String[] args, String manifestPath) throws SQLException {
 		edu.psu.cse.siis.coal.Main.reset();
 		SQLConnection.reset();
-
+		manifest = manifestPath;
 		Ic3CommandLineParser parser = new Ic3CommandLineParser();
 		Ic3CommandLineArguments commandLineArguments = parser.parseCommandLine(args, Ic3CommandLineArguments.class);
 		if (commandLineArguments == null) {

@@ -63,7 +63,7 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
     protected ManifestPullParser detailedManifest;
     protected Map<String, Integer> componentToIdMap;
     protected Ic3SetupApplication ic3SetupApplication;
-    protected String packageName;
+    public static String packageName;
     protected Ic3CommandLineArguments arguments;
     protected String apkPath;
 
@@ -89,18 +89,22 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
         long startTime = System.currentTimeMillis() / 1000L;
         this.outputDir = "./ic3output";
         this.componentToIdMap = new HashMap<>();
-//        this.prepareManifestFile(commandLineArguments);
-/*        if(commandLineArguments.getProtobufDestination() != null) {
-            this.ic3Builder = Application.newBuilder();
-            this.ic3Builder.setAnalysisStart(startTime);
-            if(commandLineArguments.getSample() != null) {
-                this.ic3Builder.setSample(commandLineArguments.getSample());
+        //假如存在manifest文件，处理文件
+        if (prepareManifestFile(commandLineArguments, Ic3Main.manifest)) {
+            if(commandLineArguments.getProtobufDestination() != null) {
+                this.ic3Builder = Ic3Data.Application.newBuilder();
+                this.ic3Builder.setAnalysisStart(startTime);
+                if(commandLineArguments.getSample() != null) {
+                    this.ic3Builder.setSample(commandLineArguments.getSample());
+                }
+                this.componentNameToBuilderMap = this.detailedManifest.populateProtobuf(this.ic3Builder);
+            } else if(commandLineArguments.getDb() != null) {
+                SQLConnection.init(commandLineArguments.getDbName(), commandLineArguments.getDb(), commandLineArguments.getSsh(), commandLineArguments.getDbLocalPort());
+                this.componentToIdMap = this.detailedManifest.writeToDb(false);
             }
-            this.componentNameToBuilderMap = this.detailedManifest.populateProtobuf(this.ic3Builder);
-        } else if(commandLineArguments.getDb() != null) {
-            SQLConnection.init(commandLineArguments.getDbName(), commandLineArguments.getDb(), commandLineArguments.getSsh(), commandLineArguments.getDbLocalPort());
-            this.componentToIdMap = this.detailedManifest.writeToDb(false);
-        }*/
+        } else {   //不存在manifest文件
+
+        }
 
         this.apkPath = commandLineArguments.getInput();
         Timers.v().mainGeneration.start();
@@ -205,6 +209,18 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
             }
         }
 
+    }
+
+    protected boolean prepareManifestFile(Ic3CommandLineArguments commandLineArguments, String manifestPath) {
+        if (!manifestPath.equals("") && manifestPath.endsWith(".xml")) {
+            if (commandLineArguments.getDb() != null || commandLineArguments.getProtobufDestination() != null) {
+                this.detailedManifest = new ManifestPullParser();
+                this.detailedManifest.loadManifestFile(commandLineArguments.getManifest());
+            }
+            return true;
+        }else {
+            return false;
+        }
     }
 
     protected void prepareManifestFile(Ic3CommandLineArguments commandLineArguments) {

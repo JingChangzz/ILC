@@ -18,9 +18,23 @@
  */
 package edu.psu.cse.siis.ic3.manifest;
 
+import edu.psu.cse.siis.ic3.Ic3Analysis;
+import edu.psu.cse.siis.ic3.Ic3Data;
+import edu.psu.cse.siis.ic3.Ic3Data.Application.Builder;
+import edu.psu.cse.siis.ic3.Ic3Data.Application.Component;
+import edu.psu.cse.siis.ic3.Ic3Data.Application.Component.ComponentKind;
+import edu.psu.cse.siis.ic3.Ic3Data.Application.Component.IntentFilter;
+import edu.psu.cse.siis.ic3.Ic3Data.Attribute;
+import edu.psu.cse.siis.ic3.Ic3Data.AttributeKind;
+import edu.psu.cse.siis.ic3.db.Constants;
+import edu.psu.cse.siis.ic3.db.SQLConnection;
+import edu.psu.cse.siis.ic3.manifest.binary.AXmlResourceParser;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
@@ -33,21 +47,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import edu.psu.cse.siis.ic3.Ic3Data;
-import edu.psu.cse.siis.ic3.Ic3Data.Application.Builder;
-import edu.psu.cse.siis.ic3.Ic3Data.Application.Component;
-import edu.psu.cse.siis.ic3.Ic3Data.Application.Component.ComponentKind;
-import edu.psu.cse.siis.ic3.Ic3Data.Application.Component.IntentFilter;
-import edu.psu.cse.siis.ic3.Ic3Data.Attribute;
-import edu.psu.cse.siis.ic3.Ic3Data.AttributeKind;
-import edu.psu.cse.siis.ic3.db.Constants;
-import edu.psu.cse.siis.ic3.db.SQLConnection;
-import edu.psu.cse.siis.ic3.manifest.binary.AXmlResourceParser;
 
 public class ManifestPullParser {
   private static final String MANIFEST = "manifest";
@@ -237,9 +236,6 @@ public class ManifestPullParser {
 
   /**
    * Parse the manifest file.
-   *
-   * @param reader Input if text XML.
-   * @param is Input if binary XML.
    * @throws IOException
    * @throws XmlPullParserException
    */
@@ -270,16 +266,16 @@ public class ManifestPullParser {
   public Map<String, Integer> writeToDb(boolean skipEntryPoints) {
     Map<String, Integer> componentIds = new HashMap<String, Integer>();
 
-    componentIds.putAll(SQLConnection.insert(getPackageName(), version, shaSum, activities, usesPermissions,
+    componentIds.putAll(SQLConnection.insert(Ic3Analysis.packageName, version, shaSum, activities, usesPermissions,
         permissions, skipEntryPoints));
-    componentIds.putAll(SQLConnection.insert(getPackageName(), version,shaSum, activityAliases, null, null,
+    componentIds.putAll(SQLConnection.insert(Ic3Analysis.packageName, version,shaSum, activityAliases, null, null,
         skipEntryPoints));
     componentIds.putAll(
-        SQLConnection.insert(getPackageName(), version, shaSum, services, null, null, skipEntryPoints));
+        SQLConnection.insert(Ic3Analysis.packageName, version, shaSum, services, null, null, skipEntryPoints));
     componentIds.putAll(
-        SQLConnection.insert(getPackageName(), version, shaSum, receivers, null, null, skipEntryPoints));
+        SQLConnection.insert(Ic3Analysis.packageName, version, shaSum, receivers, null, null, skipEntryPoints));
     componentIds.putAll(
-        SQLConnection.insert(getPackageName(), version, shaSum, providers, null, null, skipEntryPoints));
+        SQLConnection.insert(Ic3Analysis.packageName, version, shaSum, providers, null, null, skipEntryPoints));
 
     return componentIds;
   }

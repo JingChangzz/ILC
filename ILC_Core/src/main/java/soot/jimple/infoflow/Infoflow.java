@@ -134,11 +134,12 @@ public class Infoflow extends AbstractInfoflow {
             logger.error("Sources are empty!");
             return true;
         }
-
+        Collection<String> classes =  entryPointCreator.getRequiredClasses();
         initializeSoot(appPath, libPath, entryPointCreator.getRequiredClasses());
 
         // entryPoints are the entryPoints required by Soot to calculate Graph - if there is no main method,
         // we have to create a new main method and use it as entryPoint and store our real entryPoints
+        SootMethod sm = entryPointCreator.createDummyMain();
         Scene.v().setEntryPoints(Collections.singletonList(entryPointCreator.createDummyMain()));
 
         // Run the analysis
@@ -248,6 +249,7 @@ public class Infoflow extends AbstractInfoflow {
                 erasureMode);
 
         // Initialize the data flow manager
+
         InfoflowManager manager = new InfoflowManager(config, null, iCfg, sourcesSinks,
                 taintWrapper, hierarchy);
 
@@ -507,6 +509,7 @@ public class Infoflow extends AbstractInfoflow {
         if (config.getWriteOutputFiles())
             PackManager.v().writeOutput();
 
+        results.setInfoflowCFG(this.iCfg);
         maxMemoryConsumption = Math.max(maxMemoryConsumption, getUsedMemory());
         System.out.println("Maximum memory consumption: " + maxMemoryConsumption / 1E6 + " MB");
         return true;
