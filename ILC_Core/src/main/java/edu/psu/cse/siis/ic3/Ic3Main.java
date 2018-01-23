@@ -7,13 +7,16 @@ import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.Set;
 
 public class Ic3Main {
 	public static String manifest;
-	public static void main(String[] args, String manifestPath) throws SQLException {
+	public static Set<String> entryPointClasses;
+	public static void main(String[] args, String manifestPath, Set<String> entryPoints) throws SQLException {
 		edu.psu.cse.siis.coal.Main.reset();
 		SQLConnection.reset();
 		manifest = manifestPath;
+		entryPointClasses = entryPoints;
 		Ic3CommandLineParser parser = new Ic3CommandLineParser();
 		Ic3CommandLineArguments commandLineArguments = parser.parseCommandLine(args, Ic3CommandLineArguments.class);
 		if (commandLineArguments == null) {

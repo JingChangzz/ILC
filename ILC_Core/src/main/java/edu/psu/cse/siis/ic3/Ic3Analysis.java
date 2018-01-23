@@ -17,7 +17,6 @@ import edu.psu.cse.siis.coal.field.transformers.FieldTransformerManager;
 import edu.psu.cse.siis.ic3.Ic3Data.Application.Builder;
 import edu.psu.cse.siis.ic3.db.SQLConnection;
 import edu.psu.cse.siis.ic3.manifest.ManifestPullParser;
-import ilc.utils.JavaAnalysis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import soot.G;
@@ -109,8 +108,7 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
         this.apkPath = commandLineArguments.getInput();
         Timers.v().mainGeneration.start();
         this.ic3SetupApplication = new Ic3SetupApplication(commandLineArguments.getManifest(), this.apkPath, commandLineArguments.getAndroidJar());
-        Set entryPointClasses = JavaAnalysis.entryPointsForAndroid;
-//        entryPointClasses.add((String) JavaAnalysis.entryPointsForAndroid.toArray()[1]);
+        Set entryPointClasses = Ic3Main.entryPointClasses;
         String name = new File(commandLineArguments.getManifest()).getName();
         this.packageName = name.substring(0, name.lastIndexOf("."));
 

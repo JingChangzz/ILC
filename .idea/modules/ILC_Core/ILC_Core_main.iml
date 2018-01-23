@@ -30,43 +30,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../libs/ic3-classes.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/../../../libs/infoflow.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../libs/protobuf-java-2.5.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../libs/infoflow-android.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../libs/jsch-0.1.51.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -93,6 +57,15 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../libs/protobuf-java-2.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
           <root url="jar://$MODULE_DIR$/../../../libs/coal-strings-0.1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -111,21 +84,47 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../libs/ic3-classes.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../libs/infoflow-android.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
           <root url="jar://$MODULE_DIR$/../../../libs/coal-0.1.7.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../libs/jsch-0.1.51.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Gradle: commons-io:commons-io:2.5" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.apache.commons:commons-configuration2:2.1" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: commons-beanutils:commons-beanutils:1.9.3" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.github.javaparser:javaparser-core:3.5.3" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.apache.commons:commons-lang3:3.3.2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: commons-collections:commons-collections:3.2.2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.slf4j:slf4j-log4j12:1.7.25" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-configuration2:2.1" level="project" />
+    <orderEntry type="library" name="Gradle: commons-beanutils:commons-beanutils:1.9.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-log4j12:1.7.25" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Gradle: commons-collections:commons-collections:3.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Gradle: log4j:log4j:1.2.17" level="project" />
   </component>
 </module>

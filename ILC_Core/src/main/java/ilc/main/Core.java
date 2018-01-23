@@ -131,7 +131,7 @@ public class Core {
         //Ic3 数据提取
         Ic3Main.main(new String[] { "-in", jarFile, "-cp",
                 classPath, "-db", "./db.properties", "-dbname",
-                "ilc", "-dbhost", "localhost"}, "");
+                "ilc", "-dbhost", "localhost"}, "", entryPoints);
 
         if(true)
             return;

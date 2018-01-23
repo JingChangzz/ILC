@@ -2,38 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92c535df-5d91-4d6a-a5f8-d758b4b628c6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/Administrator.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__log4j_log4j_1_2_17.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_slf4j_api_1_7_25.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_slf4j_log4j12_1_7_25.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/axml_2_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/coal_0_1_7.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/coal_strings_0_1_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/commons_cli_1_3_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/device.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/herosclasses_trunk.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jsch_0_1_51.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jsdg_stubs_jre1_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_17.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_31.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/protobuf_java_2_5_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/slf4j_api_1_7_7.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/slf4j_log4j12_1_7_13.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules/heros/heros.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ILC_Core/src/main/resources/EasyTaintWrapperSource.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/log4j-1.2.17.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/slf4j-api-1.7.7.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/slf4j-log4j12-1.7.13.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/Java60RegressionExclusions.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/SourcesAndSinks.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/jsdg-stubs-jre1.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/log4j.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/path.properties" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/ILC.iml" afterPath="$PROJECT_DIR$/.idea/modules/ILC.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_javaparser_javaparser_core_3_5_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/JavaAnalysis.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/JavaClassInfo.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/ILC_Core/ILC_Core.iml" afterPath="$PROJECT_DIR$/.idea/modules/ILC_Core/ILC_Core.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/ILC_Core/ILC_Core_main.iml" afterPath="$PROJECT_DIR$/.idea/modules/ILC_Core/ILC_Core_main.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/ILC_Core/ILC_Core_test.iml" afterPath="$PROJECT_DIR$/.idea/modules/ILC_Core/ILC_Core_test.iml" />
@@ -41,20 +12,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/ILC_test.iml" afterPath="$PROJECT_DIR$/.idea/modules/ILC_test.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/build.gradle" afterPath="$PROJECT_DIR$/ILC_Core/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/EntryPointMappingSceneTransformer.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/EntryPointMappingSceneTransformer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Analysis.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Analysis.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Main.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/JavaAnalysis.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/JavaAnalysis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/JavaClassInfo.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/JavaClassInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/Infoflow.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/Infoflow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/SetupApplication.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/SetupApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/TestApps/Test.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/TestApps/Test.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/data/ICCEntryPointSourceSink.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/data/ICCEntryPointSourceSink.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/data/ICCExitPointSourceSink.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/data/ICCExitPointSourceSink.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/resources/log4j.properties" afterPath="$PROJECT_DIR$/ILC_Core/src/main/resources/log4j.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/resources/path.properties" afterPath="$PROJECT_DIR$/ILC_Core/src/main/resources/path.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/SourceSink.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/ParseJar.java" />
     </list>
     <ignored path="ILC.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -91,8 +52,120 @@
         <task path="$PROJECT_DIR$/ILC_Core">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
-          <tree_state />
+          <tree_state>
+            <PATH>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="ILC" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value=":ILC_Core" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ModuleNode" />
+              </PATH_ELEMENT>
+            </PATH>
+            <PATH>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="ILC" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value=":ILC_Core" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ModuleNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="Tasks" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.TasksNode" />
+              </PATH_ELEMENT>
+            </PATH>
+            <PATH>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="ILC" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value=":ILC_Core" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ModuleNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="Tasks" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.TasksNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="build" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.TasksNode$1" />
+              </PATH_ELEMENT>
+            </PATH>
+            <PATH>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="ILC" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="ILC" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ModuleNode" />
+              </PATH_ELEMENT>
+            </PATH>
+            <PATH>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="ILC" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="ILC" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ModuleNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="Tasks" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.TasksNode" />
+              </PATH_ELEMENT>
+            </PATH>
+            <PATH>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="ILC" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="ILC" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ModuleNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="Tasks" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.TasksNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="build" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.TasksNode$1" />
+              </PATH_ELEMENT>
+            </PATH>
+          </tree_state>
         </projects_view>
       </state>
     </system>
@@ -102,11 +175,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Core.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Core.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="223" column="0" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
+            <state relative-caret-position="239">
+              <caret line="131" column="18" selection-start-line="131" selection-start-column="18" selection-end-line="131" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ic3Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="18" column="40" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ic3Analysis.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Analysis.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="110" column="57" selection-start-line="110" selection-start-column="57" selection-end-line="110" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -458,7 +551,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4550127115224" />
+        <entry key="$PROJECT_DIR$" value="4550129625123" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -630,18 +723,19 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/EntryPointMappingSceneTransformer.java" />
-        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Analysis.java" />
         <option value="$PROJECT_DIR$/.idea/encodings.xml" />
         <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/ParseJar.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/TestApps/Test.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/SetupApplication.java" />
-        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java" />
         <option value="$PROJECT_DIR$/resources/log4j.properties" />
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/ILC_Core/build.gradle" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/resources/path.properties" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/ILC_Core/build.gradle" />
+        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java" />
+        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Analysis.java" />
+        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Main.java" />
       </list>
     </option>
   </component>
@@ -786,6 +880,138 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC_Core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ilc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC_Core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ilc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC_Core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ilc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC_Core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ilc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -820,17 +1046,6 @@
       <module name="ILC_Core_main" />
       <envs />
       <method />
-    </configuration>
-    <configuration default="false" name="build (1)" type="GroovyScriptRunConfiguration" factoryName="Groovy" temporary="true">
-      <module name="ILC_Core" />
-      <setting name="path" value="file://$PROJECT_DIR$/ILC_Core/build.gradle" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workDir" value="file://$PROJECT_DIR$/ILC_Core" />
-      <setting name="debug" value="false" />
-      <method>
-        <option name="Make" enabled="false" />
-      </method>
     </configuration>
     <configuration default="false" name="ILC:ILC_Core [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -886,6 +1101,24 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="ILC_Core_main" />
       <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ILC [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -1143,18 +1376,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.Core" />
-      <item index="1" class="java.lang.String" itemvalue="Groovy.build (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Gradle.ILC:ILC_Core [clean]" />
-      <item index="3" class="java.lang.String" itemvalue="Gradle.ILC:ILC_Core [build]" />
-      <item index="4" class="java.lang.String" itemvalue="Application.ParseJar" />
+      <item index="1" class="java.lang.String" itemvalue="Gradle.ILC:ILC_Core [clean]" />
+      <item index="2" class="java.lang.String" itemvalue="Gradle.ILC:ILC_Core [build]" />
+      <item index="3" class="java.lang.String" itemvalue="Application.ParseJar" />
+      <item index="4" class="java.lang.String" itemvalue="Gradle.ILC [clean]" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.Core" />
-        <item index="1" class="java.lang.String" itemvalue="Application.ParseJar" />
-        <item index="2" class="java.lang.String" itemvalue="Gradle.ILC:ILC_Core [build]" />
-        <item index="3" class="java.lang.String" itemvalue="Gradle.ILC:ILC_Core [clean]" />
-        <item index="4" class="java.lang.String" itemvalue="Groovy.build (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Gradle.ILC [clean]" />
+        <item index="2" class="java.lang.String" itemvalue="Application.ParseJar" />
+        <item index="3" class="java.lang.String" itemvalue="Gradle.ILC:ILC_Core [build]" />
+        <item index="4" class="java.lang.String" itemvalue="Gradle.ILC:ILC_Core [clean]" />
       </list>
     </recent_temporary>
   </component>
@@ -1169,6 +1402,14 @@
       <option name="presentableId" value="Default" />
       <updated>1516699028020</updated>
     </task>
+    <task id="LOCAL-00001" summary="使用soot获取jar中class相关信息">
+      <created>1516712508705</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1516712508705</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1190,7 +1431,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23635058" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="VersionChecker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914925" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15373564" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15373564" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20617816" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18606322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1231,6 +1472,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="使用soot获取jar中class相关信息" />
+    <option name="LAST_COMMIT_MESSAGE" value="使用soot获取jar中class相关信息" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1373,6 +1618,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1381,13 +1627,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Analysis.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="97" column="22" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1439,13 +1678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/JavaAnalysis.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="30" column="40" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -1525,21 +1757,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-simple/1.7.25/af3cd3ad1ea4b08b27b54f12529b4bf343bc5ca1/slf4j-simple-1.7.25-sources.jar!/org/slf4j/impl/SimpleLogger.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="134">
           <caret line="317" column="28" selection-start-line="317" selection-start-column="28" selection-end-line="317" selection-end-column="28" />
           <folding>
-            <element signature="e#18119#18120#0" expanded="true" />
-            <element signature="e#18183#18184#0" expanded="true" />
+            <element signature="e#18119#18120#0" expanded="false" />
+            <element signature="e#18183#18184#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1568,14 +1792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ILC_Core/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/libs/infoflow.jar!/soot/jimple/infoflow/taintWrappers/EasyTaintWrapper.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
@@ -1592,10 +1808,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/JavaAnalysis.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/JavaClassInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="223" column="0" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
+        <state relative-caret-position="239">
+          <caret line="131" column="18" selection-start-line="131" selection-start-column="18" selection-end-line="131" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Analysis.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="110" column="57" selection-start-line="110" selection-start-column="57" selection-end-line="110" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="18" column="40" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
           <folding />
         </state>
       </provider>
