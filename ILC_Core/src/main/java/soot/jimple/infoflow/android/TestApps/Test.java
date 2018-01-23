@@ -43,6 +43,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -65,9 +66,9 @@ public class Test {
     private static boolean DEBUG = true;
     private static InfoflowResults infoResults = null;
     public static boolean InfoFlowComputationTimeOut;
-    private static boolean ExitPointSink = true;
+    public static boolean ExitPointSink = true;
     private static IIPCManager ipcManager = null;
-
+    public static Set<String> entryPoint = new HashSet<>();
     public Test() {
     }
 
@@ -79,11 +80,12 @@ public class Test {
         return ipcManager;
     }
 
-    public static InfoflowResults runAnalysisForResults(String[] args) throws IOException, InterruptedException {
+    public static InfoflowResults runAnalysisForResults(String[] args, Set<String> entryPoints) throws IOException, InterruptedException {
         if(args.length < 2) {
             printUsage();
             return null;
         } else {
+            entryPoint = entryPoints;
             File outputDir = new File("JimpleOutput");
             int oldRepeatCount;
             File line;
@@ -355,7 +357,7 @@ public class Test {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        runAnalysisForResults(args);
+        runAnalysisForResults(args, entryPoint);
     }
 
     private static InfoflowResults runAnalysisTimeout(final String fileName, final String androidJar) {
@@ -568,7 +570,7 @@ public class Test {
         }
     }
 
-    private static ITaintPropagationWrapper createLibrarySummaryTW() throws IOException {
+    public static ITaintPropagationWrapper createLibrarySummaryTW() throws IOException {
         try {
             Class ex = Class.forName("soot.jimple.infoflow.methodSummary.data.summary.LazySummary");
             Object lazySummary = ex.getConstructor(new Class[]{File.class}).newInstance(new Object[]{new File(summaryPath)});

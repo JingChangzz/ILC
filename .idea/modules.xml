@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ILC_Core/ILC_Core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ILC_Core/ILC_Core_test.iml" group="ILC_Core" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ILC_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ILC_main.iml" group="ILC" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ILC_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ILC_test.iml" group="ILC" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/heros/heros.iml" filepath="$PROJECT_DIR$/.idea/modules/heros/heros.iml" group="heros" />
     </modules>
   </component>
 </project>

@@ -5,7 +5,6 @@
 
 package soot.jimple.infoflow.android;
 
-import ilc.utils.JavaAnalysis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -251,7 +250,7 @@ public class SetupApplication {
 
     public void calculateSourcesSinksEntrypoints(ISourceSinkDefinitionProvider sourcesAndSinks) throws IOException, XmlPullParserException {
         this.sourceSinkProvider = sourcesAndSinks;
-        this.entrypoints = JavaAnalysis.entryPointsForAndroid;
+        this.entrypoints = Test.entryPoint;
         String apkName = new File(this.apkFileLocation).getName();
         this.appPackageName = apkName.substring(0, apkName.lastIndexOf("."));
         System.out.println("Entry point calculation done.");

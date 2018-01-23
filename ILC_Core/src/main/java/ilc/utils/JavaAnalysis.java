@@ -25,7 +25,12 @@ public class JavaAnalysis {
     public static Collection<JavaClassInfo> allClassesInfo = new HashSet<JavaClassInfo>();
     public static Collection<File> allFiles = null;
     public static Set<String> allEntryPoints = new HashSet<>();
+    public static Set<String> normalEntryPoints = new HashSet<>();
     public static Set<String> entryPointsForAndroid = new HashSet<>();
+    public static Set<String> activityCom = new HashSet<>();
+    public static Set<String> serviceCom = new HashSet<>();
+    public static Set<String> broadcastCom = new HashSet<>();
+    public static Set<String> contentProviderCom = new HashSet<>();
     public static String extentFrom = "";
 
     public JavaAnalysis(String file){
@@ -47,11 +52,12 @@ public class JavaAnalysis {
             javaClassInfo.setPackageName(getJavaPackageName(f));
             javaClassInfo.setExtendsFrom(extentFrom);
             allClassesInfo.add(javaClassInfo);
-            getEntryPoints();
             System.out.println(f.getAbsolutePath());
             System.out.println(allClassesInfo.size());
             System.out.println(extentFrom);
         }
+
+        getEntryPoints();
         return allClassesInfo;
     }
 
@@ -66,34 +72,25 @@ public class JavaAnalysis {
             if (info.getAllMethods().size() == 0){
                 continue;
             }
-            for (MethodDeclaration m : info.getAllMethods()) {
-                if (m.isAbstract() || m.isPrivate() || m.isProtected()){
-                    continue;
-                }
-                String s = new String();
-                s = "<" + info.getPackageName() + "." + info.getClassName() + " : "
-                        +  m.getType().toString() + " " + m.getName().toString() +"(";
-                for (int i = 0; i < m.getParameters().size(); i++) {
-                    if (i > 0){
-                        s += ",";
-                    }
-                    s += m.getParameter(i).getType().toString();
-                }
-                s += ")>";
-                //System.out.println("Entrypoints: "+s);
-               // allEntryPoints.add(s);
-
-                if (info.getExtendsFrom().equals("Activity")
-                        || info.getExtendsFrom().equals("BroadcastReceiver")
-                        || info.getExtendsFrom().equals("ContentProvider")
-                        || info.getExtendsFrom().equals("Service")){
-                    entryPointsForAndroid.add(info.getPackageName()+ "." + info.getClassName());
-                }else {
-                    allEntryPoints.add(info.getPackageName()+ "." + info.getClassName());
-                }
+            String key = info.getPackageName()+ "." + info.getClassName();
+            allEntryPoints.add(key);
+            String extend = info.getExtendsFrom();
+            if (extend.contains("Activity")){
+                entryPointsForAndroid.add(key);
+                activityCom.add(key);
+            }else if (("Service").equals(extend)){
+                entryPointsForAndroid.add(key);
+                serviceCom.add(key);
+            }else if (("BroadcastReceiver").equals(extend)){
+                entryPointsForAndroid.add(key);
+                broadcastCom.add(key);
+            }else if (("ContentProvider").equals(extend)){
+                entryPointsForAndroid.add(key);
+                contentProviderCom.add(key);
+            } else {
+                normalEntryPoints.add(key);
             }
         }
-        //System.out.println(allEntryPoints.size());
     }
 
     /**

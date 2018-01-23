@@ -21,8 +21,8 @@
     <bytecodeTargetLevel>
       <module name="ILC_Core_main" target="1.8" />
       <module name="ILC_Core_test" target="1.8" />
-      <module name="ILC_main" target="1.7" />
-      <module name="ILC_test" target="1.7" />
+      <module name="ILC_main" target="1.8" />
+      <module name="ILC_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

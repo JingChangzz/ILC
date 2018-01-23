@@ -12,7 +12,6 @@ public class JavaClassInfo {
     private String className;
     private List<MethodDeclaration> allMethods;
     private String packageName;//文件的package
-
     private String extendsFrom;
 
     public JavaClassInfo(){

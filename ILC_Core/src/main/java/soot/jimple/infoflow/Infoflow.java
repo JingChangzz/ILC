@@ -64,6 +64,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -87,6 +88,7 @@ public class Infoflow extends AbstractInfoflow {
 
     private Set<Stmt> collectedSources = null;
     private Set<Stmt> collectedSinks = null;
+    public static boolean exitPath = true;
 
     /**
      * Creates a new instance of the InfoFlow class for analyzing plain Java code without any references to APKs or the Android SDK.
@@ -134,12 +136,12 @@ public class Infoflow extends AbstractInfoflow {
             logger.error("Sources are empty!");
             return true;
         }
-        Collection<String> classes =  entryPointCreator.getRequiredClasses();
+        //Collection<String> classes =  entryPointCreator.getRequiredClasses();
         initializeSoot(appPath, libPath, entryPointCreator.getRequiredClasses());
 
         // entryPoints are the entryPoints required by Soot to calculate Graph - if there is no main method,
         // we have to create a new main method and use it as entryPoint and store our real entryPoints
-        SootMethod sm = entryPointCreator.createDummyMain();
+        //SootMethod sm = entryPointCreator.createDummyMain();
         Scene.v().setEntryPoints(Collections.singletonList(entryPointCreator.createDummyMain()));
 
         // Run the analysis
@@ -343,10 +345,18 @@ public class Infoflow extends AbstractInfoflow {
             logger.error("No sources found, aborting analysis");
             return true;
         }
-        if (sinkCount == 0) {
-            logger.error("No sinks found, aborting analysis");
-            return true;
+        if (exitPath == true) {
+            if (sinkCount == 0) {
+                logger.error("No sinks found, aborting exitpath analysis");
+                return true;
+            }
+        } else {
+            if (forwardProblem.getInitialSeeds().size() == 0){
+                logger.error("No source found, aborting entrypath analysis");
+                return true;
+            }
         }
+
         logger.info("Source lookup done, found {} sources and {} sinks.", forwardProblem.getInitialSeeds().size(),
                 sinkCount);
 
@@ -426,19 +436,19 @@ public class Infoflow extends AbstractInfoflow {
         Set<AbstractionAtSink> res = propagationResults.getResults();
 
         // We need to prune access paths that are entailed by another one
-        for (Iterator<AbstractionAtSink> absAtSinkIt = res.iterator(); absAtSinkIt.hasNext(); ) {
-            AbstractionAtSink curAbs = absAtSinkIt.next();
-            for (AbstractionAtSink checkAbs : res)
-                if (checkAbs != curAbs
-                        && checkAbs.getSinkStmt() == curAbs.getSinkStmt()
-                        && checkAbs.getAbstraction().isImplicit() == curAbs.getAbstraction().isImplicit()
-                        && checkAbs.getAbstraction().getSourceContext() == curAbs.getAbstraction().getSourceContext())
-                    if (checkAbs.getAbstraction().getAccessPath().entails(
-                            curAbs.getAbstraction().getAccessPath())) {
-                        absAtSinkIt.remove();
-                        break;
-                    }
-        }
+//        for (Iterator<AbstractionAtSink> absAtSinkIt = res.iterator(); absAtSinkIt.hasNext(); ) {
+//            AbstractionAtSink curAbs = absAtSinkIt.next();
+//            for (AbstractionAtSink checkAbs : res)
+//                if (checkAbs != curAbs
+//                        && checkAbs.getSinkStmt() == curAbs.getSinkStmt()
+//                        && checkAbs.getAbstraction().isImplicit() == curAbs.getAbstraction().isImplicit()
+//                        && checkAbs.getAbstraction().getSourceContext() == curAbs.getAbstraction().getSourceContext())
+//                    if (checkAbs.getAbstraction().getAccessPath().entails(
+//                            curAbs.getAbstraction().getAccessPath())) {
+//                        absAtSinkIt.remove();
+//                        break;
+//                    }
+//        }
 
         logger.info("IFDS problem with {} forward and {} backward edges solved, "
                         + "processing {} results...", forwardSolver.propagationCount,
@@ -506,7 +516,7 @@ public class Infoflow extends AbstractInfoflow {
         for (ResultsAvailableHandler handler : onResultsAvailable)
             handler.onResultsAvailable(iCfg, results);
 
-        if (config.getWriteOutputFiles())
+ //       if (config.getWriteOutputFiles())
             PackManager.v().writeOutput();
 
         results.setInfoflowCFG(this.iCfg);
@@ -632,6 +642,49 @@ public class Infoflow extends AbstractInfoflow {
 
         }
         return sinkCount;
+    }
+
+    private void scanMethodForSourcesSinks(Map<String, Integer> num,
+                                          final ISourceSinkManager sourcesSinks,
+                                          InfoflowProblem forwardProblem,
+                                          SootMethod m) {
+        if (getConfig().getLogSourcesAndSinks() && collectedSources == null) {
+            collectedSources = new HashSet<>();
+            collectedSinks = new HashSet<>();
+        }
+
+        int sinkCount = 0, sourceCount = 0;
+        if (m.hasActiveBody()) {
+            // Check whether this is a system class we need to ignore
+            final String className = m.getDeclaringClass().getName();
+            if (config.getIgnoreFlowsInSystemPackages()
+                    && SystemClassHandler.isClassInSystemPackage(className))
+                return ;
+
+            // Look for a source in the method. Also look for sinks. If we
+            // have no sink in the program, we don't need to perform any
+            // analysis
+            PatchingChain<Unit> units = m.getActiveBody().getUnits();
+            for (Unit u : units) {
+                Stmt s = (Stmt) u;
+                if (sourcesSinks.getSourceInfo(s, iCfg) != null) {
+                    forwardProblem.addInitialSeeds(u, Collections.singleton(forwardProblem.zeroValue()));
+                    sourceCount++;
+                    if (getConfig().getLogSourcesAndSinks())
+                        collectedSources.add(s);
+                    logger.info("Source found: {}", u);
+                }
+                if (sourcesSinks.isSink(s, iCfg, null)) {
+                    sinkCount++;
+                    if (getConfig().getLogSourcesAndSinks())
+                        collectedSinks.add(s);
+                    logger.info("Sink found: {}", u);
+                }
+            }
+
+        }
+        num.put("SOURCE", num.get("SOURCE")+sourceCount);
+        num.put("SINK", num.get("SINK")+sinkCount);
     }
 
     @Override

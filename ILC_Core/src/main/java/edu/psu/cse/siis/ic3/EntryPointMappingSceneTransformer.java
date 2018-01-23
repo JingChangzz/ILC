@@ -7,13 +7,6 @@ package edu.psu.cse.siis.ic3;
 
 import edu.psu.cse.siis.coal.AnalysisParameters;
 import edu.psu.cse.siis.coal.PropagationTimers;
-import edu.psu.cse.siis.ic3.Timers;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import soot.Hierarchy;
@@ -29,6 +22,13 @@ import soot.jimple.toolkits.callgraph.Edge;
 import soot.jimple.toolkits.callgraph.Filter;
 import soot.jimple.toolkits.callgraph.ReachableMethods;
 import soot.util.queue.QueueReader;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class EntryPointMappingSceneTransformer extends SceneTransformer {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

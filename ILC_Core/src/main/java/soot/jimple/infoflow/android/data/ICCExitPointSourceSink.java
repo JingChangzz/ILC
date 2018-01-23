@@ -346,17 +346,17 @@ public class ICCExitPointSourceSink {
         data.add("<android.app.Activity: void sendStickyOrderedBroadcastAsUser(android.content.Intent,android.os.UserHandle,android.content.BroadcastReceiver,android.os.Handler,int,java.lang.String,android.os.Bundle)> -> _SINK_");
         data.add("<android.content.BroadcastReceiver: void setResultData(java.lang.String)> -> _SINK_");
         data.add("<android.content.BroadcastReceiver: void setResult(int,java.lang.String,android.os.Bundle)> -> _SINK_");
-        data.add("<android.content.Context: void setResultData(java.lang.String)> -> _SINK_");
-        data.add("<android.content.Context: void setResult(int,java.lang.String,android.os.Bundle)> -> _SINK_");
-        data.add("<android.content.ContextWrapper: void setResultData(java.lang.String)> -> _SINK_");
-        data.add("<android.content.ContextWrapper: void setResult(int,java.lang.String,android.os.Bundle)> -> _SINK_");
-        data.add("<android.content.ContextThemeWrapper: void setResultData(java.lang.String)> -> _SINK_");
-        data.add("<android.content.ContextThemeWrapper: void setResult(int,java.lang.String,android.os.Bundle)> -> _SINK_");
+//        data.add("<android.content.Context: void setResultData(java.lang.String)> -> _SINK_");
+//        data.add("<android.content.Context: void setResult(int,java.lang.String,android.os.Bundle)> -> _SINK_");
+//        data.add("<android.content.ContextWrapper: void setResultData(java.lang.String)> -> _SINK_");
+//        data.add("<android.content.ContextWrapper: void setResult(int,java.lang.String,android.os.Bundle)> -> _SINK_");
+//        data.add("<android.content.ContextThemeWrapper: void setResultData(java.lang.String)> -> _SINK_");
+//        data.add("<android.content.ContextThemeWrapper: void setResult(int,java.lang.String,android.os.Bundle)> -> _SINK_");
         data.add("<android.content.ContentResolver: android.net.Uri insert(android.net.Uri,android.content.ContentValues)> -> _SINK_");
-        data.add("<android.content.ContentResolver: int delete(android.net.Uri,java.lang.String,java.lang.String[])> -> _SINK_");
+//        data.add("<android.content.ContentResolver: int delete(android.net.Uri,java.lang.String,java.lang.String[])> -> _SINK_");
         data.add("<android.content.ContentResolver: int update(android.net.Uri,android.content.ContentValues,java.lang.String,java.lang.String[])> -> _SINK_");
-        data.add("<android.content.ContentResolver: android.database.Cursor query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String)> -> _SINK_");
-        data.add("<android.content.ContentResolver: android.database.Cursor query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String,android.os.CancellationSignal)> -> _SINK_");
+//        data.add("<android.content.ContentResolver: android.database.Cursor query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String)> -> _SINK_");
+//        data.add("<android.content.ContentResolver: android.database.Cursor query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String,android.os.CancellationSignal)> -> _SINK_");
         data.add("<android.database.MatrixCursor: void addRow(java.lang.Object[])> -> _SINK_");
         data.add("<java.io.OutputStream: void write(byte[])> -> _SINK_");
         data.add("<java.io.OutputStream: void write(byte[],int,int)> -> _SINK_ ");
@@ -371,5 +371,6 @@ public class ICCExitPointSourceSink {
         data.add("<java.io.Writer: void write(java.lang.String,int,int)> -> _SINK_");
         data.add("<java.io.Writer: java.io.Writer append(java.lang.CharSequence)> -> _SINK_");
         data.add("<java.io.OutputStreamWriter: java.io.Writer append(java.lang.CharSequence)> -> _SINK_");
+//        data.add("<android.content.Intent: android.content.Intent putExtra(java.lang.String,java.lang.String)> -> _SINK_");
     }
 }
