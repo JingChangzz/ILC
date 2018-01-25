@@ -375,7 +375,7 @@ public class Test {
 
         try {
             System.out.println("Running infoflow task...");
-            task.get(26000, TimeUnit.SECONDS);
+            task.get(5, TimeUnit.MINUTES);
         } catch (ExecutionException var5) {
             System.err.println("Infoflow computation failed: " + var5.getMessage());
             var5.printStackTrace();
