@@ -17,6 +17,7 @@ import edu.psu.cse.siis.coal.field.transformers.FieldTransformerManager;
 import edu.psu.cse.siis.ic3.Ic3Data.Application.Builder;
 import edu.psu.cse.siis.ic3.db.SQLConnection;
 import edu.psu.cse.siis.ic3.manifest.ManifestPullParser;
+import ilc.db.ILCSQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import soot.G;
@@ -98,7 +99,7 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
                 }
                 this.componentNameToBuilderMap = this.detailedManifest.populateProtobuf(this.ic3Builder);
             } else if(commandLineArguments.getDb() != null) {
-                SQLConnection.init(commandLineArguments.getDbName(), commandLineArguments.getDb(), commandLineArguments.getSsh(), commandLineArguments.getDbLocalPort());
+                ILCSQLConnection.init(commandLineArguments.getDbName(), commandLineArguments.getDb(), commandLineArguments.getSsh(), commandLineArguments.getDbLocalPort());
                 this.componentToIdMap = this.detailedManifest.writeToDb(false);
             }
         } else {   //不存在manifest文件
