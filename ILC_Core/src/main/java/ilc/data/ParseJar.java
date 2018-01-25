@@ -36,11 +36,10 @@ public class ParseJar {
         jarClasses = Scene.v().getApplicationClasses();
         for (SootClass clazz : jarClasses) {
             if (clazz.isAbstract() || clazz.isInterface() || clazz.isJavaLibraryClass()){
-                allEntryPoints.add(clazz.getName());
                 continue;
             } else if (clazz.isPublic()){
-
                 String superClass = clazz.getSuperclass().getName();
+                allEntryPoints.add(clazz.getName());
                 if (superClass.contains("android.app.Activity")){
                     entryPointsForAndroid.add(clazz.getName());
                     activityCom.add(clazz.getName());
@@ -59,6 +58,7 @@ public class ParseJar {
                     serviceCom.add(clazz.getName());
                     continue;
                 }
+
                 plainEntryPoints.add(clazz.getName());
             }
         }
