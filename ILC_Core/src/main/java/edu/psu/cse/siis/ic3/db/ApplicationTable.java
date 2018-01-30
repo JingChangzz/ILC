@@ -25,7 +25,7 @@ public class ApplicationTable extends Table {
   private static final String INSERT = "INSERT INTO Applications (app, version,shasum) VALUES (?, ?,?)";
   private static final String FIND = "SELECT id FROM Applications WHERE shasum = ?";
 
-  public int insert(String app, int version, String shasum) throws SQLException {
+  public int insert(String app, String version, String shasum) throws SQLException {
 
     int id = find(shasum);
     findStatement.close();
@@ -36,15 +36,15 @@ public class ApplicationTable extends Table {
     return forceInsert(app, version, shasum);
   }
 
-  public int forceInsert(String app, int version, String shasum) throws SQLException {
+  public int forceInsert(String app, String version, String shasum) throws SQLException {
     if (insertStatement == null || insertStatement.isClosed()) {
       insertStatement = getConnection().prepareStatement(INSERT);
     }
     insertStatement.setString(1, app);
-    if (version == NOT_FOUND) {
-      insertStatement.setNull(2, Types.INTEGER);
+    if (version == "") {
+      insertStatement.setNull(2, Types.NULL);
     } else {
-      insertStatement.setInt(2, version);
+      insertStatement.setString(2, version);
     }
     
     insertStatement.setString(3, shasum);

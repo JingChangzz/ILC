@@ -1,22 +1,25 @@
 package edu.psu.cse.siis.ic3;
 
-import edu.psu.cse.siis.ic3.manifest.SHA256Calculator;
+import ilc.data.ParseJar;
 import ilc.db.ILCSQLConnection;
 
-import java.io.File;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Set;
 
 public class Ic3Main {
 	public static String manifest;
 	public static Set<String> entryPointClasses;
-	public static void main(String[] args, String manifestPath, Set<String> entryPoints) throws SQLException {
+	public static boolean isPlainEn;
+	public static void main(String[] args, String manifestPath, boolean isPlain) throws SQLException {
 		edu.psu.cse.siis.coal.Main.reset();
 		ILCSQLConnection.reset();
 		manifest = manifestPath;
-		entryPointClasses = entryPoints;
+		if (isPlain){
+			entryPointClasses = ParseJar.plainEntryPoints;
+		}else {
+			entryPointClasses = ParseJar.entryPointsForAndroid;
+		}
+		isPlainEn = isPlain;
 		Ic3CommandLineParser parser = new Ic3CommandLineParser();
 		Ic3CommandLineArguments commandLineArguments = parser.parseCommandLine(args, Ic3CommandLineArguments.class);
 		if (commandLineArguments == null) {
@@ -25,17 +28,13 @@ public class Ic3Main {
 		commandLineArguments.processCommandLineArguments();
 
 		ILCSQLConnection.init(commandLineArguments.getDbName(), "./db.properties", null, 3306);
-		try {
-			String shasum = SHA256Calculator.getSHA256(new File(commandLineArguments.getInput()));
+//			String shasum = SHA256Calculator.getSHA256(new File(commandLineArguments.getInput()));
 //			if (ILCSQLConnection.checkIfLibAnalyzed(shasum)) {
 //				return;
 //			}
 
-			Ic3Analysis analysis = new Ic3Analysis(commandLineArguments);
-			analysis.performAnalysis(commandLineArguments);
-		} catch (NoSuchAlgorithmException | IOException e) {
-			System.out.println("Error computing SHA of apk file!");
-		}
+		Ic3Analysis analysis = new Ic3Analysis(commandLineArguments);
+		analysis.performAnalysis(commandLineArguments);
 
 	}
 

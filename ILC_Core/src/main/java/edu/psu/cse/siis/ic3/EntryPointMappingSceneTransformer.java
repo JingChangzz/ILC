@@ -38,6 +38,7 @@ public class EntryPointMappingSceneTransformer extends SceneTransformer {
     private static SootClass receiverClass = null;
     private static SootClass providerClass = null;
     private static SootClass applicationClass = null;
+    private static SootClass plainClass = null;
     private final Set<String> entryPointClasses;
     private final Map<String, Set<String>> callbackMethods;
     private final Map<SootMethod, Set<String>> entryPointMap;

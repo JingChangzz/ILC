@@ -13,6 +13,7 @@ import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
 import soot.jimple.infoflow.AbstractInfoflow;
+import soot.jimple.infoflow.SequentialEntryPointCreator;
 import soot.jimple.infoflow.android.InfoflowAndroidConfiguration;
 import soot.jimple.infoflow.android.config.SootConfigForAndroid;
 import soot.jimple.infoflow.android.data.AndroidMethod;
@@ -46,6 +47,7 @@ public class Ic3SetupApplication {
     private final InfoflowAndroidConfiguration config = new InfoflowAndroidConfiguration();
     private final IInfoflowConfig sootConfig = new SootConfigForAndroid();
     private AndroidEntryPointCreator entryPointCreator;
+    private SequentialEntryPointCreator sequentialEntryPointCreator;
 
     public Ic3SetupApplication(String apkFileLocation, String classDirectory, String androidClassPath) {
         this.apkFileLocation = apkFileLocation;
@@ -55,6 +57,12 @@ public class Ic3SetupApplication {
 
     public AndroidEntryPointCreator getEntryPointCreator() {
         return this.entryPointCreator;
+    }
+
+
+    public SequentialEntryPointCreator getSequentialEntryPointCreator() {
+        sequentialEntryPointCreator = new SequentialEntryPointCreator(new ArrayList<>(this.entrypoints));
+        return sequentialEntryPointCreator;
     }
 
     public void printEntrypoints() {

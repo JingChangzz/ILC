@@ -114,7 +114,7 @@ public class ManifestPullParser {
   private final List<ManifestComponent> services = new ArrayList<ManifestComponent>();
   private final List<ManifestComponent> receivers = new ArrayList<ManifestComponent>();
   private final List<ManifestComponent> providers = new ArrayList<ManifestComponent>();
-  private int version = -1;
+  private String version = "";
   private ManifestComponent currentComponent = null;
   private Set<ManifestIntentFilter> currentIntentFilters = null;
   private ManifestIntentFilter currentIntentFilter = null;
@@ -286,7 +286,7 @@ public class ManifestPullParser {
 
   public Map<String, Ic3Data.Application.Component.Builder> populateProtobuf(Builder ic3Builder) {
     ic3Builder.setName(getPackageName());
-    ic3Builder.setVersion(version);
+    ic3Builder.setVersion(-1);
 
     for (Map.Entry<String, String> permission : permissions.entrySet()) {
       Ic3Data.Application.Permission protobufPermission =
@@ -425,7 +425,7 @@ public class ManifestPullParser {
   public String toString() {
     StringBuilder result = new StringBuilder("Manifest file for ");
     result.append(getPackageName());
-    if (version != -1) {
+    if (version != "") {
       result.append(" version ").append(version);
     }
     result.append("\n  Activities:\n");
@@ -821,7 +821,7 @@ public class ManifestPullParser {
         setPackageName(parser.getAttributeValue(i));
       } else if (parser.getAttributeNamespace(i).equals(NAMESPACE)
           && attributeName.equals(VERSION)) {
-        version = Integer.parseInt(parser.getAttributeValue(i));
+        version = parser.getAttributeValue(i);
       }
     }
     if (getPackageName() != null) {
@@ -883,7 +883,7 @@ public class ManifestPullParser {
     return true;
   }
 
-  public int getVersion() {
+  public String getVersion() {
     return version;
   }
 }

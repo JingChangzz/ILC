@@ -11,28 +11,28 @@ public class LibTable extends DbInit{
     private static final String INSERT = "INSERT INTO Applications (app, version,shasum) VALUES (?, ?,?)";
     private static final String FIND = "SELECT id FROM Applications WHERE shasum = ?";
 
-    public int insert(String app, int version, String shasum) throws SQLException {
+    public int insert(String app, String version, String shasum) throws SQLException {
         int id = find(shasum);
         findStatement.close();
         return id != -1?id:forceInsert(app, version, shasum);
     }
 
     public int find(String shasum) throws SQLException {
-        findStatement = getConnection().prepareStatement("SELECT id FROM Applications WHERE shasum = ?");
+        findStatement = getConnection().prepareStatement("SELECT id FROM Librarys WHERE shasum = ?");
         findStatement.setString(1, shasum);
         return processIntFindQuery(findStatement);
     }
 
-    public int forceInsert(String app, int version, String shasum) throws SQLException {
+    public int forceInsert(String app, String version, String shasum) throws SQLException {
         if(this.insertStatement == null || this.insertStatement.isClosed()) {
-            this.insertStatement = getConnection().prepareStatement("INSERT INTO Applications (app, version,shasum) VALUES (?, ?,?)");
+            this.insertStatement = getConnection().prepareStatement("INSERT INTO Librarys (library,version,shasum) VALUES (?,?,?)");
         }
 
         this.insertStatement.setString(1, app);
-        if(version == -1) {
+        if(version == null) {
             this.insertStatement.setNull(2, 4);
         } else {
-            this.insertStatement.setInt(2, version);
+            this.insertStatement.setString(2, version);
         }
 
         this.insertStatement.setString(3, shasum);

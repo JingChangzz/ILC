@@ -16,14 +16,14 @@ import java.util.Set;
  * 直接利用soot解析jar，得到类的信息
  */
 public class ParseJar {
-    public Set<String> allEntryPoints = new HashSet<>();
-    public Set<String> plainEntryPoints = new HashSet<>();
-    public Set<String> entryPointsForAndroid = new HashSet<>();
-    public Set<String> activityCom = new HashSet<>();
-    public Set<String> serviceCom = new HashSet<>();
-    public Set<String> broadcastCom = new HashSet<>();
-    public Set<String> contentProviderCom = new HashSet<>();
-    public Chain<SootClass> jarClasses = new HashChain<SootClass>();
+    public static Set<String> allEntryPoints = new HashSet<>();
+    public static Set<String> plainEntryPoints = new HashSet<>();
+    public static Set<String> entryPointsForAndroid = new HashSet<>();
+    public static Set<String> activityCom = new HashSet<>();
+    public static Set<String> serviceCom = new HashSet<>();
+    public static Set<String> broadcastCom = new HashSet<>();
+    public static Set<String> contentProviderCom = new HashSet<>();
+    public static Chain<SootClass> jarClasses = new HashChain<SootClass>();
 
     public static void main(String[] args) {
         String jarFile = "D:\\Desktop\\sdk\\PushServices\\GETUI_ANDROID_SDK\\GetuiSDK2.10.2.0.jar";

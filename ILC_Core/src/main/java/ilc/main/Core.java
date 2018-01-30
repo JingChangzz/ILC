@@ -2,9 +2,10 @@ package ilc.main;
 
 import edu.psu.cse.siis.ic3.Ic3Main;
 import edu.psu.cse.siis.ic3.Timers;
+import edu.psu.cse.siis.ic3.db.SQLConnection;
+import edu.psu.cse.siis.ic3.db.Table;
+import edu.psu.cse.siis.ic3.manifest.SHA256Calculator;
 import ilc.data.ParseJar;
-import ilc.db.DbInit;
-import ilc.db.ILCSQLConnection;
 import soot.SootMethod;
 import soot.jimple.Stmt;
 import soot.jimple.infoflow.Infoflow;
@@ -33,6 +34,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -270,10 +272,10 @@ public class Core {
 
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException, SQLException {
+    public static void main(String[] args) throws IOException, InterruptedException, SQLException, NoSuchAlgorithmException {
         String jarPath = "D:/Desktop/sdk/dataset";
         String dbHost = "localhost";
-        String dbName = "ilc";
+        String dbName = "libcollutest";
 
         //source and sink
         PermissionMethodParser parserExit = PermissionMethodParser.fromStringList(ICCExitPointSourceSink.getList());
@@ -321,15 +323,21 @@ public class Core {
             System.exit(-1);
         }
 
-        DbInit.setDBHost(dbHost);
+        Table.setDBHost(dbHost);
         System.out.println(new File("db.properties").getAbsoluteFile());
-        ILCSQLConnection.init(dbName, "db.properties", null, 3306);
+        SQLConnection.init(dbName, "db.properties", null, 3306);
 
         if (jarFiles.size() == 0){
             System.out.println("no file to analyse");
         }else{
             for (String jar : jarFiles){
-                if (!jar.contains("classes.jar")){
+                if (!jar.contains("devicejar.jar")){
+                    continue;
+                }
+                String shasum = SHA256Calculator.getSHA256(new File(jar));
+                if (!SQLConnection.checkIfAppAnalyzed(shasum)){
+                    SQLConnection.insert(jar.substring(jar.lastIndexOf("\\")+1, jar.indexOf(".jar")), getVersion(jar), shasum, null, null, null, false);
+                }else{
                     continue;
                 }
 
@@ -340,12 +348,17 @@ public class Core {
 
                 Timers.clear();
                 //Ic3 数据提取
+                if (parseJar.entryPointsForAndroid.size() >0) {
+                    Ic3Main.main(new String[]{"-in", jar, "-cp",
+                            classPath, "-db", "./db.properties", "-dbname",
+                            dbName, "-dbhost", dbHost}, "", false);
+                }
                 Ic3Main.main(new String[] { "-in", jar, "-cp",
                         classPath, "-db", "./db.properties", "-dbname",
-                        "ilc", "-dbhost", "localhost"}, "", parseJar.allEntryPoints);
+                        dbName, "-dbhost", dbHost}, "", true);
 
                 if(true)
-                    return;
+                    continue;
 
                 Timers.v().analysisTimer.start();
                 runPlainAnalysis(jar, sourcesForExit, sinksForExit, entryPoints, taintWrapper);
@@ -361,6 +374,10 @@ public class Core {
         //test("D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/out3", "D:/Desktop/sdk/PushServices/GETUI_ANDROID_SDK/");
 
         System.out.println("over");
+    }
+
+    private static String getVersion(String file){
+        return "0";
     }
 
 }

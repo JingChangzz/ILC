@@ -17,7 +17,6 @@ import edu.psu.cse.siis.coal.field.transformers.FieldTransformerManager;
 import edu.psu.cse.siis.ic3.Ic3Data.Application.Builder;
 import edu.psu.cse.siis.ic3.db.SQLConnection;
 import edu.psu.cse.siis.ic3.manifest.ManifestPullParser;
-import ilc.db.ILCSQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import soot.G;
@@ -99,10 +98,11 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
                 }
                 this.componentNameToBuilderMap = this.detailedManifest.populateProtobuf(this.ic3Builder);
             } else if(commandLineArguments.getDb() != null) {
-                ILCSQLConnection.init(commandLineArguments.getDbName(), commandLineArguments.getDb(), commandLineArguments.getSsh(), commandLineArguments.getDbLocalPort());
+                SQLConnection.init(commandLineArguments.getDbName(), commandLineArguments.getDb(), commandLineArguments.getSsh(), commandLineArguments.getDbLocalPort());
                 this.componentToIdMap = this.detailedManifest.writeToDb(false);
             }
         } else {   //不存在manifest文件
+            //根据前面统计的类信息，存入class以及conponent 表
 
         }
 
@@ -196,7 +196,11 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
         Scene.v().loadNecessaryClasses();
         Timers.v().classLoading.end();
         Timers.v().entryPointMapping.start();
-        Scene.v().setEntryPoints(Collections.singletonList(this.ic3SetupApplication.getEntryPointCreator().createDummyMain()));
+        if (Ic3Main.isPlainEn){
+            Scene.v().setEntryPoints(Collections.singletonList(this.ic3SetupApplication.getSequentialEntryPointCreator().createDummyMain()));
+        }else {
+            Scene.v().setEntryPoints(Collections.singletonList(this.ic3SetupApplication.getEntryPointCreator().createDummyMain()));
+        }
         Timers.v().entryPointMapping.end();
         e1 = Scene.v().getClasses().iterator();
 
@@ -259,12 +263,12 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
         if(commandLineArguments.getProtobufDestination() != null) {
             ProtobufResultProcessor resultProcessor = new ProtobufResultProcessor();
 
-            try {
-                resultProcessor.processResult(this.packageName, this.ic3Builder, commandLineArguments.getProtobufDestination(), commandLineArguments.binary(), this.componentNameToBuilderMap, AnalysisParameters.v().getAnalysisClasses().size(), this.writer);
-            } catch (IOException var5) {
-                this.logger.error("Could not process analysis results", var5);
-                throw new FatalAnalysisException();
-            }
+//            try {
+//                resultProcessor.processResult(this.packageName, this.ic3Builder, commandLineArguments.getProtobufDestination(), commandLineArguments.binary(), this.componentNameToBuilderMap, AnalysisParameters.v().getAnalysisClasses().size(), this.writer);
+//            } catch (IOException var5) {
+//                this.logger.error("Could not process analysis results", var5);
+//                throw new FatalAnalysisException();
+//            }
         } else {
             ResultProcessor resultProcessor1 = new ResultProcessor();
 

@@ -81,7 +81,7 @@ public class SQLConnection {
     appId = Constants.NOT_FOUND;
   }
 
-  public static Map<String, Integer> insert(String app, int version, String shasum,
+  public static Map<String, Integer> insert(String app, String version, String shasum,
       List<ManifestComponent> intentFilters, Set<String> usesPermissions,
       Map<String, String> permissions, boolean skipEntryPoints) {
     try {
@@ -96,8 +96,10 @@ public class SQLConnection {
       }
       if (skipEntryPoints) {
         return Collections.emptyMap();
-      } else {
+      } else if (intentFilters != null){
         return insertIntentFilters(intentFilters);
+      }else{
+        return null;
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -329,8 +331,8 @@ public class SQLConnection {
   public static void insertTime(long modelParseTime, long classLoadTime, long mainGenerationTime,
       long entryPointMappingTime, long ic3Time, long entryPathTime, long exitPathTime,
       long totalTime) throws SQLException {
-    appAnalysisTimeTable.insert(appId, modelParseTime, classLoadTime, mainGenerationTime,
-        entryPointMappingTime, ic3Time, entryPathTime, exitPathTime, totalTime);
+      appAnalysisTimeTable.insert(appId, modelParseTime, classLoadTime, mainGenerationTime,
+          entryPointMappingTime, ic3Time, entryPathTime, exitPathTime, totalTime);
   }
 
   public static boolean checkIfAppAnalyzed(String shasum) throws SQLException {
@@ -339,7 +341,6 @@ public class SQLConnection {
     if (appId == Constants.NOT_FOUND) {
       return false;
     }
-
     return true;
   }
 

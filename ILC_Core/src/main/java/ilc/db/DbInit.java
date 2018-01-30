@@ -32,6 +32,9 @@ public class DbInit {
     protected PreparedStatement insertStatement = null;
     protected PreparedStatement findStatement = null;
     private PreparedStatement selectLastInsertId = null;
+    protected String insertString;
+    protected String findString;
+    protected static final int NOT_FOUND = Constants.NOT_FOUND;
 
     public static void init(String dbName, String dbPropertiesPath, String sshPropertiesPath,
                             int localPort) {
@@ -146,5 +149,22 @@ public class DbInit {
 
         resultSet.close();
         return autoinc;
+    }
+
+    protected int processIntFindQuery(PreparedStatement statement) throws SQLException {
+        return processIntFindQuery(statement, "id");
+    }
+
+    protected int processIntFindQuery(PreparedStatement statement, String column)
+            throws SQLException {
+        ResultSet resultSet = statement.executeQuery();
+        int result;
+        if (resultSet.next()) {
+            result = resultSet.getInt(column);
+        } else {
+            result = NOT_FOUND;
+        }
+        resultSet.close();
+        return result;
     }
 }
