@@ -1,7 +1,9 @@
 package edu.psu.cse.siis.ic3;
 
+import edu.psu.cse.siis.ic3.db.SQLConnection;
 import ilc.data.ParseJar;
 import ilc.db.ILCSQLConnection;
+import ilc.main.Core;
 
 import java.sql.SQLException;
 import java.util.Set;
@@ -12,7 +14,8 @@ public class Ic3Main {
 	public static boolean isPlainEn;
 	public static void main(String[] args, String manifestPath, boolean isPlain) throws SQLException {
 		edu.psu.cse.siis.coal.Main.reset();
-		ILCSQLConnection.reset();
+		SQLConnection.reset();
+		SQLConnection.appId = Core.appID;
 		manifest = manifestPath;
 		if (isPlain){
 			entryPointClasses = ParseJar.plainEntryPoints;

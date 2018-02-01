@@ -22,6 +22,7 @@ import edu.psu.cse.siis.ic3.manifest.ManifestComponent;
 import edu.psu.cse.siis.ic3.manifest.ManifestData;
 import edu.psu.cse.siis.ic3.manifest.ManifestIntentFilter;
 import edu.psu.cse.siis.ic3.manifest.ManifestProviderComponent;
+import ilc.main.Core;
 import soot.Unit;
 
 import java.sql.SQLException;
@@ -66,7 +67,7 @@ public class SQLConnection {
   
   protected static AppAnalysisTimeTable appAnalysisTimeTable = new AppAnalysisTimeTable();
 
-  protected static int appId = Constants.NOT_FOUND;
+  public static int appId = Constants.NOT_FOUND;
 
   public static void init(String dbName, String dbPropertiesPath, String sshPropertiesPath,
       int localDbPort) {
@@ -87,6 +88,7 @@ public class SQLConnection {
     try {
       if (appId == Constants.NOT_FOUND) {
         appId = applicationTable.insert(app, version,shasum);
+        Core.appID = appId;
       }
       if (usesPermissions != null && !insertUsesPermissions(usesPermissions)) {
         return null;

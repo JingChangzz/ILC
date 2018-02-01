@@ -1,11 +1,9 @@
 package ilc.data;
 
 import edu.psu.cse.siis.coal.AnalysisParameters;
-import edu.psu.cse.siis.coal.Model;
 import edu.psu.cse.siis.coal.PropagationTimers;
 import edu.psu.cse.siis.coal.Result;
 import edu.psu.cse.siis.coal.Results;
-import edu.psu.cse.siis.coal.arguments.Argument;
 import edu.psu.cse.siis.coal.field.values.FieldValue;
 import edu.psu.cse.siis.coal.field.values.TopFieldValue;
 import edu.psu.cse.siis.coal.values.BasePropagationValue;
@@ -29,13 +27,11 @@ import soot.Type;
 import soot.Unit;
 import soot.jimple.InvokeExpr;
 import soot.jimple.Stmt;
-import soot.tagkit.LineNumberTag;
 
 import java.io.IOException;
 import java.io.Writer;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -70,7 +66,7 @@ public class ResultManager {
             ((Ic3Result)result).dump();
             this.analyzeResult(result);
             if(writeToDb) {
-                this.writeResultToDb(result);
+                //this.writeResultToDb(result);
             }
         }
 
@@ -90,86 +86,86 @@ public class ResultManager {
         }
     }
 
-    private void writeResultToDb(Result result) throws SQLException {
-        Iterator var3 = result.getResults().entrySet().iterator();
-
-        while(true) {
-            while(true) {
-                Map.Entry entry;
-                Unit unit;
-                Argument[] arguments;
-                Map entryPointMap;
-                do {
-                    if(!var3.hasNext()) {
-                        return;
-                    }
-
-                    entry = (Map.Entry)var3.next();
-                    unit = (Unit)entry.getKey();
-                    arguments = Model.v().getArgumentsForQuery((Stmt)unit);
-                    entryPointMap = ((Ic3Result)result).getEntryPointMap();
-                } while(arguments == null);
-
-                SootMethod method = AnalysisParameters.v().getIcfg().getMethodOf(unit);
-                int unitId = this.getIdForUnit(unit, method);
-                if(unit.hasTag("LineNumberTag")) {
-                    unitId = ((LineNumberTag)unit.getTag("LineNumberTag")).getLineNumber();
-                }
-
-                HashMap valueMap = new HashMap(arguments.length);
-                Map argnumToValueMap = (Map)entry.getValue();
-                Argument[] className = arguments;
-                int methodSignature = arguments.length;
-
-                for(int basePropagationValue = 0; basePropagationValue < methodSignature; ++basePropagationValue) {
-                    Argument targetType = className[basePropagationValue];
-                    valueMap.put(targetType.getProperty("valueType"), argnumToValueMap.get(Integer.valueOf(targetType.getArgnum()[0])));
-                }
-
-                String inClazz = method.getDeclaringClass().getName();
-                String callMethod = method.getSignature();
-                if(valueMap.containsKey("activity")) {
-                    ILCSQLConnection.insertIntentAtExitPoint(inClazz, callMethod, (BasePropagationValue)valueMap.get("activity"), "a", (Set)null, (Integer)null, (Set)entryPointMap.get(method), unit);
-                } else if(valueMap.containsKey("service")) {
-                    ILCSQLConnection.insertIntentAtExitPoint(inClazz, callMethod, (BasePropagationValue)valueMap.get("service"), "s", (Set)null, (Integer)null, (Set)entryPointMap.get(method), unit);
-                } else if(valueMap.containsKey("receiver")) {
-                    ILCSQLConnection.insertIntentAtExitPoint(inClazz, callMethod, (BasePropagationValue)valueMap.get("receiver"), "r", (Set)valueMap.get("permission"), (Integer)null, (Set)entryPointMap.get(method), unit);
-                } else if(valueMap.containsKey("intentFilter")) {
-                    insertDynamicReceiver((Set)valueMap.get("permission"), (Set)valueMap.get("receiverType"), (BasePropagationValue)valueMap.get("intentFilter"), method, unit);
-                } else if(valueMap.containsKey("provider")) {
-                    ILCSQLConnection.insertIntentAtExitPoint(inClazz, callMethod, (BasePropagationValue)valueMap.get("provider"), "p", (Set)null, (Integer)null, (Set)entryPointMap.get(method), unit);
-                } else if(valueMap.containsKey("authority")) {
-
-                } else if(valueMap.containsKey("pendingIntent")) {
-                    BasePropagationValue var21 = (BasePropagationValue)valueMap.get("pendingIntent");
-                    String var22 = var21 instanceof PropagationValue?(String)((FieldValue)((PropagationValue)var21).getValuesForField("targetType").iterator().next()).getValue():null;
-                    Set permissions = (Set)valueMap.get("permission");
-                    if(var22 != null) {
-                        ILCSQLConnection.insertIntentAtExitPoint(inClazz, callMethod, var21, var22, permissions, (Integer)null, (Set)entryPointMap.get(method), unit);
-                    } else {
-                        Iterator var17 = Arrays.asList(new String[]{"a", "r", "s"}).iterator();
-                        while(var17.hasNext()) {
-                            String target = (String)var17.next();
-                            ILCSQLConnection.insertIntentAtExitPoint(inClazz, callMethod, var21, target, permissions, (Integer)null, (Set)entryPointMap.get(method), unit);
-                        }
-                    }
-                } else if(valueMap.containsKey("componentExtra")) {
-
-                }
-            }
-        }
-    }
-
-    private int getIdForUnit(Unit unit, SootMethod method) {
-        int id = 0;
-        for(Iterator var4 = method.getActiveBody().getUnits().iterator(); var4.hasNext(); ++id) {
-            Unit currentUnit = (Unit)var4.next();
-            if(currentUnit == unit) {
-                return id;
-            }
-        }
-        return -1;
-    }
+//    private void writeResultToDb(Result result) throws SQLException {
+//        Iterator var3 = result.getResults().entrySet().iterator();
+//
+//        while(true) {
+//            while(true) {
+//                Map.Entry entry;
+//                Unit unit;
+//                Argument[] arguments;
+//                Map entryPointMap;
+//                do {
+//                    if(!var3.hasNext()) {
+//                        return;
+//                    }
+//
+//                    entry = (Map.Entry)var3.next();
+//                    unit = (Unit)entry.getKey();
+//                    arguments = Model.v().getArgumentsForQuery((Stmt)unit);
+//                    entryPointMap = ((Ic3Result)result).getEntryPointMap();
+//                } while(arguments == null);
+//
+//                SootMethod method = AnalysisParameters.v().getIcfg().getMethodOf(unit);
+//                int unitId = this.getIdForUnit(unit, method);
+//                if(unit.hasTag("LineNumberTag")) {
+//                    unitId = ((LineNumberTag)unit.getTag("LineNumberTag")).getLineNumber();
+//                }
+//
+//                HashMap valueMap = new HashMap(arguments.length);
+//                Map argnumToValueMap = (Map)entry.getValue();
+//                Argument[] className = arguments;
+//                int methodSignature = arguments.length;
+//
+//                for(int basePropagationValue = 0; basePropagationValue < methodSignature; ++basePropagationValue) {
+//                    Argument targetType = className[basePropagationValue];
+//                    valueMap.put(targetType.getProperty("valueType"), argnumToValueMap.get(Integer.valueOf(targetType.getArgnum()[0])));
+//                }
+//
+//                String inClazz = method.getDeclaringClass().getName();
+//                String callMethod = method.getSignature();
+//                if(valueMap.containsKey("activity")) {
+//                    DbConnection.insertIntentAtExitPoint(inClazz, callMethod, (BasePropagationValue)valueMap.get("activity"), "a", (Set)null, (Integer)null, (Set)entryPointMap.get(method), unit);
+//                } else if(valueMap.containsKey("service")) {
+//                    DbConnection.insertIntentAtExitPoint(inClazz, callMethod, (BasePropagationValue)valueMap.get("service"), "s", (Set)null, (Integer)null, (Set)entryPointMap.get(method), unit);
+//                } else if(valueMap.containsKey("receiver")) {
+//                    DbConnection.insertIntentAtExitPoint(inClazz, callMethod, (BasePropagationValue)valueMap.get("receiver"), "r", (Set)valueMap.get("permission"), (Integer)null, (Set)entryPointMap.get(method), unit);
+//                } else if(valueMap.containsKey("intentFilter")) {
+//                    insertDynamicReceiver((Set)valueMap.get("permission"), (Set)valueMap.get("receiverType"), (BasePropagationValue)valueMap.get("intentFilter"), method, unit);
+//                } else if(valueMap.containsKey("provider")) {
+//                    DbConnection.insertIntentAtExitPoint(inClazz, callMethod, (BasePropagationValue)valueMap.get("provider"), "p", (Set)null, (Integer)null, (Set)entryPointMap.get(method), unit);
+//                } else if(valueMap.containsKey("authority")) {
+//
+//                } else if(valueMap.containsKey("pendingIntent")) {
+//                    BasePropagationValue var21 = (BasePropagationValue)valueMap.get("pendingIntent");
+//                    String var22 = var21 instanceof PropagationValue?(String)((FieldValue)((PropagationValue)var21).getValuesForField("targetType").iterator().next()).getValue():null;
+//                    Set permissions = (Set)valueMap.get("permission");
+//                    if(var22 != null) {
+//                        ILCSQLConnection.insertIntentAtExitPoint(inClazz, callMethod, var21, var22, permissions, (Integer)null, (Set)entryPointMap.get(method), unit);
+//                    } else {
+//                        Iterator var17 = Arrays.asList(new String[]{"a", "r", "s"}).iterator();
+//                        while(var17.hasNext()) {
+//                            String target = (String)var17.next();
+//                            ILCSQLConnection.insertIntentAtExitPoint(inClazz, callMethod, var21, target, permissions, (Integer)null, (Set)entryPointMap.get(method), unit);
+//                        }
+//                    }
+//                } else if(valueMap.containsKey("componentExtra")) {
+//
+//                }
+//            }
+//        }
+//    }
+//
+//    private int getIdForUnit(Unit unit, SootMethod method) {
+//        int id = 0;
+//        for(Iterator var4 = method.getActiveBody().getUnits().iterator(); var4.hasNext(); ++id) {
+//            Unit currentUnit = (Unit)var4.next();
+//            if(currentUnit == unit) {
+//                return id;
+//            }
+//        }
+//        return -1;
+//    }
 
     private void analyzeResult(Result result) {
         HashSet nonLinkingFieldNames = new HashSet();

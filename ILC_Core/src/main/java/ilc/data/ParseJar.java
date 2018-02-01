@@ -81,6 +81,7 @@ public class ParseJar {
         Scene.v().addBasicClass("java.io.PrintStream", SootClass.SIGNATURES);
         Scene.v().addBasicClass("java.lang.System", SootClass.SIGNATURES);
         Scene.v().addBasicClass("java.lang.Thread", SootClass.SIGNATURES);
+//        Scene.v().setSootClassPath("/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/rt.jar");
         Scene.v().loadNecessaryClasses();
     }
 
