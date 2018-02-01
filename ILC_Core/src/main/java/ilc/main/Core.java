@@ -320,7 +320,7 @@ public class Core {
                 ++id;
             }
         }catch (RuntimeException e){
-
+            return 0;
         }
         return -1;
     }
