@@ -13,14 +13,30 @@ import java.util.zip.ZipFile;
  * Created by Zhangjing on 2/7/2018.
  */
 public class UnZipFile {
+    private static String jar;
+    private static String manifest;
 
     /**
      * 解压到指定目录
+     * rename 解压后的jar、xml文件 rename
      * @param zipPath
      * @param descDir
      */
     public static String unZipFiles(String zipPath, String descDir) throws IOException {
-        return unZipFiles(new File(zipPath), descDir);
+        String zipDir = unZipFiles(new File(zipPath), descDir+"/");
+        String name = zipPath.substring(zipPath.lastIndexOf('\\')+1, zipPath.lastIndexOf('.'));
+        File[] zipFiles = new File(zipDir).listFiles();
+        for (File f : zipFiles){
+            if(f.isFile() && f.getName().equals("classes.jar")){
+                jar = zipDir + "/" + name + ".jar";
+                f.renameTo(new File(jar));
+            }
+            if(f.isFile() && f.getName().equals("AndroidManifest.xml")){
+                manifest = zipDir + "/" + name + ".xml";
+                f.renameTo(new File(manifest));
+            }
+        }
+        return zipDir;
     }
 
     /**
@@ -69,6 +85,22 @@ public class UnZipFile {
         }
         System.out.println("******************解压完毕********************");
         return pathFile.getAbsolutePath();
+    }
+
+    public static String getJar() {
+        return jar;
+    }
+
+    public static void setJar(String jar) {
+        UnZipFile.jar = jar;
+    }
+
+    public static String getManifest() {
+        return manifest;
+    }
+
+    public static void setManifest(String manifest) {
+        UnZipFile.manifest = manifest;
     }
 
     //测试

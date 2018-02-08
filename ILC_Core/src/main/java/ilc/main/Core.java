@@ -35,10 +35,6 @@ import soot.tagkit.LineNumberTag;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -54,6 +50,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
+import static ilc.utils.UnZipFile.getJar;
+import static ilc.utils.UnZipFile.getManifest;
+import static ilc.utils.UnZipFile.unZipFiles;
 
 /**
  * Created by zhangjing on 11/7/2017.
@@ -248,6 +248,13 @@ public class Core {
         taintWrapper.setAggressiveMode(false);
 
         ArrayList<String> jarFiles = new ArrayList<>();
+        File[] files = new File(jarPath).listFiles();
+        for (File f : files){
+            if (f.isFile() && (f.getAbsolutePath().endsWith(".jar") || f.getAbsolutePath().endsWith(".aar"))){
+                jarFiles.add(f.getAbsolutePath());
+            }
+        }
+        /*
         try(DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(jarPath), "*.jar")){ // I think that if you analyze .class files you don't need this step
             for (Path path : stream){
                 jarFiles.add(path.toString());
@@ -256,7 +263,7 @@ public class Core {
             System.out.println("Error loading jar files.");
             e.printStackTrace();
             System.exit(-1);
-        }
+        }*/
 
         Table.setDBHost(dbHost);
         System.out.println(new File("db.properties").getAbsoluteFile());
@@ -266,12 +273,19 @@ public class Core {
             System.out.println("no file to analyse");
         }else{
             for (String jar : jarFiles){
-                if (!jar.contains("devicejar.jar")){
+                if (!jar.contains("upush")){
                     continue;
                 }
+                String manifest = "";
+                if (isAAR(jar)){
+                    String aarDir = unZipFiles(jar, jarPath);
+                    jar = getJar();
+                    manifest = getManifest();
+                }
+
                 String shasum = SHA256Calculator.getSHA256(new File(jar));
                 if (!SQLConnection.checkIfAppAnalyzed(shasum)){
-                    SQLConnection.insert(jar.substring(jar.lastIndexOf("\\")+1, jar.indexOf(".jar")), getVersion(jar), shasum, null, null, null, false);
+                    //SQLConnection.insert(jar.substring(jar.lastIndexOf("\\")+1, jar.length()-1), getVersion(jar), shasum, null, null, null, false);
                 }else{
                     //continue;
                 }
@@ -286,7 +300,7 @@ public class Core {
                 if (parseJar.entryPointsForAndroid.size() >0) {
                     Ic3Main.main(new String[]{"-in", jar, "-cp",
                             classPath, "-db", "./db.properties", "-dbname",
-                            dbName, "-dbhost", dbHost}, "", false);
+                            dbName, "-dbhost", dbHost}, manifest, false);
                 }
                 Ic3Main.main(new String[] { "-in", jar, "-cp",
                         classPath, "-db", "./db.properties", "-dbname",
@@ -308,6 +322,13 @@ public class Core {
 
     private static String getVersion(String file){
         return "0";
+    }
+
+    private static boolean isAAR(String file){
+        if (file.endsWith(".aar")){
+            return true;
+        }
+        return false;
     }
 
     private static int getIdForUnit(Unit unit, SootMethod method) {
