@@ -13,8 +13,9 @@ import java.util.zip.ZipFile;
  * Created by Zhangjing on 2/7/2018.
  */
 public class UnZipFile {
-    private static String jar;
-    private static String manifest;
+    private static String jar = "";
+    private static String manifest = "";
+    private static String res = "";
 
     /**
      * 解压到指定目录
@@ -34,6 +35,10 @@ public class UnZipFile {
             if(f.isFile() && f.getName().equals("AndroidManifest.xml")){
                 manifest = zipDir + "/" + name + ".xml";
                 f.renameTo(new File(manifest));
+            }
+            if (f.isDirectory() && f.getName().equals("res")){
+                if (f.length() > 0)
+                    res = f.getAbsolutePath();
             }
         }
         return zipDir;
@@ -101,6 +106,10 @@ public class UnZipFile {
 
     public static void setManifest(String manifest) {
         UnZipFile.manifest = manifest;
+    }
+
+    public static String getRes(){
+        return res;
     }
 
     //测试

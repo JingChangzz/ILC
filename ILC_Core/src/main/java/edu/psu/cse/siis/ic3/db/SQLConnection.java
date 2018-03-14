@@ -87,7 +87,7 @@ public class SQLConnection {
       Map<String, String> permissions, boolean skipEntryPoints) {
     try {
       if (appId == Constants.NOT_FOUND) {
-        appId = applicationTable.insert(app, version,shasum);
+        appId = applicationTable.insert(app, version, shasum);
         Core.appID = appId;
       }
       if (usesPermissions != null && !insertUsesPermissions(usesPermissions)) {

@@ -88,6 +88,8 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
         long startTime = System.currentTimeMillis() / 1000L;
         this.outputDir = "./ic3output";
         this.componentToIdMap = new HashMap<>();
+        String name = new File(commandLineArguments.getManifest()).getName();
+        this.packageName = name.substring(0, name.lastIndexOf("."));
         //假如存在manifest文件，处理文件
         if (prepareManifestFile(commandLineArguments, Ic3Main.manifest)) {
             if(commandLineArguments.getProtobufDestination() != null) {
@@ -110,8 +112,7 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
         Timers.v().mainGeneration.start();
         this.ic3SetupApplication = new Ic3SetupApplication(commandLineArguments.getManifest(), this.apkPath, commandLineArguments.getAndroidJar());
         Set entryPointClasses = Ic3Main.entryPointClasses;
-        String name = new File(commandLineArguments.getManifest()).getName();
-        this.packageName = name.substring(0, name.lastIndexOf("."));
+
 
 //        if(this.detailedManifest == null) {
 //            try {
@@ -218,7 +219,7 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
         if (!manifestPath.equals("") && manifestPath.endsWith(".xml")) {
             if (commandLineArguments.getDb() != null || commandLineArguments.getProtobufDestination() != null) {
                 this.detailedManifest = new ManifestPullParser();
-                this.detailedManifest.loadManifestFile(commandLineArguments.getManifest());
+                this.detailedManifest.loadManifestFile(manifestPath);
             }
             return true;
         }else {

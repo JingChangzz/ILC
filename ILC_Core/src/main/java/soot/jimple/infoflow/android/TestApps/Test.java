@@ -69,6 +69,8 @@ public class Test {
     public static boolean ExitPointSink = true;
     private static IIPCManager ipcManager = null;
     public static Set<String> entryPoint = new HashSet<>();
+    public static String androidManifest = "";
+    public static String resDirectory = "";
     public Test() {
     }
 
@@ -80,12 +82,14 @@ public class Test {
         return ipcManager;
     }
 
-    public static InfoflowResults runAnalysisForResults(String[] args, Set<String> entryPoints) throws IOException, InterruptedException {
+    public static InfoflowResults runAnalysisForResults(String[] args, Set<String> entryPoints, String manifest, String resDir) throws IOException, InterruptedException {
         if(args.length < 2) {
             printUsage();
             return null;
         } else {
             entryPoint = entryPoints;
+            androidManifest = manifest;
+            resDirectory = resDir;
             File outputDir = new File("JimpleOutput");
             int oldRepeatCount;
             File line;
@@ -357,7 +361,7 @@ public class Test {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        runAnalysisForResults(args, entryPoint);
+        runAnalysisForResults(args, entryPoint, androidManifest, resDirectory);
     }
 
     private static InfoflowResults runAnalysisTimeout(final String fileName, final String androidJar) {

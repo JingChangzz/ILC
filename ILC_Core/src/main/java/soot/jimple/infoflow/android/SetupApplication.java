@@ -253,6 +253,10 @@ public class SetupApplication {
         this.entrypoints = Test.entryPoint;
         String apkName = new File(this.apkFileLocation).getName();
         this.appPackageName = apkName.substring(0, apkName.lastIndexOf("."));
+        if (!Test.resDirectory.equals("")){
+
+
+        }
         System.out.println("Entry point calculation done.");
         G.reset();
         //no callback

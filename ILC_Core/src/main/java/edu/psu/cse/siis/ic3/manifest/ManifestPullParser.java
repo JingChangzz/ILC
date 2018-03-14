@@ -123,6 +123,7 @@ public class ManifestPullParser {
   private final Set<String> usesPermissions = new HashSet<>();
   private Map<String, String> permissions = new HashMap<String, String>();
   private final Set<String> entryPointClasses = new HashSet<>();
+  private String path;
 
   public List<ManifestComponent> getActivities() {
     return activities;
@@ -182,6 +183,7 @@ public class ManifestPullParser {
 
   public void loadManifestFile(String manifest) {
     try {
+      path = manifest;
       if (manifest.endsWith(".xml")) {
         loadClassesFromTextManifest(new FileInputStream(manifest));
       } else {
@@ -263,9 +265,15 @@ public class ManifestPullParser {
     }
   }
 
-  public Map<String, Integer> writeToDb(boolean skipEntryPoints) {
+  public Map<String, Integer> writeToDb(boolean skipEntryPoints){
     Map<String, Integer> componentIds = new HashMap<String, Integer>();
-
+    try {
+      shaSum = SHA256Calculator.getSHA256(new File(path.substring(0, path.lastIndexOf("."))+".jar"));
+    } catch (NoSuchAlgorithmException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     componentIds.putAll(SQLConnection.insert(Ic3Analysis.packageName, version, shaSum, activities, usesPermissions,
         permissions, skipEntryPoints));
     componentIds.putAll(SQLConnection.insert(Ic3Analysis.packageName, version,shaSum, activityAliases, null, null,

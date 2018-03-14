@@ -38,6 +38,10 @@ public class ParseJar {
             if (clazz.isAbstract() || clazz.isInterface() || clazz.isJavaLibraryClass()){
                 continue;
             } else if (clazz.isPublic()){
+//                for (SootMethod sm : clazz.getMethods()){
+//                    Body b = sm.retrieveActiveBody();
+//                    System.out.println(b.toString());
+//                }
                 String superClass = clazz.getSuperclass().getName();
                 allEntryPoints.add(clazz.getName());
                 if (superClass.contains("android.app.Activity")){
@@ -75,7 +79,7 @@ public class ParseJar {
         Options.v().set_process_dir(Collections.singletonList(apkPath));//路径应为文件夹
         Options.v().set_keep_line_number(true);
 //      Options.v().set_whole_program(true);
-        Options.v().set_no_bodies_for_excluded(true);
+        Options.v().set_no_bodies_for_excluded(false);
         Options.v().set_app(true);
 //       Scene.v().setMainClass(appclass); // how to make it work ?
         Scene.v().addBasicClass("java.io.PrintStream", SootClass.SIGNATURES);
