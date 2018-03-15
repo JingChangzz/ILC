@@ -10,7 +10,6 @@ import soot.SootMethod;
 import soot.Unit;
 import soot.jimple.Stmt;
 import soot.jimple.infoflow.Infoflow;
-import soot.jimple.infoflow.SequentialEntryPointCreator;
 import soot.jimple.infoflow.android.InfoflowAndroidConfiguration;
 import soot.jimple.infoflow.android.TestApps.Test;
 import soot.jimple.infoflow.android.data.ICCEntryPointSourceSink;
@@ -39,7 +38,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -86,13 +84,13 @@ public class Core {
         //analysis
         PathBuilder pathBuilder = PathBuilder.ContextSensitive;
         Infoflow infoFlow = new Infoflow(classPath, true, (BiDirICFGFactory)null, new DefaultPathBuilderFactory(pathBuilder, true));
-        for (String en : entryPoints) {
+        for (String en : ParseJar.entryPointsMethods) {
             System.out.println("Entry point:" + en);
-            SequentialEntryPointCreator sepc = new SequentialEntryPointCreator(Collections.singletonList(en));
+            //SequentialEntryPointCreator sepc = new SequentialEntryPointCreator(Collections.singletonList(en));
             ISourceSinkManager ssm = new DefaultSourceSinkManager(sources, sinks, sources, sinks);
             infoFlow.setTaintWrapper((ITaintPropagationWrapper)taintWrapper);
             InfoflowAndroidConfiguration.setAccessPathLength(3);
-            plainInfoRresults = plainAnalysisTask(infoFlow, jarFile, sepc, ssm);
+            plainInfoRresults = plainAnalysisTask(infoFlow, jarFile, en, ssm);
 
             if (InfoFlowComputationTimeOut) {
                 System.out.println("Plain Infoflow computation timeout with Context sensitive path builder. Running sourcesonly..");
@@ -100,7 +98,7 @@ public class Core {
                 InfoflowAndroidConfiguration.setAccessPathLength(1);
                 infoFlow = new Infoflow(classPath, true, (BiDirICFGFactory)null, new DefaultPathBuilderFactory(pathBuilder, true));
                 infoFlow.addResultsAvailableHandler(new Core.MyResultsAvailableHandler(null));
-                plainInfoRresults = plainAnalysisTask(infoFlow, jarFile, sepc, ssm);
+                plainInfoRresults = plainAnalysisTask(infoFlow, jarFile, en, ssm);
                 InfoFlowComputationTimeOut = true;
             }
             if (plainInfoRresults == null) continue;
@@ -115,7 +113,7 @@ public class Core {
         System.out.println("plain analysis over ---------------->" +jarFile);
     }
 
-    private static InfoflowResults plainAnalysisTask(Infoflow infoFlow, String jarFile, SequentialEntryPointCreator sepc, ISourceSinkManager ssm){
+    private static InfoflowResults plainAnalysisTask(Infoflow infoFlow, String jarFile, String  sepc, ISourceSinkManager ssm){
         FutureTask task = new FutureTask(new Callable() {
             public InfoflowResults call() throws Exception {
                 long beforeRun = System.nanoTime();
@@ -129,7 +127,7 @@ public class Core {
         executor.execute(task);
         try {
             System.out.println("Running plain infoflow task...");
-            task.get(3, TimeUnit.MINUTES);
+            task.get(1000, TimeUnit.MINUTES);
         } catch (ExecutionException var5) {
             System.err.println("Infoflow computation failed: " + var5.getMessage());
             var5.printStackTrace();

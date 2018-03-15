@@ -2,12 +2,15 @@ package ilc.data;
 
 import soot.Scene;
 import soot.SootClass;
+import soot.SootMethod;
 import soot.options.Options;
 import soot.util.Chain;
 import soot.util.HashChain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,13 +20,14 @@ import java.util.Set;
  */
 public class ParseJar {
     public static Set<String> allEntryPoints = new HashSet<>();
-    public static Set<String> plainEntryPoints = new HashSet<>();
-    public static Set<String> entryPointsForAndroid = new HashSet<>();
+    public static Set<String> plainEntryPoints = new HashSet<>();// class for entry
+    public static Set<String> entryPointsForAndroid = new HashSet<>();// class for entry
     public static Set<String> activityCom = new HashSet<>();
     public static Set<String> serviceCom = new HashSet<>();
     public static Set<String> broadcastCom = new HashSet<>();
     public static Set<String> contentProviderCom = new HashSet<>();
     public static Chain<SootClass> jarClasses = new HashChain<SootClass>();
+    public static List<String> entryPointsMethods = new ArrayList<>();
 
     public static void main(String[] args) {
         String jarFile = "D:\\Desktop\\sdk\\PushServices\\GETUI_ANDROID_SDK\\GetuiSDK2.10.2.0.jar";
@@ -38,10 +42,11 @@ public class ParseJar {
             if (clazz.isAbstract() || clazz.isInterface() || clazz.isJavaLibraryClass()){
                 continue;
             } else if (clazz.isPublic()){
-//                for (SootMethod sm : clazz.getMethods()){
-//                    Body b = sm.retrieveActiveBody();
-//                    System.out.println(b.toString());
-//                }
+                for (SootMethod sm : clazz.getMethods()){
+                    if (sm.isPublic()){
+                        entryPointsMethods.add(sm.getSignature());
+                    }
+                }
                 String superClass = clazz.getSuperclass().getName();
                 allEntryPoints.add(clazz.getName());
                 if (superClass.contains("android.app.Activity")){
