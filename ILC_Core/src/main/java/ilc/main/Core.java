@@ -1,11 +1,14 @@
 package ilc.main;
 
+import edu.psu.cse.siis.ic3.Ic3Main;
 import edu.psu.cse.siis.ic3.Timers;
 import edu.psu.cse.siis.ic3.db.SQLConnection;
 import edu.psu.cse.siis.ic3.db.Table;
 import edu.psu.cse.siis.ic3.manifest.SHA256Calculator;
 import ilc.data.ParseJar;
 import ilc.db.ILCSQLConnection;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import soot.SootMethod;
 import soot.Unit;
 import soot.jimple.Stmt;
@@ -28,6 +31,7 @@ import soot.jimple.infoflow.source.ISourceSinkManager;
 import soot.jimple.infoflow.source.data.SourceSinkDefinition;
 import soot.jimple.infoflow.taintWrappers.EasyTaintWrapper;
 import soot.jimple.infoflow.taintWrappers.ITaintPropagationWrapper;
+import soot.options.Options;
 import soot.tagkit.LineNumberTag;
 
 import java.io.BufferedWriter;
@@ -35,9 +39,9 @@ import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -49,9 +53,10 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static ilc.utils.UnZipFile.getARSC;
 import static ilc.utils.UnZipFile.getJar;
 import static ilc.utils.UnZipFile.getManifest;
-import static ilc.utils.UnZipFile.getRes;
+import static ilc.utils.UnZipFile.getResDir;
 import static ilc.utils.UnZipFile.unZipFiles;
 
 /**
@@ -79,12 +84,17 @@ public class Core {
     static InfoflowResults plainInfoRresults = null;
     static boolean InfoFlowComputationTimeOut = false;
     public static int appID = -1;
+    public static String entryAPI;
+    public static ParseJar parseJar;
+    public static String arscFile;
+    public static String resDir;
 
     public static void runPlainAnalysis(String jarFile, Set<String> sources, Set<String> sinks, Set<String> entryPoints, Object taintWrapper, boolean exitpath) throws IOException, SQLException {
         //analysis
         PathBuilder pathBuilder = PathBuilder.ContextSensitive;
         Infoflow infoFlow = new Infoflow(classPath, true, (BiDirICFGFactory)null, new DefaultPathBuilderFactory(pathBuilder, true));
-        for (String en : ParseJar.entryPointsMethods) {
+        for (String en : parseJar.entryPointsMethods) {
+            entryAPI = en;
             System.out.println("Entry point:" + en);
             //SequentialEntryPointCreator sepc = new SequentialEntryPointCreator(Collections.singletonList(en));
             ISourceSinkManager ssm = new DefaultSourceSinkManager(sources, sinks, sources, sinks);
@@ -92,31 +102,32 @@ public class Core {
             InfoflowAndroidConfiguration.setAccessPathLength(3);
             plainInfoRresults = plainAnalysisTask(infoFlow, jarFile, en, ssm);
 
-            if (InfoFlowComputationTimeOut) {
+            /*if (InfoFlowComputationTimeOut) {
                 System.out.println("Plain Infoflow computation timeout with Context sensitive path builder. Running sourcesonly..");
                 pathBuilder = PathBuilder.ContextInsensitiveSourceFinder;
                 InfoflowAndroidConfiguration.setAccessPathLength(1);
                 infoFlow = new Infoflow(classPath, true, (BiDirICFGFactory)null, new DefaultPathBuilderFactory(pathBuilder, true));
                 infoFlow.addResultsAvailableHandler(new Core.MyResultsAvailableHandler(null));
                 plainInfoRresults = plainAnalysisTask(infoFlow, jarFile, en, ssm);
-                InfoFlowComputationTimeOut = true;
-            }
+                InfoFlowComputationTimeOut = false;
+            }*/
             if (plainInfoRresults == null) continue;
             if (exitpath){
                 //保存 exit path
-                saveExitPath(plainInfoRresults);
+                saveExitPath(plainInfoRresults, en);
             }else{
                 //保存entry path
                 saveEntryPath(plainInfoRresults);
             }
         }
-        System.out.println("plain analysis over ---------------->" +jarFile);
+
     }
 
     private static InfoflowResults plainAnalysisTask(Infoflow infoFlow, String jarFile, String  sepc, ISourceSinkManager ssm){
         FutureTask task = new FutureTask(new Callable() {
             public InfoflowResults call() throws Exception {
                 long beforeRun = System.nanoTime();
+                Options.v().set_keep_line_number(true);
                 infoFlow.computeInfoflow(jarFile, classPath, sepc, ssm);
                 Core.plainInfoRresults = infoFlow.getResults();
                 return Core.plainInfoRresults;
@@ -127,91 +138,99 @@ public class Core {
         executor.execute(task);
         try {
             System.out.println("Running plain infoflow task...");
-            task.get(1000, TimeUnit.MINUTES);
+            task.get(5, TimeUnit.MINUTES);
         } catch (ExecutionException var5) {
             System.err.println("Infoflow computation failed: " + var5.getMessage());
             var5.printStackTrace();
             InfoFlowComputationTimeOut = true;
             plainInfoRresults = null;
+            executor.shutdown();
         } catch (TimeoutException var6) {
             System.err.println("Infoflow computation timed out: " + var6.getMessage());
             var6.printStackTrace();
             InfoFlowComputationTimeOut = true;
             plainInfoRresults = null;
+            task.cancel(true);
+            executor.shutdownNow();
         } catch (InterruptedException var7) {
             System.err.println("Infoflow computation interrupted: " + var7.getMessage());
             var7.printStackTrace();
             InfoFlowComputationTimeOut = true;
             plainInfoRresults = null;
+            executor.shutdown();
         }
+        task.cancel(true);
         executor.shutdown();
         return plainInfoRresults;
     }
 
-    private static void runAnalysisForJar(String jarFile, Set<String> entryPoints, String manifest, String resDir) throws IOException, InterruptedException, SQLException {
+    private static void runAnalysisForJar(String jarFile, Set<String> entryPoints, String manifest, String resDir, String arscFile) throws IOException, InterruptedException, SQLException {
         boolean InfoFlowComputationTimeOut = false;
 
         //dataflow分析, exit path
-        Timers.v().exitPathTimer.start();
-        InfoflowResults results = Test.runAnalysisForResults(
-                new String[] { jarFile, classPath, "--aplength", "2", "--timeout", "300",
-                        "--logsourcesandsinks", "--nocallbacks" ,"--pathalgo", "contextsensitive"},
-                        entryPoints, manifest, resDir);
 
-        if (Test.InfoFlowComputationTimeOut) {
-            InfoFlowComputationTimeOut = true;
-            System.out.println(
-                    "Infoflow computation timeout with Context sensitive path builder. Running sourcesonly..");
-            results = Test.runAnalysisForResults(new String[] {
-                    jarFile, classPath,
-                    "--pathalgo", "SOURCESONLY", "--aplength", "1", "--NOPATHS", "--layoutmode", "none",
-                    "--aliasflowins", "--noarraysize", "--timeout", "300", "--logsourcesandsinks" },
-                    entryPoints, manifest, resDir);
-        }
-        if (results != null) {
-            //保存 exit path
-            saveExitPath(results);
-        }
-        runPlainAnalysis(jarFile, sourcesForExit, sinksForExit, ParseJar.plainEntryPoints, taintWrapper, true);
-        Timers.v().exitPathTimer.end();
-        System.out.println("exitpath over");
+        for (String ep : entryPoints) {
+            Timers.v().exitPathTimer.start();
+            Core.entryAPI = ep;
+            InfoflowResults results = Test.runAnalysisForResults(
+                    new String[]{jarFile, classPath, "--aplength", "2", "--timeout", "300",
+                            "--logsourcesandsinks", "--pathalgo", "contextsensitive"},
+                    Collections.singleton(ep), manifest, resDir);//"--nocallbacks",
 
-        //dataflow分析, entry path
-        Timers.v().entryPathTimer.start();
-        results = Test.runAnalysisForResults(
-                new String[] { jarFile, classPath,
-                        "--iccentry", "--aplength", "1", "--timeout",  "300", "--logsourcesandsinks"},
-                        entryPoints, manifest, resDir);
+            if (Test.InfoFlowComputationTimeOut) {
+                InfoFlowComputationTimeOut = true;
+                System.out.println(
+                        "Infoflow computation timeout with Context sensitive path builder. Running sourcesonly..");
+                results = Test.runAnalysisForResults(new String[]{
+                                jarFile, classPath,
+                                "--pathalgo", "SOURCESONLY", "--aplength", "1", "--NOPATHS", "--layoutmode", "none",
+                                "--aliasflowins", "--noarraysize", "--timeout", "300", "--logsourcesandsinks"},
+                        Collections.singleton(ep), manifest, resDir);
+            }
+            if (results != null) {
+                //保存 exit path
+                saveExitPath(results, ep);
+            }
+            Timers.v().exitPathTimer.end();
+            System.out.println("exitpath over");
 
-        if (Test.InfoFlowComputationTimeOut) {
-            InfoFlowComputationTimeOut = true;
-            System.out.println(
-                    "Infoflow computation timeout with Context sensitive path builder. Running sourcesonly..");
-            results = Test.runAnalysisForResults(new String[] {
-                    jarFile, classPath,
-                    "--iccentry", "--pathalgo", "SOURCESONLY", "--aplength", "1", "--nopaths", "--layoutmode",
-                    "none", "--aliasflowins", "--noarraysize",  "--nostatic", "--logsourcesandsinks",
-                    "--timeout", "300" }, entryPoints, manifest, resDir);
-        }
-        if (results != null){
-            //保存entry path
-            saveEntryPath(results);
-        }
-        runPlainAnalysis(jarFile, sourcesForEntry, sinksForEntry, ParseJar.plainEntryPoints, taintWrapper, false);
-        Timers.v().entryPathTimer.end();
+            //dataflow分析, entry path
+            Timers.v().entryPathTimer.start();
+            results = Test.runAnalysisForResults(
+                    new String[]{jarFile, classPath,
+                            "--iccentry", "--aplength", "1", "--timeout", "300", "--logsourcesandsinks"},
+                    Collections.singleton(ep), manifest, resDir);
 
-        if (InfoFlowComputationTimeOut) {
-            //DialDroidSQLConnection.markAppTimeout();
-        }
+            if (Test.InfoFlowComputationTimeOut) {
+                InfoFlowComputationTimeOut = true;
+                System.out.println(
+                        "Infoflow computation timeout with Context sensitive path builder. Running sourcesonly..");
+                results = Test.runAnalysisForResults(new String[]{
+                        jarFile, classPath,
+                        "--iccentry", "--pathalgo", "SOURCESONLY", "--aplength", "1", "--nopaths", "--layoutmode",
+                        "none", "--aliasflowins", "--noarraysize", "--nostatic", "--logsourcesandsinks",
+                        "--timeout", "300"}, Collections.singleton(ep), manifest, resDir);
+            }
+            if (results != null) {
+                //保存entry path
+                saveEntryPath(results);
+            }
+            Timers.v().entryPathTimer.end();
 
+            if (InfoFlowComputationTimeOut) {
+                //DialDroidSQLConnection.markAppTimeout();
+            }
+        }
+        runPlainAnalysis(jarFile, sourcesForExit, sinksForExit, parseJar.plainEntryPoints, taintWrapper, false);
+        runPlainAnalysis(jarFile, sourcesForEntry, sinksForEntry, parseJar.plainEntryPoints, taintWrapper, true);
+        System.out.println("analysis over ---------------->" +jarFile);
     }
 
     public static void main(String[] args) throws IOException, InterruptedException, SQLException, NoSuchAlgorithmException {
         //
-        ///Volumes/ZJ'S PANZI/dataset2018/sdk/dataset
-        String jarPath = "E:/gradute/sdk/dataset";
+        String jarRootPath = "E:/gradute/libs-Bench";
         String dbHost = "localhost";
-        String dbName = "test";
+        String dbName = "ilc999";// 001 for realworld libs from python;   002 for bench
 
         //source and sink
         PermissionMethodParser parserExit = PermissionMethodParser.fromStringList(ICCExitPointSourceSink.getList());
@@ -248,59 +267,45 @@ public class Core {
         }
         taintWrapper.setAggressiveMode(false);
 
-        ArrayList<String> jarFiles = new ArrayList<>();
-        File[] files = new File(jarPath).listFiles();
-        for (File f : files){
-            if (f.isFile() && (f.getAbsolutePath().endsWith(".jar") || f.getAbsolutePath().endsWith(".aar"))){
-                jarFiles.add(f.getAbsolutePath());
-            }
-        }
-        /*
-        try(DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(jarPath), "*.jar")){ // I think that if you analyze .class files you don't need this step
-            for (Path path : stream){
-                jarFiles.add(path.toString());
-            }
-        }catch (IOException e){
-            System.out.println("Error loading jar files.");
-            e.printStackTrace();
-            System.exit(-1);
-        }*/
+        Collection<File> allFiles = FileUtils.listFiles(new File(jarRootPath), TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
 
         Table.setDBHost(dbHost);
         System.out.println(new File("db.properties").getAbsoluteFile());
         SQLConnection.init(dbName, "db.properties", null, 3306);
 
-        if (jarFiles.size() == 0){
+        if (allFiles.size() == 0){
             System.out.println("no file to analyse");
         }else{
-            for (String jar : jarFiles){
-//                if (!jar.contains("upush")){
-//                    continue;
-//                }
+            for (File jarFile : allFiles){
+                if (!jarFile.getAbsolutePath().endsWith(".aar") && !jarFile.getAbsolutePath().endsWith(".jar")){
+                    continue;
+                }
+                String jar = jarFile.getAbsolutePath();
                 String manifest = "";
-                String res = "";
+                String jarname=jarFile.getName();
                 boolean isAar = isAAR(jar);
                 if (isAar){
-                    String aarDir = unZipFiles(jar, jarPath);
+                    String aarDir = unZipFiles(jar, jarRootPath);
                     jar = getJar();
                     manifest = getManifest();
-                    res = getRes();
+                    resDir = getResDir();
+                    arscFile = getARSC();
                 }
-
+                String category = getCategory(jar);
                 String shasum = SHA256Calculator.getSHA256(new File(jar));
                 if (!SQLConnection.checkIfAppAnalyzed(shasum)){
-                    //SQLConnection.insert(jar.substring(jar.lastIndexOf("\\")+1, jar.length()-1), getVersion(jar), shasum, null, null, null, false);
+                    SQLConnection.insert(jarname, getVersion(jar), shasum, null, null, null, false);
+                    SQLConnection.saveAppCategory(category, jar);
                 }else{
-                    //continue;
+                    continue;
                 }
 
                 //entry points for infoflow analysis
-                ParseJar parseJar = new ParseJar();
+                parseJar = new ParseJar();
                 parseJar.runParsing(jar);
-                Set<String> entryPoints = parseJar.plainEntryPoints;
 
                 Timers.clear();
-                /*/Ic3 数据提取
+                //Ic3 数据提取
                 if (parseJar.entryPointsForAndroid.size() >0) {
                     Ic3Main.main(new String[]{"-in", jar, "-cp",
                             classPath, "-db", "./db.properties", "-dbname",
@@ -308,24 +313,26 @@ public class Core {
                 }
                 Ic3Main.main(new String[] { "-in", jar, "-cp",
                         classPath, "-db", "./db.properties", "-dbname",
-                        dbName, "-dbhost", dbHost}, "", true);*/
-
-//                if(true)
-//                    continue;
+                        dbName, "-dbhost", dbHost}, "", true);
 
                 Timers.v().analysisTimer.start();
 
-                runAnalysisForJar(jar, parseJar.entryPointsForAndroid, manifest, res);
+                runAnalysisForJar(jar, parseJar.entryPointsForAndroid, manifest, resDir, arscFile);
                 Timers.v().analysisTimer.end();
-                //Timers.v().saveTimeToDb();
+                Timers.v().saveTimeToDb(parseJar.entryPointsForAndroid.size()+parseJar.plainEntryPoints.size(),parseJar.entryPointsForAndroid.size());
             }
         }
 
         System.out.println("over");
     }
 
+    private static String getCategory(String file) {
+        //E:\gradute\lib-libscout\Advertising\Facebook-Audience\4.7.0\***.jar
+        return file.split("\\\\")[3];
+    }
+
     private static String getVersion(String file){
-        return "0";
+        return file.split("\\\\")[5];
     }
 
     private static boolean isAAR(String file){
@@ -376,7 +383,7 @@ public class Core {
         }
     }
 
-    private static void saveExitPath(InfoflowResults results) throws SQLException {
+    private static void saveExitPath(InfoflowResults results, String trigger) throws SQLException {
         for (ResultSinkInfo sink : results.getResults().keySet()) { //
             SootMethod method = results.getInfoflowCFG().getMethodOf(sink.getSink());
             String className = results.getInfoflowCFG().getMethodOf(sink.getSink()).getDeclaringClass().toString();
@@ -388,13 +395,18 @@ public class Core {
             for (ResultSourceInfo source : results.getResults().get(sink)) {
                 String leakSource = source.getSource().toString();
                 //^^^^^^获取调用source、启动敏感路径的方法
+                /*CallGraph cg = Scene.v().getCallGraph();
+                Iterator<Edge> ie = cg.iterator();
+                if (ie.hasNext()){
+                    ie.next();
+                }
                 Stmt s = source.getSource();
                 SootMethod callSource = results.getInfoflowCFG().getMethodOf(s);
 
                 Collection<Unit> ss = results.getInfoflowCFG().getCallersOf(callSource);
                 Collection<Unit> ps = results.getInfoflowCFG().getStartPointsOf(callSource);
                 //List<Unit> ps = results.getInfoflowCFG().getPredsOf()
-                IInfoflowCFG r = results.getInfoflowCFG();
+                IInfoflowCFG r = results.getInfoflowCFG();*/
                 // ^^^^^^
 
                 String methodCalling = null;
@@ -405,6 +417,13 @@ public class Core {
                 }
 
                 String leakSink = sink.getSink().toString();
+/*                if (leakSink.contains("write")) {
+                    AccessPath ap = sink.getAccessPath();
+                    SootMethod sm = sink.getSink().getInvokeExpr().getMethod();
+                    SootMethod wsm = Scene.v().getMethod(method.getSignature());
+                    Body smBody = wsm.retrieveActiveBody();
+                    List<Value> vList = source.getSource().getInvokeExpr().getArgs();
+                }*/
                 StringBuffer leakPath = new StringBuffer();
                 if (source.getPath() != null) {
                     for (Stmt stmt : source.getPath()) {
@@ -412,8 +431,11 @@ public class Core {
                     }
                 }
                 System.out.println("exitleakpath----"+leakPath);
+                if (trigger == null){
+                    trigger = className;
+                }
                 ILCSQLConnection.insertDataExitLeak(className, method.getSignature(), instruction, sink.getSink(),
-                        leakSource, leakSink, leakPath.toString(), methodCalling);
+                        leakSource, leakSink, leakPath.toString(), methodCalling, trigger);
             }
         }
     }

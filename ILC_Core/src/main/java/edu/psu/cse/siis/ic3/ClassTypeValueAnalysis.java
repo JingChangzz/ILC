@@ -7,17 +7,18 @@ package edu.psu.cse.siis.ic3;
 
 import edu.psu.cse.siis.coal.arguments.Argument;
 import edu.psu.cse.siis.coal.arguments.ArgumentValueAnalysis;
+import soot.Scene;
+import soot.SootClass;
+import soot.Unit;
+import soot.Value;
+import soot.jimple.Stmt;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import soot.Scene;
-import soot.SootClass;
-import soot.Unit;
-import soot.Value;
-import soot.jimple.Stmt;
 
 public class ClassTypeValueAnalysis extends ArgumentValueAnalysis {
     private static final String BROADCAST_RECEIVER = "android.content.BroadcastReceiver";

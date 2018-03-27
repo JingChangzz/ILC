@@ -73,7 +73,7 @@ public class Timers {
 
   public int classes = 0;
 
-  public void saveTimeToDb() {
+  public void saveTimeToDb(int classNum, int methodNum) {
     long ic3Time = totalTimer.getTime();
     long modelParseTime = modelParsing.getTime();
     long classLoadTime = classLoading.getTime();
@@ -84,8 +84,7 @@ public class Timers {
     long exitPathTime = exitPathTimer.getTime();
 
     try {
-      SQLConnection.insertTime(modelParseTime, classLoadTime, mainGenerationTime,
-          entryPointMappingTime, ic3Time, entryPathTime, exitPathTime, totalTime);
+      SQLConnection.insertTime(totalTime, classNum, methodNum);
     } catch (SQLException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

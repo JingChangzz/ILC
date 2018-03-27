@@ -396,7 +396,7 @@ public class Test {
             InfoFlowComputationTimeOut = true;
             infoResults = null;
         }
-
+        task.cancel(true);
         executor.shutdown();
         return infoResults;
     }
@@ -533,11 +533,11 @@ public class Test {
                 var9.printStackTrace();
             }
 
-            if(DEBUG) {
+            /*if(DEBUG) {
                 app.printEntrypoints();
                 app.printSinks();
                 app.printSources();
-            }
+            }*/
 
             System.out.println("Running data flow analysis...");
             InfoflowResults res1 = app.runInfoflow(new Test.MyResultsAvailableHandler(null));

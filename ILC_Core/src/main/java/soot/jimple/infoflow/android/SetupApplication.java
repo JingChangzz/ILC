@@ -5,21 +5,29 @@
 
 package soot.jimple.infoflow.android;
 
+import ilc.main.Core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 import soot.G;
 import soot.Main;
+import soot.PackManager;
 import soot.Scene;
+import soot.SootClass;
 import soot.SootMethod;
 import soot.jimple.Stmt;
 import soot.jimple.infoflow.AbstractInfoflow;
 import soot.jimple.infoflow.Infoflow;
 import soot.jimple.infoflow.android.TestApps.Test;
+import soot.jimple.infoflow.android.callbacks.AbstractCallbackAnalyzer;
+import soot.jimple.infoflow.android.callbacks.DefaultCallbackAnalyzer;
 import soot.jimple.infoflow.android.config.SootConfigForAndroid;
 import soot.jimple.infoflow.android.data.AndroidMethod;
 import soot.jimple.infoflow.android.data.parsers.PermissionMethodParser;
+import soot.jimple.infoflow.android.resources.ARSCFileParser;
+import soot.jimple.infoflow.android.resources.LayoutControl;
+import soot.jimple.infoflow.android.resources.LayoutFileParser;
 import soot.jimple.infoflow.android.source.AccessPathBasedSourceSinkManager;
 import soot.jimple.infoflow.android.source.parsers.xml.XMLSourceSinkParser;
 import soot.jimple.infoflow.cfg.BiDirICFGFactory;
@@ -40,10 +48,12 @@ import javax.activation.UnsupportedDataTypeException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -69,6 +79,7 @@ public class SetupApplication {
     private Set<Stmt> collectedSources;
     private Set<Stmt> collectedSinks;
     private String callbackFile;
+    private List<ARSCFileParser.ResPackage> resourcePackages;
 
     public SetupApplication(String androidJar, String apkFileLocation) {
         this(androidJar, apkFileLocation, "", (IIPCManager)null);
@@ -100,6 +111,7 @@ public class SetupApplication {
         this.apkFileLocation = apkFileLocation;
         this.ipcManager = ipcManager;
         this.additionalClasspath = additionalClasspath;
+        this.resourcePackages = null;
     }
 
     public Set<SourceSinkDefinition> getSinks() {
@@ -253,9 +265,19 @@ public class SetupApplication {
         this.entrypoints = Test.entryPoint;
         String apkName = new File(this.apkFileLocation).getName();
         this.appPackageName = apkName.substring(0, apkName.lastIndexOf("."));
-        if (!Test.resDirectory.equals("")){
-
-
+        if (Core.resDir!=null && Core.arscFile!=null){
+            ARSCFileParser resParser = new ARSCFileParser();
+            resParser.parse(Core.arscFile);
+            this.resourcePackages = resParser.getPackages();
+            LayoutFileParser lfp = null;
+            if(this.config.getEnableCallbacks()) {
+                if (this.callbackClasses != null && this.callbackClasses.isEmpty()) {
+                    this.logger.warn("Callback definition file is empty, disabling callbacks");
+                } else {
+                    lfp = new LayoutFileParser((String)this.entrypoints.toArray()[0], resParser);
+                    this.calculateCallbackMethods(resParser, lfp);
+                }
+            }
         }
         System.out.println("Entry point calculation done.");
         G.reset();
@@ -274,6 +296,192 @@ public class SetupApplication {
         this.sourceSinkManager.setEnableCallbackSources(this.config.getEnableCallbackSources());
         //
         this.entryPointCreator = this.createEntryPointCreator();
+    }
+
+    private void calculateCallbackMethods(ARSCFileParser resParser, LayoutFileParser lfp) throws IOException {
+        DefaultCallbackAnalyzer jimpleClass = null;
+        boolean hasChanged = true;
+
+        while(hasChanged) {
+            hasChanged = false;
+            G.reset();
+            this.initializeSoot(true);
+            this.createMainMethod();
+            if(jimpleClass == null) {
+                jimpleClass = this.callbackClasses == null?new DefaultCallbackAnalyzer(this.config, this.entrypoints, this.callbackFile):new DefaultCallbackAnalyzer(this.config, this.entrypoints, this.callbackClasses);
+                jimpleClass.collectCallbackMethods();
+                lfp.parseLayoutFile(Core.resDir);
+            } else {
+                jimpleClass.collectCallbackMethodsIncremental();
+            }
+
+            PackManager.v().getPack("wjpp").apply();
+            PackManager.v().getPack("cg").apply();
+            PackManager.v().getPack("wjtp").apply();
+            Iterator var5 = jimpleClass.getCallbackMethods().entrySet().iterator();
+
+            while(var5.hasNext()) {
+                Map.Entry entry = (Map.Entry)var5.next();
+                Set curCallbacks = (Set)this.callbackMethods.get(entry.getKey());
+                if(curCallbacks != null) {
+                    if(curCallbacks.addAll((Collection)entry.getValue())) {
+                        hasChanged = true;
+                    }
+                } else {
+                    this.callbackMethods.put((String) entry.getKey(), new HashSet((Collection)entry.getValue()));
+                    hasChanged = true;
+                }
+            }
+
+            if(this.entrypoints.addAll(jimpleClass.getDynamicManifestComponents())) {
+                hasChanged = true;
+            }
+        }
+
+        this.collectXmlBasedCallbackMethods(resParser, lfp, jimpleClass);
+    }
+
+    private void collectXmlBasedCallbackMethods(ARSCFileParser resParser, LayoutFileParser lfp, AbstractCallbackAnalyzer jimpleClass) {
+        Iterator callbacksPlain = jimpleClass.getLayoutClasses().entrySet().iterator();
+
+        label75:
+        while(callbacksPlain.hasNext()) {
+            Map.Entry lcentry = (Map.Entry)callbacksPlain.next();
+            SootClass set = Scene.v().getSootClass((String)lcentry.getKey());
+            Iterator var7 = ((Set)lcentry.getValue()).iterator();
+
+            while(true) {
+                Set controls1;
+                do {
+                    while(true) {
+                        if(!var7.hasNext()) {
+                            continue label75;
+                        }
+
+                        Integer classId = (Integer)var7.next();
+                        ARSCFileParser.AbstractResource resource = resParser.findResource(classId.intValue());
+                        if(resource instanceof ARSCFileParser.StringResource) {
+                            String layoutFileName = ((ARSCFileParser.StringResource)resource).getValue();
+                            Set callbackMethods = (Set)lfp.getCallbackMethods().get(layoutFileName);
+                            if(callbackMethods != null) {
+                                Iterator controls = callbackMethods.iterator();
+
+                                label61:
+                                while(true) {
+                                    while(true) {
+                                        if(!controls.hasNext()) {
+                                            break label61;
+                                        }
+
+                                        String methodName = (String)controls.next();
+                                        String lc = "void " + methodName + "(android.view.View)";
+                                        SootClass currentClass = set;
+
+                                        while(true) {
+                                            SootMethod callbackMethod = currentClass.getMethodUnsafe(lc);
+                                            if(callbackMethod != null) {
+                                                this.addCallbackMethod(set.getName(), new AndroidMethod(callbackMethod));
+                                                break;
+                                            }
+
+                                            if(!currentClass.hasSuperclass()) {
+                                                System.err.println("Callback method " + methodName + " not found in class " + set.getName());
+                                                break;
+                                            }
+
+                                            currentClass = currentClass.getSuperclass();
+                                        }
+                                    }
+                                }
+                            }
+
+                            controls1 = (Set)lfp.getUserControls().get(layoutFileName);
+                            break;
+                        }
+
+                        System.err.println("Unexpected resource type for layout class");
+                    }
+                } while(controls1 == null);
+
+                Iterator methodName1 = controls1.iterator();
+
+                while(methodName1.hasNext()) {
+                    LayoutControl lc1 = (LayoutControl)methodName1.next();
+                    this.registerCallbackMethodsForView(set, lc1);
+                }
+            }
+        }
+
+        HashSet callbacksPlain1 = new HashSet();
+        Iterator lcentry1 = this.callbackMethods.values().iterator();
+
+        while(lcentry1.hasNext()) {
+            Set set1 = (Set)lcentry1.next();
+            callbacksPlain1.addAll(set1);
+        }
+
+        System.out.println("Found " + callbacksPlain1.size() + " callback methods for " + this.callbackMethods.size() + " components");
+    }
+
+    private void registerCallbackMethodsForView(SootClass callbackClass, LayoutControl lc) {
+        if(!callbackClass.getName().startsWith("android.")) {
+            if(!lc.getViewClass().getName().startsWith("android.")) {
+                SootClass sc = lc.getViewClass();
+
+                boolean systemMethods;
+                for(systemMethods = false; sc.hasSuperclass(); sc = sc.getSuperclass()) {
+                    if(sc.getName().equals("android.view.View")) {
+                        systemMethods = true;
+                        break;
+                    }
+                }
+
+                if(systemMethods) {
+                    sc = lc.getViewClass();
+                    HashSet systemMethods1 = new HashSet(10000);
+                    Iterator var5 = Scene.v().getActiveHierarchy().getSuperclassesOf(sc).iterator();
+
+                    while(true) {
+                        SootClass sm;
+                        do {
+                            if(!var5.hasNext()) {
+                                var5 = sc.getMethods().iterator();
+
+                                while(var5.hasNext()) {
+                                    SootMethod sm2 = (SootMethod)var5.next();
+                                    if(!sm2.isConstructor() && systemMethods1.contains(sm2.getSubSignature())) {
+                                        this.addCallbackMethod(callbackClass.getName(), new AndroidMethod(sm2));
+                                    }
+                                }
+
+                                return;
+                            }
+
+                            sm = (SootClass)var5.next();
+                        } while(!sm.getName().startsWith("android."));
+
+                        Iterator var7 = sm.getMethods().iterator();
+
+                        while(var7.hasNext()) {
+                            SootMethod sm1 = (SootMethod)var7.next();
+                            if(!sm1.isConstructor()) {
+                                systemMethods1.add(sm1.getSubSignature());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void addCallbackMethod(String layoutClass, AndroidMethod callbackMethod) {
+        Set<SootMethodAndClass> methods = (Set)this.callbackMethods.get(layoutClass);
+        if(methods == null) {
+            methods = new HashSet();
+            this.callbackMethods.put(layoutClass, methods);
+        }
+
+        ((Set)methods).add(new AndroidMethod(callbackMethod));
     }
 
     private void createMainMethod() {

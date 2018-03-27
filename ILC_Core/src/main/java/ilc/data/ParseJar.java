@@ -19,15 +19,15 @@ import java.util.Set;
  * 直接利用soot解析jar，得到类的信息
  */
 public class ParseJar {
-    public static Set<String> allEntryPoints = new HashSet<>();
-    public static Set<String> plainEntryPoints = new HashSet<>();// class for entry
-    public static Set<String> entryPointsForAndroid = new HashSet<>();// class for entry
-    public static Set<String> activityCom = new HashSet<>();
-    public static Set<String> serviceCom = new HashSet<>();
-    public static Set<String> broadcastCom = new HashSet<>();
-    public static Set<String> contentProviderCom = new HashSet<>();
-    public static Chain<SootClass> jarClasses = new HashChain<SootClass>();
-    public static List<String> entryPointsMethods = new ArrayList<>();
+    public Set<String> allEntryPoints = new HashSet<>();
+    public Set<String> plainEntryPoints = new HashSet<>();// class for entry
+    public Set<String> entryPointsForAndroid = new HashSet<>();// class for entry
+    public Set<String> activityCom = new HashSet<>();
+    public Set<String> serviceCom = new HashSet<>();
+    public Set<String> broadcastCom = new HashSet<>();
+    public Set<String> contentProviderCom = new HashSet<>();
+    public Chain<SootClass> jarClasses = new HashChain<SootClass>();
+    public List<String> entryPointsMethods = new ArrayList<>();
 
     public static void main(String[] args) {
         String jarFile = "D:\\Desktop\\sdk\\PushServices\\GETUI_ANDROID_SDK\\GetuiSDK2.10.2.0.jar";
@@ -42,11 +42,7 @@ public class ParseJar {
             if (clazz.isAbstract() || clazz.isInterface() || clazz.isJavaLibraryClass()){
                 continue;
             } else if (clazz.isPublic()){
-                for (SootMethod sm : clazz.getMethods()){
-                    if (sm.isPublic()){
-                        entryPointsMethods.add(sm.getSignature());
-                    }
-                }
+
                 String superClass = clazz.getSuperclass().getName();
                 allEntryPoints.add(clazz.getName());
                 if (superClass.contains("android.app.Activity")){
@@ -66,9 +62,14 @@ public class ParseJar {
                     entryPointsForAndroid.add(clazz.getName());
                     serviceCom.add(clazz.getName());
                     continue;
+                }else {
+                    plainEntryPoints.add(clazz.getName());
+                    for (SootMethod sm : clazz.getMethods()){
+                        if (sm.isPublic()){
+                            entryPointsMethods.add(sm.getSignature());
+                        }
+                    }
                 }
-
-                plainEntryPoints.add(clazz.getName());
             }
         }
         System.out.println("jar parseing over");

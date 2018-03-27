@@ -18,7 +18,8 @@ public class ILCSQLConnection extends SQLConnection{
     protected static SourceSinkCountTable sourceSinkCountTable = new SourceSinkCountTable();
 
     public static void insertDataExitLeak(String className, String method, int instruction, Unit unit,
-                                          String source, String sink, String path, String methodCalling) throws SQLException {
+                                          String source, String sink, String path, String methodCalling,
+                                          String trigger ) throws SQLException {
 
         String exit_kind = "a";
         if (sink.contains("startService") || sink.contains("bindService")) {
@@ -34,7 +35,7 @@ public class ILCSQLConnection extends SQLConnection{
 
         int exitPointID = insertExitPoint(className, method, instruction, exit_kind, 0, unit);
         ArrayList<String> permissions = PermissionAnalysis.getPermissionList(source);
-        int leakID = dataExitLeaksTable.insert(exitPointID, source, sink, path, methodCalling);
+        int leakID = dataExitLeaksTable.insert(exitPointID, source, sink, path, methodCalling, trigger);
 
         for (String permission : permissions) {
             int permissionId = permissionStringTable.insert(permission);

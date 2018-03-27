@@ -284,12 +284,12 @@ public class Ic3Analysis extends Analysis<Ic3CommandLineArguments> {
     }
 
     protected void finalizeAnalysis(Ic3CommandLineArguments commandLineArguments) {
-        try {
+        /*try {
             SQLConnection.saveAppCategory(commandLineArguments.getAppCategory(), this.apkPath);
             Timers.v().saveTimeToDb();
         } catch (SQLException var3) {
             ;
-        }
+        }*/
 
     }
 

@@ -22,7 +22,13 @@ import edu.psu.cse.siis.ic3.manifest.ManifestComponent;
 import edu.psu.cse.siis.ic3.manifest.ManifestData;
 import edu.psu.cse.siis.ic3.manifest.ManifestIntentFilter;
 import edu.psu.cse.siis.ic3.manifest.ManifestProviderComponent;
+import ilc.db.LibTotalAnalysisTime;
+import ilc.db.SinkInEntryPathTable;
+import ilc.db.SinkInExitPathTable;
+import ilc.db.SourceInEntryPathTable;
+import ilc.db.SourceInExitPathTable;
 import ilc.main.Core;
+import soot.SootMethod;
 import soot.Unit;
 
 import java.sql.SQLException;
@@ -330,11 +336,8 @@ public class SQLConnection {
         unit.toString());
   }
 
-  public static void insertTime(long modelParseTime, long classLoadTime, long mainGenerationTime,
-      long entryPointMappingTime, long ic3Time, long entryPathTime, long exitPathTime,
-      long totalTime) throws SQLException {
-      appAnalysisTimeTable.insert(appId, modelParseTime, classLoadTime, mainGenerationTime,
-          entryPointMappingTime, ic3Time, entryPathTime, exitPathTime, totalTime);
+  public static void insertTime(long totalTime, long classNum, long methodNum) throws SQLException {
+      new LibTotalAnalysisTime().insert(appId, totalTime, classNum, methodNum);
   }
 
   public static boolean checkIfAppAnalyzed(String shasum) throws SQLException {
@@ -346,4 +349,19 @@ public class SQLConnection {
     return true;
   }
 
+  public static void insertSourceMethod(String trigger, SootMethod m, Unit u, boolean exitpath) throws SQLException {
+    if (exitpath){
+      new SourceInExitPathTable().insert(appId, trigger, m.getSignature(), u.toString());
+    }else{
+      new SourceInEntryPathTable().insert(appId, trigger, m.getSignature(), u.toString());
+    }
+  }
+
+  public static void insertSinkMethod(String trigger, SootMethod m, Unit u, boolean exitpath) throws SQLException {
+    if (exitpath){
+      new SinkInExitPathTable().insert(appId, trigger, m.getSignature(), u.toString());
+    }else{
+      new SinkInEntryPathTable().insert(appId, trigger, m.getSignature(), u.toString());
+    }
+  }
 }

@@ -15,13 +15,6 @@ import edu.psu.cse.siis.coal.arguments.Argument;
 import edu.psu.cse.siis.coal.arguments.ArgumentValueManager;
 import edu.psu.cse.siis.coal.values.BasePropagationValue;
 import edu.psu.cse.siis.coal.values.PropagationValue;
-import edu.psu.cse.siis.ic3.Ic3Result;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
 import soot.MethodOrMethodContext;
 import soot.Scene;
 import soot.SootMethod;
@@ -33,6 +26,13 @@ import soot.jimple.toolkits.callgraph.Filter;
 import soot.jimple.toolkits.callgraph.ReachableMethods;
 import soot.toolkits.graph.ExceptionalUnitGraph;
 import soot.util.queue.QueueReader;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 public class Ic3ResultBuilder implements ResultBuilder {
     private Map<SootMethod, Set<String>> entryPointMap;

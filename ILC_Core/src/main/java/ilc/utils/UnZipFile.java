@@ -15,7 +15,8 @@ import java.util.zip.ZipFile;
 public class UnZipFile {
     private static String jar = "";
     private static String manifest = "";
-    private static String res = "";
+    private static String arscFile = "";
+    private static String resDir = "";
 
     /**
      * 解压到指定目录
@@ -24,8 +25,15 @@ public class UnZipFile {
      * @param descDir
      */
     public static String unZipFiles(String zipPath, String descDir) throws IOException {
+        descDir = new File(zipPath).getParent();
         String zipDir = unZipFiles(new File(zipPath), descDir+"/");
         String name = zipPath.substring(zipPath.lastIndexOf('\\')+1, zipPath.lastIndexOf('.'));
+        executeCMD(zipDir);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         File[] zipFiles = new File(zipDir).listFiles();
         for (File f : zipFiles){
             if(f.isFile() && f.getName().equals("classes.jar")){
@@ -37,11 +45,23 @@ public class UnZipFile {
                 f.renameTo(new File(manifest));
             }
             if (f.isDirectory() && f.getName().equals("res")){
-                if (f.length() > 0)
-                    res = f.getAbsolutePath();
+                resDir = f.getAbsolutePath();
+            }
+            if(f.isFile() && f.getName().equals("resource.arsc")){
+                arscFile = f.getAbsolutePath();
             }
         }
         return zipDir;
+    }
+
+    public static void executeCMD(String path){
+        String cmd = "aapt package -f -M "+ path +"/AndroidManifest.xml -S "+path +
+                "/res -A "+path+"/assets -I E:/gradute/android.jar -F "+path+"/resource.arsc";
+        try {
+            Runtime.getRuntime().exec(cmd);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -108,8 +128,12 @@ public class UnZipFile {
         UnZipFile.manifest = manifest;
     }
 
-    public static String getRes(){
-        return res;
+    public static String getResDir(){
+        return resDir;
+    }
+
+    public static String getARSC(){
+        return arscFile;
     }
 
     //测试

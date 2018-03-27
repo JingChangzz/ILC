@@ -3,6 +3,7 @@ package soot.jimple.infoflow.entryPointCreators;
 /**
  * Created by Administrator on 3/14/2018.
  */
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import soot.ArrayType;

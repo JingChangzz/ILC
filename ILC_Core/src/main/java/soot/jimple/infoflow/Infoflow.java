@@ -8,7 +8,9 @@ package soot.jimple.infoflow; /*************************************************
  * Bodden, and others.
  ******************************************************************************/
 
+import edu.psu.cse.siis.ic3.db.SQLConnection;
 import heros.solver.CountingThreadPoolExecutor;
+import ilc.main.Core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import soot.MethodOrMethodContext;
@@ -57,6 +59,7 @@ import soot.jimple.infoflow.util.SystemClassHandler;
 import soot.jimple.toolkits.callgraph.ReachableMethods;
 import soot.options.Options;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -322,6 +325,8 @@ public class Infoflow extends AbstractInfoflow {
         int sinkCount = 0;
         logger.info("Looking for sources and sinks...");
 
+        collectedSources = new HashSet<>();
+        collectedSinks = new HashSet<>();
         for (SootMethod sm : getMethodsForSeeds(iCfg))
             sinkCount += scanMethodForSourcesSinks(sourcesSinks, forwardProblem, sm);
 
@@ -511,7 +516,36 @@ public class Infoflow extends AbstractInfoflow {
 					}
 				}
 			}
-		}*/
+		}
+        for (ResultSinkInfo sinkInfo : this.results.getResults().keySet()){
+            String sinkString = sinkInfo.getSink().toString();
+            SootMethod sm = iCfg.getMethodOf(sinkInfo.getSink());
+            Body sinkBody = sm.retrieveActiveBody();
+            PatchingChain<Unit> us = sinkBody.getUnits();
+            Unit tt = us.getPredOf(sinkInfo.getSink());
+            while(!tt.toString().contains("FileOutputStream")) {
+                tt = us.getPredOf(tt);
+            }
+            Stmt initFileOutput = (Stmt)tt;
+            Value p1 = initFileOutput.getInvokeExpr().getArg(0);
+            String path="";
+            while (us.getPredOf(tt) != null) {
+                tt = us.getPredOf(tt);
+                if (tt instanceof AssignStmt) {
+                    AssignStmt assignStmt = (AssignStmt) tt;
+                    if (p1.toString().contains(assignStmt.getLeftOp().toString())) {
+                        InvokeExpr ie = assignStmt.getInvokeExpr();
+                        if (ie.toString().contains("<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>")){
+                            path = path + ie.getArg(0);
+                        }
+                        p1 = assignStmt.getRightOp();
+                    }
+                }
+            }
+
+            System.out.println("123");
+
+        }*/
 
         for (ResultsAvailableHandler handler : onResultsAvailable)
             handler.onResultsAvailable(iCfg, results);
@@ -606,11 +640,7 @@ public class Infoflow extends AbstractInfoflow {
     private int scanMethodForSourcesSinks(
             final ISourceSinkManager sourcesSinks,
             InfoflowProblem forwardProblem,
-            SootMethod m) {
-        if (getConfig().getLogSourcesAndSinks() && collectedSources == null) {
-            collectedSources = new HashSet<>();
-            collectedSinks = new HashSet<>();
-        }
+            SootMethod m){
 
         int sinkCount = 0;
         if (m.hasActiveBody()) {
@@ -626,17 +656,30 @@ public class Infoflow extends AbstractInfoflow {
             PatchingChain<Unit> units = m.getActiveBody().getUnits();
             for (Unit u : units) {
                 Stmt s = (Stmt) u;
-                if (sourcesSinks.getSourceInfo(s, iCfg) != null) {
-                    forwardProblem.addInitialSeeds(u, Collections.singleton(forwardProblem.zeroValue()));
-                    if (getConfig().getLogSourcesAndSinks())
-                        collectedSources.add(s);
-                    logger.info("Source found: {}", u);
-                }
-                if (sourcesSinks.isSink(s, iCfg, null)) {
-                    sinkCount++;
-                    if (getConfig().getLogSourcesAndSinks())
-                        collectedSinks.add(s);
-                    logger.info("Sink found: {}", u);
+                try {
+                    if (sourcesSinks.getSourceInfo(s, iCfg) != null) {
+                        forwardProblem.addInitialSeeds(u, Collections.singleton(forwardProblem.zeroValue()));
+                        //if (getConfig().getLogSourcesAndSinks())
+                            collectedSources.add(s);
+                        if (exitPath == true){
+                                SQLConnection.insertSourceMethod(Core.entryAPI, m, u, true);
+                            }
+                        else
+                            SQLConnection.insertSourceMethod(Core.entryAPI, m, u, false);
+                        logger.info("Source found: {}", u);
+                    }
+                    if (sourcesSinks.isSink(s, iCfg, null)) {
+                        sinkCount++;
+                        //if (getConfig().getLogSourcesAndSinks())
+                            collectedSinks.add(s);
+                        if (exitPath == true)
+                            SQLConnection.insertSinkMethod(Core.entryAPI, m, u, true);
+                        else
+                            SQLConnection.insertSinkMethod(Core.entryAPI, m, u, false);
+                        logger.info("Sink found: {}", u);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
 

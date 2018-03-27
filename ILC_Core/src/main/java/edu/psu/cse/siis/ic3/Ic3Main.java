@@ -1,7 +1,6 @@
 package edu.psu.cse.siis.ic3;
 
 import edu.psu.cse.siis.ic3.db.SQLConnection;
-import ilc.data.ParseJar;
 import ilc.db.ILCSQLConnection;
 import ilc.main.Core;
 
@@ -18,9 +17,9 @@ public class Ic3Main {
 		SQLConnection.appId = Core.appID;
 		manifest = manifestPath;
 		if (isPlain){
-			entryPointClasses = ParseJar.plainEntryPoints;
+			entryPointClasses = Core.parseJar.plainEntryPoints;
 		}else {
-			entryPointClasses = ParseJar.entryPointsForAndroid;
+			entryPointClasses = Core.parseJar.entryPointsForAndroid;
 		}
 		isPlainEn = isPlain;
 		Ic3CommandLineParser parser = new Ic3CommandLineParser();
@@ -38,7 +37,7 @@ public class Ic3Main {
 
 		Ic3Analysis analysis = new Ic3Analysis(commandLineArguments);
 		analysis.performAnalysis(commandLineArguments);
-
+		edu.psu.cse.siis.coal.Main.reset();
 	}
 
 }

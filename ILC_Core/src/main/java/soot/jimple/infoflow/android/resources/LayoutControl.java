@@ -10,10 +10,10 @@
  ******************************************************************************/
 package soot.jimple.infoflow.android.resources;
 
+import soot.SootClass;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import soot.SootClass;
 
 /**
  * Data class representing a layout control on the android screen

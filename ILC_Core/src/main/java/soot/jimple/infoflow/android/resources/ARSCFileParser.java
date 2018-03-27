@@ -10,6 +10,11 @@
  ******************************************************************************/
 package soot.jimple.infoflow.android.resources;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
@@ -18,10 +23,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Parser for reading out the contents of Android's resource.arsc file.
@@ -1079,9 +1080,9 @@ public class ARSCFileParser extends AbstractResourceParser {
 	
 	/**
 	 * Parses the resource definition file in the given APK 
-	 * @param apkFile The APK file in which to parse the resource definition file
+	 *  apkFile The APK file in which to parse the resource definition file
 	 * @throws IOException Thrown if the given APK file cannot be opened
-	 */
+
 	public void parse(String apkFile) throws IOException {
 		this.handleAndroidResourceFiles(apkFile, null, new IResourceHandler() {
 			
@@ -1099,6 +1100,10 @@ public class ARSCFileParser extends AbstractResourceParser {
 			}
 			
 		});
+	}*/
+	public void parse(String arcsFile) throws IOException {
+		InputStream stream = new FileInputStream(new File(arcsFile));
+		parse(stream);
 	}
 	
 	public void parse(InputStream stream) throws IOException {

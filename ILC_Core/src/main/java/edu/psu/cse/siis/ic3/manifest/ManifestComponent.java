@@ -18,11 +18,11 @@
  */
 package edu.psu.cse.siis.ic3.manifest;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import soot.SootMethod;
 import soot.Unit;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ManifestComponent {
   private final String name;
@@ -51,7 +51,7 @@ public class ManifestComponent {
     this.registrationUnit = registrationUnit;
   }
 
-  /**
+    /**
    * @return the name
    */
   public String getName() {
