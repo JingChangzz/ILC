@@ -138,7 +138,7 @@ public class Core {
         executor.submit(task);
         try {
             System.out.println("Running plain infoflow task...");
-            task.get(5, TimeUnit.MINUTES);
+            task.get(3, TimeUnit.MINUTES);
         } catch (ExecutionException var5) {
             System.err.println("Infoflow computation failed: " + var5.getMessage());
             var5.printStackTrace();
@@ -174,7 +174,7 @@ public class Core {
             String timeout = "180";
             InfoflowResults results = Test.runAnalysisForResults(
                     new String[]{jarFile, classPath, "--aplength", "2", "--timeout", timeout,
-                            "--logsourcesandsinks", "--pathalgo", "contextsensitive"},
+                            "--pathalgo", "contextsensitive"},
                     Collections.singleton(ep), manifest, resDir);//"--nocallbacks",
 
             if (Test.InfoFlowComputationTimeOut) {
@@ -184,7 +184,7 @@ public class Core {
                 results = Test.runAnalysisForResults(new String[]{
                                 jarFile, classPath,
                                 "--pathalgo", "SOURCESONLY", "--aplength", "1", "--NOPATHS", "--layoutmode", "none",
-                                "--aliasflowins", "--noarraysize", "--timeout", timeout, "--logsourcesandsinks"},
+                                "--aliasflowins", "--noarraysize", "--timeout", timeout, },
                         Collections.singleton(ep), manifest, resDir);
             }
             if (results != null) {
@@ -198,7 +198,7 @@ public class Core {
             Timers.v().entryPathTimer.start();
             results = Test.runAnalysisForResults(
                     new String[]{jarFile, classPath,
-                            "--iccentry", "--aplength", "1", "--timeout", timeout, "--logsourcesandsinks"},
+                            "--iccentry", "--aplength", "1", "--timeout", timeout},
                     Collections.singleton(ep), manifest, resDir);
 
             if (Test.InfoFlowComputationTimeOut) {
@@ -208,7 +208,7 @@ public class Core {
                 results = Test.runAnalysisForResults(new String[]{
                         jarFile, classPath,
                         "--iccentry", "--pathalgo", "SOURCESONLY", "--aplength", "1", "--nopaths", "--layoutmode",
-                        "none", "--aliasflowins", "--noarraysize", "--nostatic", "--logsourcesandsinks",
+                        "none", "--aliasflowins", "--noarraysize", "--nostatic",
                         "--timeout", timeout}, Collections.singleton(ep), manifest, resDir);
             }
             if (results != null) {
