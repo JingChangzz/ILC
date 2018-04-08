@@ -9,7 +9,7 @@ import java.sql.SQLException;
  */
 public class ICCExitLeaksTable extends Table{
     private static final String INSERT = "INSERT INTO ICCExitLeaks "
-            + "(exit_point_id, leak_source, leak_sink, leak_path, method, trigger_method) VALUES (?, ?, ?, ?, ?, ?)";
+            + "(exit_point_id, leak_source, leak_path, leak_sink, method, trigger_method) VALUES (?, ?, ?, ?, ?, ?)";
 
   /*
    * private static final String FIND =

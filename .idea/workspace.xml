@@ -2,35 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92c535df-5d91-4d6a-a5f8-d758b4b628c6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AndroidCallbacks.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/LibTotalAnalysisTime.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/SinkInEntryPathTable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/SinkInExitPathTable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/SourceInEntryPathTable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/SourceInExitPathTable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/resources/LayoutFileParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/entryPointCreators/AndroidEntryPointCreator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/ClassTypeValueAnalysis.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/ClassTypeValueAnalysis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Analysis.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Analysis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Main.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3ResultBuilder.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3ResultBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Timers.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Timers.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/SQLConnection.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/SQLConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/manifest/ManifestComponent.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/manifest/ManifestComponent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/ParseJar.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/ParseJar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/ExitPointTable.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/ExitPointTable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ICCEntryLeaksTable.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ICCEntryLeaksTable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ICCExitLeaksTable.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ICCExitLeaksTable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ILCSQLConnection.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ILCSQLConnection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/UnZipFile.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/UnZipFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/Infoflow.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/Infoflow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/SetupApplication.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/SetupApplication.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/TestApps/Test.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/TestApps/Test.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/data/ICCEntryPointSourceSink.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/data/ICCEntryPointSourceSink.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/data/ICCExitPointSourceSink.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/data/ICCExitPointSourceSink.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/resources/ARSCFileParser.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/resources/ARSCFileParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/resources/LayoutControl.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/resources/LayoutControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/entryPointCreators/BaseEntryPointCreator.java" afterPath="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/entryPointCreators/BaseEntryPointCreator.java" />
     </list>
     <ignored path="ILC.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -146,23 +124,75 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Core.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Core.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1281">
-              <caret line="284" column="42" selection-start-line="284" selection-start-column="42" selection-end-line="284" selection-end-column="42" />
+            <state relative-caret-position="716">
+              <caret line="200" column="105" selection-start-line="200" selection-start-column="83" selection-end-line="200" selection-end-column="105" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#15453#15454#0" expanded="true" />
+                <element signature="e#15497#15498#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Ic3Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Main.java">
+      <file leaf-file-name="IntentTable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/IntentTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+            <state relative-caret-position="21">
+              <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExitPointTable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/ExitPointTable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SQLConnection.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/SQLConnection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="43" column="36" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DbConnection.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/DbConnection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="118" column="3" selection-start-line="118" selection-start-column="3" selection-end-line="118" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ICCEntryLeaksTable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ICCEntryLeaksTable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="127">
+              <caret line="39" column="45" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ICCExitLeaksTable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ICCExitLeaksTable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -171,95 +201,10 @@
       <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/TestApps/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="191" column="0" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
+            <state relative-caret-position="267">
+              <caret line="207" column="26" selection-start-line="207" selection-start-column="19" selection-end-line="207" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ParseJar.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/ParseJar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="63" column="29" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResultProcessor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/ResultProcessor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-179">
-              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SetupApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/SetupApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="307" column="0" selection-start-line="307" selection-start-column="0" selection-end-line="307" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Infoflow.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/Infoflow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="656" column="0" selection-start-line="656" selection-start-column="0" selection-end-line="656" selection-end-column="0" />
-              <folding>
-                <element signature="e#26171#26183#0" expanded="true" />
-                <element signature="e#26940#26952#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LayoutFileParser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/resources/LayoutFileParser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="168" column="0" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseEntryPointCreator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/entryPointCreators/BaseEntryPointCreator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidEntryPointCreator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/entryPointCreators/AndroidEntryPointCreator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="403" column="0" selection-start-line="403" selection-start-column="0" selection-end-line="403" selection-end-column="0" />
-              <folding>
-                <element signature="e#2688#2699#0" expanded="true" />
-                <element signature="e#13278#13298#0" expanded="true" />
-                <element signature="e#20457#20483#0" expanded="true" />
-                <element signature="e#33866#33877#0" expanded="true" />
-                <element signature="e#36612#36624#0" expanded="true" />
-                <element signature="e#44766#44794#0" expanded="true" />
-                <element signature="e#46699#46711#0" expanded="true" />
-                <element signature="e#47569#47576#0" expanded="true" />
-                <element signature="e#51573#51581#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -753,10 +698,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/EntryPointsTable.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/PermissionLeakTable.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/SourceSinkCountTable.java" />
-        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ICCEntryLeaksTable.java" />
         <option value="$PROJECT_DIR$/ILC_Core/build.gradle" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/db.properties" />
@@ -764,12 +707,10 @@
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/manifest/ManifestPullParser.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/FindPathTrigger.java" />
         <option value="$PROJECT_DIR$/sootOutput/com.example.zhangjing.devicejar.AboutDevice.jimple" />
-        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ILCSQLConnection.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/SourceInExitPathTable.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/SourceInEntryPathTable.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/SinkInExitPathTable.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/SinkInEntryPathTable.java" />
-        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ICCExitLeaksTable.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Timers.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/LibTotalAnalysisTime.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/data/ICCEntryPointSourceSink.java" />
@@ -780,7 +721,6 @@
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/soot/SootMethod.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3SetupApplication.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/SetupApplication.java" />
-        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/TestApps/Test.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/entryPointCreators/BaseEntryPointCreator.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/SQLConnection.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/ResultManager.java" />
@@ -803,6 +743,11 @@
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/entryPointCreators/AndroidEntryPointCreator.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/ParseJar.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Main.java" />
+        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ILCSQLConnection.java" />
+        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ICCExitLeaksTable.java" />
+        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ICCEntryLeaksTable.java" />
+        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/ExitPointTable.java" />
+        <option value="$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/TestApps/Test.java" />
         <option value="$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java" />
       </list>
     </option>
@@ -823,8 +768,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1456" />
-    <option name="height" value="876" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -1245,6 +1190,40 @@
               <option name="myItemId" value="ilc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC_Core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ilc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -1337,6 +1316,44 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ic3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ILC_Core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ic3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1834,7 +1851,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521085546251</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="解决resource.arsc">
+      <created>1522123764517</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1522123764517</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1850,7 +1874,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1860,19 +1884,19 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37567568" sideWeight="0.5028653" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4108108" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41756758" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29438204" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33370787" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32898173" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2743553" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23410758" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="VersionChecker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914925" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15186246" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25286534" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="562" y="55" width="320" height="750" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18606322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4256757" sideWeight="0.49713466" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43648648" sideWeight="0.49713466" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1931,7 +1955,8 @@
     <MESSAGE value="处理aar类型" />
     <MESSAGE value="待解决：找到所有的路径触发api" />
     <MESSAGE value="以方法作为分析入口。得到每个path的触发函数" />
-    <option name="LAST_COMMIT_MESSAGE" value="以方法作为分析入口。得到每个path的触发函数" />
+    <MESSAGE value="解决resource.arsc" />
+    <option name="LAST_COMMIT_MESSAGE" value="解决resource.arsc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1944,7 +1969,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
-          <line>347</line>
+          <line>354</line>
           <properties />
           <option name="timeStamp" value="107" />
         </line-breakpoint>
@@ -1986,7 +2011,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
-          <line>313</line>
+          <line>317</line>
           <properties />
           <option name="timeStamp" value="126" />
         </line-breakpoint>
@@ -2064,13 +2089,13 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
-          <line>418</line>
+          <line>425</line>
           <properties />
           <option name="timeStamp" value="170" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
-          <line>424</line>
+          <line>431</line>
           <properties />
           <option name="timeStamp" value="172" />
         </line-breakpoint>
@@ -2094,12 +2119,6 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
-          <line>279</line>
-          <properties />
-          <option name="timeStamp" value="195" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
           <line>174</line>
           <properties />
           <option name="timeStamp" value="198" />
@@ -2112,13 +2131,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
-          <line>304</line>
+          <line>308</line>
           <properties />
           <option name="timeStamp" value="202" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
-          <line>319</line>
+          <line>323</line>
           <properties />
           <option name="timeStamp" value="203" />
         </line-breakpoint>
@@ -2190,7 +2209,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
-          <line>286</line>
+          <line>290</line>
           <properties />
           <option name="timeStamp" value="227" />
         </line-breakpoint>
@@ -2230,11 +2249,17 @@
           <properties />
           <option name="timeStamp" value="238" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java</url>
+          <line>282</line>
+          <properties />
+          <option name="timeStamp" value="239" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="239" />
+      <option name="time" value="240" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -2248,93 +2273,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/libs/infoflow-android.jar!/soot/jimple/infoflow/android/axml/parsers/AXML20Parser.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/soot.jar!/soot/SceneTransformer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/soot.jar!/soot/ScenePack.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/soot.jar!/soot/Transform.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/soot.jar!/soot/Pack.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="747" column="0" selection-start-line="747" selection-start-column="0" selection-end-line="747" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/io/File.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="818" column="0" selection-start-line="818" selection-start-column="0" selection-end-line="818" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/jre/lib/rt.jar!/sun/misc/URLClassPath.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="179" column="0" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/net/URLClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="364" column="0" selection-start-line="364" selection-start-column="0" selection-end-line="364" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/ClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="423" column="0" selection-start-line="423" selection-start-column="0" selection-end-line="423" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/concurrent/ThreadPoolExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="1141" column="0" selection-start-line="1141" selection-start-column="0" selection-end-line="1141" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/soot.jar!/soot/Hierarchy.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="212" column="0" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/entryPointCreators/AndroidEntryPointConstants.java" />
     <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/soot/SootMethod.java" />
     <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/soot/SootClass.java" />
     <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/soot/Scene.java" />
@@ -2354,14 +2292,6 @@
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/SQLConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="351" column="61" selection-start-line="351" selection-start-column="61" selection-end-line="351" selection-end-column="61" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2521,7 +2451,7 @@
         <state relative-caret-position="141">
           <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
           <folding>
-            <element signature="e#1921#1922#0" expanded="true" />
+            <element signature="e#1921#1922#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2600,16 +2530,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/TestApps/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="191" column="0" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/ResultProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-179">
@@ -2618,29 +2538,156 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Main.java">
+    <entry file="file://$PROJECT_DIR$/ic3output/audience-network-sdk-4.10.0.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java">
+    <entry file="file://$PROJECT_DIR$/ic3output/staticbroadcastsendjar-release.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1281">
-          <caret line="284" column="42" selection-start-line="284" selection-start-column="42" selection-end-line="284" selection-end-column="42" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ILCSQLConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="49" column="31" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ICCExitLeaksTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/coal-0.1.7.jar!/edu/psu/cse/siis/coal/Main.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="68" column="14" selection-start-line="68" selection-start-column="14" selection-end-line="68" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/ParseJar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-84">
+          <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Ic3Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/utils/UnZipFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/ApplicationTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="32" column="12" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/db/ICCEntryLeaksTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="39" column="45" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/soot.jar!/soot/Timer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="92" column="36" selection-start-line="92" selection-start-column="36" selection-end-line="92" selection-end-column="36" />
+          <folding>
+            <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#2589#2590#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/SQLConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="43" column="36" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/DbConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="118" column="3" selection-start-line="118" selection-start-column="3" selection-end-line="118" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/IntentTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/db/ExitPointTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/edu/psu/cse/siis/ic3/Timers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="89" column="26" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/soot/jimple/infoflow/android/TestApps/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="207" column="26" selection-start-line="207" selection-start-column="19" selection-end-line="207" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/data/ParseJar.java">
+    <entry file="file://$PROJECT_DIR$/ILC_Core/src/main/java/ilc/main/Core.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="63" column="29" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="29" />
-          <folding />
+        <state relative-caret-position="716">
+          <caret line="200" column="105" selection-start-line="200" selection-start-column="83" selection-end-line="200" selection-end-column="105" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#15453#15454#0" expanded="true" />
+            <element signature="e#15497#15498#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

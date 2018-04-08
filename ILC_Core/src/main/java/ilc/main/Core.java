@@ -117,7 +117,7 @@ public class Core {
                 saveExitPath(plainInfoRresults, en);
             }else{
                 //保存entry path
-                saveEntryPath(plainInfoRresults);
+                saveEntryPath(plainInfoRresults, en);
             }
         }
 
@@ -134,8 +134,8 @@ public class Core {
             }
         });
 
-        ExecutorService executor = Executors.newFixedThreadPool(1);
-        executor.execute(task);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(task);
         try {
             System.out.println("Running plain infoflow task...");
             task.get(5, TimeUnit.MINUTES);
@@ -150,7 +150,6 @@ public class Core {
             var6.printStackTrace();
             InfoFlowComputationTimeOut = true;
             plainInfoRresults = null;
-            task.cancel(true);
             executor.shutdownNow();
         } catch (InterruptedException var7) {
             System.err.println("Infoflow computation interrupted: " + var7.getMessage());
@@ -159,8 +158,8 @@ public class Core {
             plainInfoRresults = null;
             executor.shutdown();
         }
-        task.cancel(true);
-        executor.shutdown();
+        executor.shutdownNow();
+        task = null;
         return plainInfoRresults;
     }
 
@@ -172,8 +171,9 @@ public class Core {
         for (String ep : entryPoints) {
             Timers.v().exitPathTimer.start();
             Core.entryAPI = ep;
+            String timeout = "180";
             InfoflowResults results = Test.runAnalysisForResults(
-                    new String[]{jarFile, classPath, "--aplength", "2", "--timeout", "300",
+                    new String[]{jarFile, classPath, "--aplength", "2", "--timeout", timeout,
                             "--logsourcesandsinks", "--pathalgo", "contextsensitive"},
                     Collections.singleton(ep), manifest, resDir);//"--nocallbacks",
 
@@ -184,7 +184,7 @@ public class Core {
                 results = Test.runAnalysisForResults(new String[]{
                                 jarFile, classPath,
                                 "--pathalgo", "SOURCESONLY", "--aplength", "1", "--NOPATHS", "--layoutmode", "none",
-                                "--aliasflowins", "--noarraysize", "--timeout", "300", "--logsourcesandsinks"},
+                                "--aliasflowins", "--noarraysize", "--timeout", timeout, "--logsourcesandsinks"},
                         Collections.singleton(ep), manifest, resDir);
             }
             if (results != null) {
@@ -198,7 +198,7 @@ public class Core {
             Timers.v().entryPathTimer.start();
             results = Test.runAnalysisForResults(
                     new String[]{jarFile, classPath,
-                            "--iccentry", "--aplength", "1", "--timeout", "300", "--logsourcesandsinks"},
+                            "--iccentry", "--aplength", "1", "--timeout", timeout, "--logsourcesandsinks"},
                     Collections.singleton(ep), manifest, resDir);
 
             if (Test.InfoFlowComputationTimeOut) {
@@ -209,11 +209,11 @@ public class Core {
                         jarFile, classPath,
                         "--iccentry", "--pathalgo", "SOURCESONLY", "--aplength", "1", "--nopaths", "--layoutmode",
                         "none", "--aliasflowins", "--noarraysize", "--nostatic", "--logsourcesandsinks",
-                        "--timeout", "300"}, Collections.singleton(ep), manifest, resDir);
+                        "--timeout", timeout}, Collections.singleton(ep), manifest, resDir);
             }
             if (results != null) {
                 //保存entry path
-                saveEntryPath(results);
+                saveEntryPath(results, ep);
             }
             Timers.v().entryPathTimer.end();
 
@@ -221,16 +221,19 @@ public class Core {
                 //DialDroidSQLConnection.markAppTimeout();
             }
         }
-        runPlainAnalysis(jarFile, sourcesForExit, sinksForExit, parseJar.plainEntryPoints, taintWrapper, false);
-        runPlainAnalysis(jarFile, sourcesForEntry, sinksForEntry, parseJar.plainEntryPoints, taintWrapper, true);
+        runPlainAnalysis(jarFile, sourcesForExit, sinksForExit, parseJar.plainEntryPoints, taintWrapper, true);
+        runPlainAnalysis(jarFile, sourcesForEntry, sinksForEntry, parseJar.plainEntryPoints, taintWrapper, false);
         System.out.println("analysis over ---------------->" +jarFile);
     }
 
     public static void main(String[] args) throws IOException, InterruptedException, SQLException, NoSuchAlgorithmException {
         //
-        String jarRootPath = "E:/gradute/libs-Bench";
+        String jarRootPath = "E:/gradute/libs-libscout";
         String dbHost = "localhost";
-        String dbName = "ilc999";// 001 for realworld libs from python;   002 for bench
+        String dbName = "ilc001";
+        // 001 for realworld libs from python;
+        // 002 for bench
+        // 003 for selfwrite libs
 
         //source and sink
         PermissionMethodParser parserExit = PermissionMethodParser.fromStringList(ICCExitPointSourceSink.getList());
@@ -284,8 +287,9 @@ public class Core {
                 String manifest = "";
                 String jarname=jarFile.getName();
                 boolean isAar = isAAR(jar);
+                String aarUnzipDir = null;
                 if (isAar){
-                    String aarDir = unZipFiles(jar, jarRootPath);
+                    aarUnzipDir = unZipFiles(jar, jarRootPath);
                     jar = getJar();
                     manifest = getManifest();
                     resDir = getResDir();
@@ -319,7 +323,10 @@ public class Core {
 
                 runAnalysisForJar(jar, parseJar.entryPointsForAndroid, manifest, resDir, arscFile);
                 Timers.v().analysisTimer.end();
-                Timers.v().saveTimeToDb(parseJar.entryPointsForAndroid.size()+parseJar.plainEntryPoints.size(),parseJar.entryPointsForAndroid.size());
+                Timers.v().saveTimeToDb(parseJar.entryPointsForAndroid.size()+parseJar.plainEntryPoints.size(),parseJar.entryPointsMethods.size());
+                //删除unzip的aar文件夹
+                if (aarUnzipDir != null)
+                    FileUtils.deleteDirectory(new File(aarUnzipDir));
             }
         }
 
@@ -357,7 +364,7 @@ public class Core {
         return -1;
     }
 
-    private static void saveEntryPath(InfoflowResults results) throws SQLException {
+    private static void saveEntryPath(InfoflowResults results, String trigger_api) throws SQLException {
         for (ResultSinkInfo sink : results.getResults().keySet()) { //
             String method = results.getInfoflowCFG().getMethodOf(sink.getSink()).getSignature();
             String className = results.getInfoflowCFG().getMethodOf(sink.getSink()).getDeclaringClass().toString();
@@ -378,7 +385,7 @@ public class Core {
                 }
                 System.out.println("entryleakpath----"+leakPath);
                 ILCSQLConnection.insertDataEntryLeak(className, method.toString(), instruction,
-                        sink.getSink(), leakSource, leakSink, leakPath.toString());
+                        sink.getSink(), leakSource, leakSink, leakPath.toString(), trigger_api);
             }
         }
     }

@@ -31,6 +31,7 @@ public class ExitPointTable extends Table {
 
   public int insert(int classId, String method, int instruction, String exit_kind,
       Integer missingIntents, String unit) throws SQLException {
+    instruction = 0;
     int id = find(classId, method, instruction, exit_kind);
     if (id != NOT_FOUND) {
       return id;
@@ -43,7 +44,7 @@ public class ExitPointTable extends Table {
       method = method.substring(0, 512);
     }
     insertStatement.setString(2, method);
-    insertStatement.setInt(3, instruction);
+    insertStatement.setInt(3, 0);
     insertStatement.setString(4, unit);
     insertStatement.setString(5, exit_kind);
     if (missingIntents == null) {

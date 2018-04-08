@@ -44,10 +44,10 @@ public class ILCSQLConnection extends SQLConnection{
     }
 
     public static void insertDataEntryLeak(String className, String method, int instruction,
-                                             Unit unit, String source, String sink, String path) throws SQLException {
+                                             Unit unit, String source, String sink, String path, String trigger_api) throws SQLException {
         int classId = insertClass(className);
         int entryPointID = entryPointsTable.insert(classId, method, instruction, source);
-        dataEntryLeaksTable.insert(entryPointID, source, sink, path);
+        dataEntryLeaksTable.insert(entryPointID, source, sink, path, unit.toString(), trigger_api);
     }
 
     protected static int insertExitPoint(String className, String method, int instruction,
