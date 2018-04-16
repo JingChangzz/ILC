@@ -184,7 +184,7 @@ public class Core {
                 results = Test.runAnalysisForResults(new String[]{
                                 jarFile, classPath,
                                 "--pathalgo", "SOURCESONLY", "--aplength", "1", "--NOPATHS", "--layoutmode", "none",
-                                "--aliasflowins", "--noarraysize", "--timeout", timeout, },
+                                "--aliasflowins", "--noarraysize", "--timeout", timeout},
                         Collections.singleton(ep), manifest, resDir);
             }
             if (results != null) {
@@ -234,6 +234,7 @@ public class Core {
         // 001 for realworld libs from python;
         // 002 for bench
         // 003 for selfwrite libs
+        // 004 for 国内手动下载
 
         //source and sink
         PermissionMethodParser parserExit = PermissionMethodParser.fromStringList(ICCExitPointSourceSink.getList());
@@ -283,6 +284,9 @@ public class Core {
                 if (!jarFile.getAbsolutePath().endsWith(".aar") && !jarFile.getAbsolutePath().endsWith(".jar")){
                     continue;
                 }
+//                if (!jarFile.getName().contains("contentprovider")){
+//                    continue;
+//                }
                 String jar = jarFile.getAbsolutePath();
                 String manifest = "";
                 String jarname=jarFile.getName();
@@ -328,9 +332,20 @@ public class Core {
                 if (aarUnzipDir != null)
                     FileUtils.deleteDirectory(new File(aarUnzipDir));
             }
+            for (File jarFile : allFiles){
+                String jar = jarFile.getAbsolutePath();
+                boolean isAar = isAAR(jar);
+                if (isAar) {
+                    File unzip = new File(jarFile.getParent() + "/" + jarFile.getName().split("\\.aar")[0]);
+                    if (unzip.exists()) {
+                        FileUtils.deleteDirectory(unzip);
+                    }
+                }
+            }
         }
 
         System.out.println("over");
+
     }
 
     private static String getCategory(String file) {

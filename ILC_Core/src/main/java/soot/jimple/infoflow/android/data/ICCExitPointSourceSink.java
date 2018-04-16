@@ -371,8 +371,9 @@ public class ICCExitPointSourceSink {
         data.add("<java.io.Writer: void write(java.lang.String,int,int)> -> _SINK_");
         data.add("<java.io.Writer: java.io.Writer append(java.lang.CharSequence)> -> _SINK_");
         data.add("<java.io.OutputStreamWriter: java.io.Writer append(java.lang.CharSequence)> -> _SINK_");
-        data.add("<java.io.FileOutputStream: void <init>(java.lang.String)> -> _SOURCE_");
+        //data.add("<java.io.FileOutputStream: void <init>(java.lang.String)> -> _SOURCE_");
         //data.add("<java.net.Socket: void connect(java.net.SocketAddress)> -> _SINK_");
 //        data.add("<android.content.Intent: android.content.Intent putExtra(java.lang.String,java.lang.String)> -> _SINK_");
+        //data.add("<java.io.FileOutputStream: void <init>(java.lang.String)> -> _SOURCE_");
     }
 }

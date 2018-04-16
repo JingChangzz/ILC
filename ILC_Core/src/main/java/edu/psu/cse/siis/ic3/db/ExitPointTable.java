@@ -23,7 +23,7 @@ import java.sql.Types;
 
 public class ExitPointTable extends Table {
   private static final String INSERT = "INSERT INTO ExitPoints "
-      + "(class_id, method, instruction, statement, exit_kind, missing) VALUES (?, ?, ?, ?, ?,?)";
+      + "(class_id, method, instruction, statement, exit_kind, missing) VALUES (?, ?, ?, ?, ?, ?)";
 
   private static final String FIND =
       "SELECT id FROM ExitPoints WHERE class_id = ? AND method = ? AND instruction = ? "
