@@ -228,13 +228,16 @@ public class Core {
 
     public static void main(String[] args) throws IOException, InterruptedException, SQLException, NoSuchAlgorithmException {
         //
-        String jarRootPath = "E:/gradute/libs-libscout";
+        String jarRootPath = "E:/gradute/libs-china";
         String dbHost = "localhost";
-        String dbName = "ilc001";
+        String dbName = "ilc999";
         // 001 for realworld libs from python;
         // 002 for bench
         // 003 for selfwrite libs
-        // 004 for 国内手动下载
+        // 004 for aar 再跑一次
+        // 005 国内手动下载
+        //libtest 应用，测试没有调用库中共谋
+        // 999 国内jar包
 
         //source and sink
         PermissionMethodParser parserExit = PermissionMethodParser.fromStringList(ICCExitPointSourceSink.getList());
@@ -305,6 +308,8 @@ public class Core {
                     SQLConnection.insert(jarname, getVersion(jar), shasum, null, null, null, false);
                     SQLConnection.saveAppCategory(category, jar);
                 }else{
+                    resDir = null;
+                    arscFile = null;
                     continue;
                 }
 
@@ -317,11 +322,11 @@ public class Core {
                 if (parseJar.entryPointsForAndroid.size() >0) {
                     Ic3Main.main(new String[]{"-in", jar, "-cp",
                             classPath, "-db", "./db.properties", "-dbname",
-                            dbName, "-dbhost", dbHost}, manifest, false);
+                            dbName, "-dbhost", dbHost}, manifest, arscFile, resDir, false);
                 }
                 Ic3Main.main(new String[] { "-in", jar, "-cp",
                         classPath, "-db", "./db.properties", "-dbname",
-                        dbName, "-dbhost", dbHost}, "", true);
+                        dbName, "-dbhost", dbHost}, manifest, arscFile, resDir,true);
 
                 Timers.v().analysisTimer.start();
 
@@ -331,6 +336,8 @@ public class Core {
                 //删除unzip的aar文件夹
                 if (aarUnzipDir != null)
                     FileUtils.deleteDirectory(new File(aarUnzipDir));
+                arscFile = null;
+                resDir = null;
             }
             for (File jarFile : allFiles){
                 String jar = jarFile.getAbsolutePath();

@@ -29,10 +29,16 @@ public class UnZipFile {
         String zipDir = unZipFiles(new File(zipPath), descDir+"/");
         String name = zipPath.substring(zipPath.lastIndexOf('\\')+1, zipPath.lastIndexOf('.'));
         executeCMD(zipDir);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        boolean flag = true;
+        while(flag) {
+            try {
+                Thread.sleep(1000);
+                if (new File(zipDir+"/resource.arsc").exists()){
+                    flag = false;
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         File[] zipFiles = new File(zipDir).listFiles();
         for (File f : zipFiles){

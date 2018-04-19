@@ -9,16 +9,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import soot.G;
 import soot.Main;
+import soot.PackManager;
 import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
 import soot.jimple.infoflow.AbstractInfoflow;
 import soot.jimple.infoflow.SequentialEntryPointCreator;
 import soot.jimple.infoflow.android.InfoflowAndroidConfiguration;
+import soot.jimple.infoflow.android.callbacks.AbstractCallbackAnalyzer;
+import soot.jimple.infoflow.android.callbacks.DefaultCallbackAnalyzer;
 import soot.jimple.infoflow.android.config.SootConfigForAndroid;
 import soot.jimple.infoflow.android.data.AndroidMethod;
 import soot.jimple.infoflow.android.resources.ARSCFileParser;
 import soot.jimple.infoflow.android.resources.LayoutControl;
+import soot.jimple.infoflow.android.resources.LayoutFileParser;
 import soot.jimple.infoflow.config.IInfoflowConfig;
 import soot.jimple.infoflow.data.SootMethodAndClass;
 import soot.jimple.infoflow.entryPointCreators.AndroidEntryPointCreator;
@@ -27,6 +31,7 @@ import soot.options.Options;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -84,142 +89,143 @@ public class Ic3SetupApplication {
 
     }
 
-//    private void calculateCallbackMethods(ARSCFileParser resParser, LayoutFileParser lfp) throws IOException {
-//        DefaultCallbackAnalyzer jimpleClass = null;
-//        boolean hasChanged = true;
-//
-//        while(hasChanged) {
-//            hasChanged = false;
-//            G.reset();
-//            this.initializeSoot(true);
-//            this.createMainMethod();
-//            if(jimpleClass == null) {
-//                jimpleClass = this.callbackClasses == null?new DefaultCallbackAnalyzer(this.config, this.entrypoints, "AndroidCallbacks.txt"):new DefaultCallbackAnalyzer(this.config, this.entrypoints, this.callbackClasses);
-//                jimpleClass.collectCallbackMethods();
-//                lfp.parseLayoutFile(this.apkFileLocation);
-//            } else {
-//                jimpleClass.collectCallbackMethodsIncremental();
-//            }
-//
-//            PackManager.v().getPack("wjpp").apply();
-//            PackManager.v().getPack("cg").apply();
-//            PackManager.v().getPack("wjtp").apply();
-//            Iterator var5 = jimpleClass.getCallbackMethods().entrySet().iterator();
-//
-//            while(var5.hasNext()) {
-//                Entry entry = (Entry)var5.next();
-//                Set curCallbacks = (Set)this.callbackMethods.get(entry.getKey());
-//                if(curCallbacks != null) {
-//                    if(curCallbacks.addAll((Collection)entry.getValue())) {
-//                        hasChanged = true;
-//                    }
-//                } else {
-//                    this.callbackMethods.put(entry.getKey(), new HashSet((Collection)entry.getValue()));
-//                    hasChanged = true;
-//                }
-//            }
-//
-//            if(this.entrypoints.addAll(jimpleClass.getDynamicManifestComponents())) {
-//                hasChanged = true;
-//            }
-//        }
-//
-//        this.collectXmlBasedCallbackMethods(resParser, lfp, jimpleClass);
-//    }
-//
-//    private void collectXmlBasedCallbackMethods(ARSCFileParser resParser, LayoutFileParser lfp, AbstractCallbackAnalyzer jimpleClass) {
-//        Iterator callbacksPlain = jimpleClass.getLayoutClasses().entrySet().iterator();
-//
-//        label75:
-//        while(callbacksPlain.hasNext()) {
-//            Entry lcentry = (Entry)callbacksPlain.next();
-//            SootClass set = Scene.v().getSootClass((String)lcentry.getKey());
-//            Iterator var7 = ((Set)lcentry.getValue()).iterator();
-//
-//            while(true) {
-//                Set controls1;
-//                do {
-//                    while(true) {
-//                        if(!var7.hasNext()) {
-//                            continue label75;
-//                        }
-//
-//                        Integer classId = (Integer)var7.next();
-//                        AbstractResource resource = resParser.findResource(classId.intValue());
-//                        if(resource instanceof StringResource) {
-//                            String layoutFileName = ((StringResource)resource).getValue();
-//                            Set callbackMethods = (Set)lfp.getCallbackMethods().get(layoutFileName);
-//                            if(callbackMethods != null) {
-//                                Iterator controls = callbackMethods.iterator();
-//
-//                                label61:
-//                                while(true) {
-//                                    while(true) {
-//                                        if(!controls.hasNext()) {
-//                                            break label61;
-//                                        }
-//
-//                                        String methodName = (String)controls.next();
-//                                        String lc = "void " + methodName + "(android.view.View)";
-//                                        SootClass currentClass = set;
-//
-//                                        while(true) {
-//                                            SootMethod callbackMethod = currentClass.getMethodUnsafe(lc);
-//                                            if(callbackMethod != null) {
-//                                                this.addCallbackMethod(set.getName(), new AndroidMethod(callbackMethod));
-//                                                break;
-//                                            }
-//
-//                                            if(!currentClass.hasSuperclass()) {
-//                                                System.err.println("Callback method " + methodName + " not found in class " + set.getName());
-//                                                break;
-//                                            }
-//
-//                                            currentClass = currentClass.getSuperclass();
-//                                        }
-//                                    }
-//                                }
-//                            }
-//
-//                            controls1 = (Set)lfp.getUserControls().get(layoutFileName);
-//                            break;
-//                        }
-//
-//                        System.err.println("Unexpected resource type for layout class");
-//                    }
-//                } while(controls1 == null);
-//
-//                Iterator methodName1 = controls1.iterator();
-//
-//                while(methodName1.hasNext()) {
-//                    LayoutControl lc1 = (LayoutControl)methodName1.next();
-//                    this.registerCallbackMethodsForView(set, lc1);
-//                }
-//            }
-//        }
-//
-//        HashSet callbacksPlain1 = new HashSet();
-//        Iterator lcentry1 = this.callbackMethods.values().iterator();
-//
-//        while(lcentry1.hasNext()) {
-//            Set set1 = (Set)lcentry1.next();
-//            callbacksPlain1.addAll(set1);
-//        }
-//
-//        System.out.println("Found " + callbacksPlain1.size() + " callback methods for " + this.callbackMethods.size() + " components");
-//    }
-//
+    private void calculateCallbackMethods(ARSCFileParser resParser, LayoutFileParser lfp) throws IOException {
+        DefaultCallbackAnalyzer jimpleClass = null;
+        boolean hasChanged = true;
+
+        while(hasChanged) {
+            hasChanged = false;
+            G.reset();
+            this.initializeSoot(true);
+            this.createMainMethod();
+            if(jimpleClass == null) {
+                jimpleClass = this.callbackClasses == null?new DefaultCallbackAnalyzer(this.config, this.entrypoints, "AndroidCallbacks.txt"):new DefaultCallbackAnalyzer(this.config, this.entrypoints, this.callbackClasses);
+                jimpleClass.collectCallbackMethods();
+                lfp.parseLayoutFile(Ic3Main.resDir);
+            } else {
+                jimpleClass.collectCallbackMethodsIncremental();
+            }
+
+            PackManager.v().getPack("wjpp").apply();
+            PackManager.v().getPack("cg").apply();
+            PackManager.v().getPack("wjtp").apply();
+            Iterator var5 = jimpleClass.getCallbackMethods().entrySet().iterator();
+
+            while(var5.hasNext()) {
+                Map.Entry entry = (Map.Entry)var5.next();
+                Set curCallbacks = (Set)this.callbackMethods.get(entry.getKey());
+                if(curCallbacks != null) {
+                    if(curCallbacks.addAll((Collection)entry.getValue())) {
+                        hasChanged = true;
+                    }
+                } else {
+                    this.callbackMethods.put((String) entry.getKey(), new HashSet((Collection)entry.getValue()));
+                    hasChanged = true;
+                }
+            }
+
+            if(this.entrypoints.addAll(jimpleClass.getDynamicManifestComponents())) {
+                hasChanged = true;
+            }
+        }
+
+        this.collectXmlBasedCallbackMethods(resParser, lfp, jimpleClass);
+    }
+
+    private void collectXmlBasedCallbackMethods(ARSCFileParser resParser, LayoutFileParser lfp, AbstractCallbackAnalyzer jimpleClass) {
+        Iterator callbacksPlain = jimpleClass.getLayoutClasses().entrySet().iterator();
+
+        label75:
+        while(callbacksPlain.hasNext()) {
+            Map.Entry lcentry = (Map.Entry)callbacksPlain.next();
+            SootClass set = Scene.v().getSootClass((String)lcentry.getKey());
+            Iterator var7 = ((Set)lcentry.getValue()).iterator();
+
+            while(true) {
+                Set controls1;
+                do {
+                    while(true) {
+                        if(!var7.hasNext()) {
+                            continue label75;
+                        }
+
+                        Integer classId = (Integer)var7.next();
+                        ARSCFileParser.AbstractResource resource = resParser.findResource(classId.intValue());
+                        if(resource instanceof ARSCFileParser.StringResource) {
+                            String layoutFileName = ((ARSCFileParser.StringResource)resource).getValue();
+                            Set callbackMethods = (Set)lfp.getCallbackMethods().get(layoutFileName);
+                            if(callbackMethods != null) {
+                                Iterator controls = callbackMethods.iterator();
+
+                                label61:
+                                while(true) {
+                                    while(true) {
+                                        if(!controls.hasNext()) {
+                                            break label61;
+                                        }
+
+                                        String methodName = (String)controls.next();
+                                        String lc = "void " + methodName + "(android.view.View)";
+                                        SootClass currentClass = set;
+
+                                        while(true) {
+                                            SootMethod callbackMethod = currentClass.getMethodUnsafe(lc);
+                                            if(callbackMethod != null) {
+                                                this.addCallbackMethod(set.getName(), new AndroidMethod(callbackMethod));
+                                                break;
+                                            }
+
+                                            if(!currentClass.hasSuperclass()) {
+                                                System.err.println("Callback method " + methodName + " not found in class " + set.getName());
+                                                break;
+                                            }
+
+                                            currentClass = currentClass.getSuperclass();
+                                        }
+                                    }
+                                }
+                            }
+
+                            controls1 = (Set)lfp.getUserControls().get(layoutFileName);
+                            break;
+                        }
+
+                        System.err.println("Unexpected resource type for layout class");
+                    }
+                } while(controls1 == null);
+
+                Iterator methodName1 = controls1.iterator();
+
+                while(methodName1.hasNext()) {
+                    LayoutControl lc1 = (LayoutControl)methodName1.next();
+                    this.registerCallbackMethodsForView(set, lc1);
+                }
+            }
+        }
+
+        HashSet callbacksPlain1 = new HashSet();
+        Iterator lcentry1 = this.callbackMethods.values().iterator();
+
+        while(lcentry1.hasNext()) {
+            Set set1 = (Set)lcentry1.next();
+            callbacksPlain1.addAll(set1);
+        }
+
+        System.out.println("Found " + callbacksPlain1.size() + " callback methods for " + this.callbackMethods.size() + " components");
+    }
+
     public Map<String, Set<String>> calculateSourcesSinksEntrypoints(Set<AndroidMethod> sourceMethods, Set<AndroidMethod> modifierMethods, String packageName, Set<String> entryPointClasses) throws IOException {
         this.appPackageName = packageName;
         this.entrypoints = entryPointClasses;
         boolean parseLayoutFile = !this.apkFileLocation.endsWith(".xml");
         ARSCFileParser resParser = null;
-        if(parseLayoutFile) {
+        if(Ic3Main.arscFile!=null) {   //相当于只有aar才进行这个操作
             resParser = new ARSCFileParser();
-            resParser.parse(this.apkFileLocation);
+            resParser.parse(Ic3Main.arscFile);
+            Object jimpleClass = null;
+            LayoutFileParser lfp = parseLayoutFile ? new LayoutFileParser(this.appPackageName, resParser) : null;
+            this.calculateCallbackMethods(resParser, lfp);
         }
-
-        Object jimpleClass = null;
         this.logger.info("Entry point calculation done.");
         G.reset();
         HashMap result = new HashMap(this.callbackMethods.size());
@@ -339,7 +345,7 @@ public class Ic3SetupApplication {
     }
 
     private String getClasspath() {
-        boolean forceAndroidJar = false;
+        boolean forceAndroidJar = true;
         String classpath = forceAndroidJar?this.androidClassPath:Scene.v().getAndroidJarPath(this.androidClassPath, this.apkFileLocation);
         this.logger.debug("soot classpath: " + classpath);
         return classpath;

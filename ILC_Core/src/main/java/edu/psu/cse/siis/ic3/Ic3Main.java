@@ -9,13 +9,17 @@ import java.util.Set;
 
 public class Ic3Main {
 	public static String manifest;
+	public static String arscFile;
+	public static String resDir;
 	public static Set<String> entryPointClasses;
 	public static boolean isPlainEn;
-	public static void main(String[] args, String manifestPath, boolean isPlain) throws SQLException {
+	public static void main(String[] args, String manifestPath, String arsc, String resD, boolean isPlain) throws SQLException {
 		edu.psu.cse.siis.coal.Main.reset();
 		SQLConnection.reset();
 		SQLConnection.appId = Core.appID;
 		manifest = manifestPath;
+		arscFile = arsc;
+		resDir = resD;
 		if (isPlain){
 			entryPointClasses = Core.parseJar.plainEntryPoints;
 		}else {
